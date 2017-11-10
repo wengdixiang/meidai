@@ -519,12 +519,12 @@ label{
 
 
 
-        #production_management input[type="checkbox"]{
+       /* #production_management input[type="checkbox"]{
             appearance: none;
             -webkit-appearance: none;
             outline: none;
             display:none
-         }
+         }*/
         #production_management{
             width:200px;
             display:inline-block;
@@ -535,10 +535,13 @@ label{
             width:200px;
             height:20px;
             display:inline-block;
-            background:url(http://sandbox.runjs.cn/uploads/rs/216/0y89gzo2/checkbox_01.gif)  
-            no-repeat;
+            /*background:url(http://sandbox.runjs.cn/uploads/rs/216/0y89gzo2/checkbox_01.gif)  */
+            /*no-repeat;*/
             padding-left:20px;
             background-position:0 0;
+            position: relative;
+            z-index:5;
+
         }
        span.management_t{
             background-position:0 -21px;
@@ -655,6 +658,7 @@ label{
         }
         .particular_schedule>h3{
             text-align:center;
+            margin-bottom: 30px;
         }
         .particular_schedule>div{
             padding-left:20%;
@@ -673,6 +677,7 @@ label{
         .progress{
             width:80%;
             text-align:center;
+   
         }
         .btn-md{
             width:150px;

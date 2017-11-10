@@ -41,7 +41,24 @@
     <script src="js/top.js"></script>
     <script src="js/nav_left.js"></script>
     <style>
-
+    /*管理按钮样式*/
+        #management_buttom{
+            display:inline-block;
+            height:15px;
+             position:relative;
+             top:25px;
+             left:0;
+        }
+        /*订单日志样式*/
+      #log_list{
+            display: flex;
+            width:80%;
+        }
+        #log_list>div{
+            width:20%;
+            font-size: 14px;
+            text-align:center;
+        }
     </style>
 </head>
 <body>
@@ -69,12 +86,13 @@
                 <span>生产流程管理</span>
             </div> -->
             <label id='production_management'>
-                <input type="checkbox" name="" class="toggle-vis" data-column="8" class="radioclass" style='z-index:1'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="8" class="radioclass" style='display: none'>
                 <input type="checkbox" name="" class="toggle-vis" data-column="9" class="radioclass" style='display: none;'>
                 <input type="checkbox" name="" class="toggle-vis" data-column="10" class="radioclass" style='display: none;'>
                 <input type="checkbox" name="" class="toggle-vis" data-column="11" class="radioclass" style='display: none;'>
                 <input type="checkbox" name="" class="toggle-vis" data-column="12" class="radioclass" style='display: none;'>
-                <span class="management">生产流程管理</span>
+                <input type="checkbox" id="management_buttom" style=""  readonly="readonly" >
+                <span class="management">   生产流程管理</span>
             </label>
         </div>
         <div class='timezone'>
@@ -83,6 +101,14 @@
             </select>
             <select id="dropdown_list_month">
                 <option value ="">-- 选择月 --</option>
+            </select>
+            <select name="" id="dropdown_list_state">
+                <option value="">-- 选择状态--</option>
+                <option value="topay1">待支付</option>
+                <option value="toconfirm">已支付</option>
+                <option value="printing">生产中</option>
+                <option value="delivering">运输中</option>
+                <option value="done">完成交付</option>
             </select>
             <button id='determine_the_time' class='btn_info btn-sm'>确定</button>
         </div>
@@ -306,17 +332,17 @@
                         </div>
                     </div>                
                 </div>
-                <!-- 快递的信息 -->
+            <!-- 商品进度 -->
                 <div class="particular_schedule">
-                   <h3>商品进度</h3>
+                   <h3>商品进度</h3>                 
                    <div>当前进度:&nbsp; &nbsp;
                         <b id="present_schedule"></b>
                         <div class="progress">
-                          <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 45%">
-                            <!-- <span class="sr-only">45% Complete</span> -->
-                          </div>
+                          <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 45%"></div>    
                         </div>
+                        <div id="log_list"></div>
                    </div>
+             <!-- 快递的信息 -->
                    <h3>快递信息</h3>
                    <div>
                         <p id="current_progress">快递当前状态:&nbsp; &nbsp;<span></span>&nbsp; &nbsp;<b></b></p>
@@ -324,8 +350,7 @@
                    </div>
                    <p id="btn_box">
                          <button id="glasses_data" class="btn-md btn_info">查看眼镜数据</button>
-                   </div>
-                       
+                   </div>     
                 </div>
             
             <!-- 上传眼镜配置 -->
@@ -466,7 +491,54 @@
             if($(this).css("height")!="23px"){
                 $(this).css("height","23px");
             }else{
-                  $(this).css("height","161px");
+                  $(this).css("height","184px");
+                 var now_state= $(this).closest("tr").children().eq(5).html() ;
+                 console.log(now_state)
+                 // console.log(now_state)
+                 /*下载扫描模型：所有已经支付订单*/
+                 // if(now_state!="待支付"&&now_state!="完成交付"){
+                 //     $(this).children().eq(1).children().prop("disabled",false).css({"color":"#000"});
+                 // }else{
+                 //     $(this).children().eq(1).children().prop("disabled",true).css({"color":"#999"});
+                 // }
+                /*开始生产*/
+                if(now_state=="已支付"){
+                     $(this).children().eq(1).children().prop("disabled",false).css({"color":"#000"});
+                }else{
+                     $(this).children().eq(1).children().prop("disabled",true).css({"color":"#999"});
+                }
+                /* 上传打印模型：仅限"生产中"的订单*/
+                 if(now_state=="生产中"){
+                     $(this).children().eq(3).children().prop("disabled",false).css({"color":"#000"});
+                 }else{
+                     $(this).children().eq(3).children().prop("disabled",true).css({"color":"#999"});
+                 }
+                 /*修改模型数据：仅"已支付"、"生产中"的订单*/
+
+                 if(now_state=="生产中"||now_state=="已支付"){
+                     $(this).children().eq(4).children().prop("disabled",false).css({"color":"#000"});
+                 }else{
+                     $(this).children().eq(4).children().prop("disabled",true).css({"color":"#999"});
+                 }
+                 /*下载打印数据："生产中"、"运输中"或"已完成"的订单*/
+                 if(now_state=="生产中"||now_state=="运输中"||now_state=="完成交付"){
+                     $(this).children().eq(5).children().prop("disabled",false).css({"color":"#000"});
+                 }else{
+                    $(this).children().eq(5).children().prop("disabled",true).css({"color":"#999"});
+                 }
+                 /*输入快递单号：仅限"生产中"的订单*/
+                 if(now_state=="生产中"||now_state=="运输中"){
+                   $(this).children().eq(6).children().prop("disabled",false).css({"color":"#000"});
+                 
+                 }else{
+                      $(this).children().eq(6).children().prop("disabled",true).css({"color":"#999"});
+                 }
+                 /*完成交付：仅限"生产中"、"运输中"的订单*/
+                 if(now_state=="生产中"||now_state=="运输中"){
+                     $(this).children().eq(7).children().prop("disabled",false).css({"color":"#000"});
+                 }else{
+                    $(this).children().eq(7).children().prop("disabled",true).css({"color":"#999"});
+                 }
             }
           });
         /* 年的下拉列表 */
