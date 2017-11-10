@@ -562,7 +562,7 @@ $(function(){
                     // format_time(all_deal_data[deal_list[i]].printdate),
                     order_status,
                     // all_deal_data[deal_list[i]].status,   
-                    "<button id='alter_news' class='btn_info btn-sm' alternews ='"+deal_list[i]+" ' >"+tmp_button+"</button>",                
+                    `<button id='alter_news' class='${tmp_btn_color} btn-sm' alternews ='${deal_list[i]} ' >${tmp_button}</button>`,                
                     "<button id='print_receipts' class='"+tmp_shopping_class+" btn-sm btn_info' alternews ='"+deal_list[i]+" ' >"+tmp_shopping_receipts+"</button>",
 
                     // "<button id='download_model' class='btn-sm btn_info' alternews ='"+rawscan_uuid+"'>下载扫描数据</button>",                
@@ -1261,16 +1261,16 @@ $(function(){
                     console.log(data[i])
                    switch(data[i].status){
                     case 'unpaid':
-                    data[i].status="待支付";
+                    data[i].status="提交订单";
                     break;
                     case 'paid':
-                    data[i].status="已支付";
+                    data[i].status="完成支付";
                     break;
                     case 'printing':
-                    data[i].status="生产中";
+                    data[i].status="开始生产";
                     break;
                     case 'delivering':
-                    data[i].status="运输中";
+                    data[i].status="开始运输";
                     break;
                     case 'done':
                     data[i].status="完成交付";
@@ -1288,7 +1288,7 @@ $(function(){
                 $("#log_list").html(html);
                 console.log(log_unpaid);
                  $("#log_list").prepend(`<div>
-                       <b>待支付</b></br>
+                       <b>提交订单</b></br>
                        <span>${log_unpaid}</span>
                    </div>`)
             },
@@ -1318,23 +1318,23 @@ $(function(){
                 {
                 case 'topay':
                   if(all_deal_data[deal_uuid].paymentstatus=="paid"){
-                  present_status = '已支付';
+                  present_status = '完成支付';
                   present_status_map='40%';
                   }else{
-                  present_status = '待支付';
+                  present_status = '提交订单';
                   present_status_map='20%';
                   }                  
                   break;
                 case 'printing':
-                  present_status = '生产中';
+                  present_status = '开始生产';
                   present_status_map='60%';
                   break;
                    case 'toconfirm':
-                  present_status = '已支付';
+                  present_status = '完成支付';
                   present_status_map='40%';
                   break;
                 case 'delivering':
-                  present_status = '运输中';
+                  present_status = '开始运输';
                   present_status_map='80%';
                   break;
                 case 'done':
