@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>订单管理-美戴</title>
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fswear.css">
+
+    <!-- 表格控件的样式 -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    
+    <!-- 上传文件的样式 -->
+    <link rel="stylesheet" type="text/css" href="css/uploadify.css" />
+    <script src="3rd/jquery-3.1.0.min.js"></script>
+    <!-- <script src="3rd/jquery.min.js"></script> -->
+    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>  
+    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script> 
+
+    <!-- 加载二维码 -->
+    <script src="3rd/jquery.qrcode.min.js"></script> 
+
+    <!-- 二维码字符串压缩 -->
+    <script src="3rd/pako.min.js"></script>
+    <script src="js/fswear.js"></script>
+    <script src="js/index.js"></script>
+    <!-- <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.js"></script> -->
+    <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.min.js"></script>
+    <script src="js/index-data.js"></script>
+    <script src="js/top.js"></script>
+    <script src="js/nav_left.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <!-- 顶部 -->
+    <div class='top'></div>
+    <!-- 顶部 END -->
+    <div class='content'>
+        <!-- 左侧导航栏 -->
+        <div class='nav-left'></div>
+        <!-- 左侧导航栏 END -->
+        <div class='order_data'>
+            <button id='recently_one_day' class='data_query_btn btn-sm' index> 今天</button>
+            <button id='recently_hebdomad' class='data_query_btn btn-sm' index >最近7天</button>
+            <button id='recently_month' class='data_query_btn btn-sm' index >最近30天</button>
+            <button id='recently_one_year' class='data_query_btn btn-sm' index >最近300天</button>
+            <button id='all_data' class='data_query_btn btn-sm' index >全部</button>
+            <!-- <div class="checkboxFour">
+                <input type="checkbox" value="1" id="checkboxFourInput" name="" />
+                <input type="checkbox" name="" class="toggle-vis" data-column="8" class="radioclass" style='display: none;'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="9" class="radioclass" style='display: none;'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="10" class="radioclass" style='display: none;'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="11" class="radioclass" style='display: none;'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="12" class="radioclass" style='display: none;'>
+                <label for="checkboxFourInput"></label>
+                <span>生产流程管理</span>
+            </div> -->
+            <label id='production_management'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="8" class="radioclass" style='z-index:1'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="9" class="radioclass" style='display: none;'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="10" class="radioclass" style='display: none;'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="11" class="radioclass" style='display: none;'>
+                <input type="checkbox" name="" class="toggle-vis" data-column="12" class="radioclass" style='display: none;'>
+                <span class="management">生产流程管理</span>
+            </label>
+        </div>
+        <div class='timezone'>
+            <select id="dropdown_list_year">
+                <option value ="">-- 选择年 --</option>
+            </select>
+            <select id="dropdown_list_month">
+                <option value ="">-- 选择月 --</option>
+            </select>
+            <button id='determine_the_time' class='btn_info btn-sm'>确定</button>
+        </div>
+        <!-- 内容的右侧 -->
+        <div class='message'>
+            <div class='data-table'>
+                <table id="table_id_example">
+                    <thead>
+                        <tr>
+                            <th>序号</th>             
+                            <th>创建时间</th>
+                            <th>姓名</th>
+                            <th>手机</th>
+                            <th>邮箱</th>
+                            <th>订单状态</th> 
+                            <th>订单详情</th>
+                            <th>打印小票</th>
+                            <th>生产管理流程</th>
+                            <!-- <th>上传眼镜配置</th>
+                            <th>下载打印数据</th>
+                            <th>输入快递单号</th>
+                            <th>完成交付</th>
+                            <th>deal_uuid</th> -->
+                        </tr>      
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+    
+            <!-- 当没有证书时的显示 -->
+            <div id='prompt_messagea'>
+                <h1>您无法操作。可能的原因：</h1>
+                <p>1. 您没有使用 HTTPS 访问。</p>
+                <p>2. 您没有有效的证书。</p>
+            </div>
+            <!-- 当没有证书时的显示 END-->
+            
+            <!-- 点击完成交付按钮显示 -->
+            <div id='complete_done_success'>
+                <p>订单完成交付成功</p>
+            </div>
+            <div id='complete_done_error'>
+                <p>订单完成交付失败</p>
+            </div>
+            <!-- 点击完成交付按钮显示 END -->
+
+            <div class='cancel-table'>
+                <span class='glyphicon glyphicon-remove'></span>
+                <div class='information-content'>
+                    <ul id='user_information' >
+                        <li id='order_number'>
+                            <span>用户名：</span>
+                            <span class='username'>
+                                <!-- <input id='username' type="text" name="username"> -->  
+                            </span>
+                            <span class='username_error'></span>
+                        </li>
+                        <li id='order_phone'>
+                            <span >手机号：</span>
+                            <span class='phone'>
+                                <!-- <input id='phone' type="text" name="phone"> -->
+                            </span>
+                            <div class='phone_error'></div>
+                        </li>
+                        <li id='order_email'>
+                            <span>邮箱：</span>
+                            <span class='email'>
+                                <!-- <input id='email' type="text" name="email" value='13000000000'> -->
+                            </span>
+                            <div class='email_error'></div>
+                        </li>
+                        <li>
+                            <p id='user_information_mod_hint'>此账户的用户名、手机号、邮箱只能由用户自行修改。</p>
+                        </li>
+                    </ul>
+                    <div class="information-middle">
+                        <div class="user_photo">
+                            <img>               
+                        </div>
+                        <div class='glass'>
+                            <div class='glass-frame'>
+                                <span></span>
+                                <!-- <img> -->
+                                <div></div>
+                            </div>
+                            <div class='glass-frame-color'>
+                                <input type="" name="" value=''>
+                                <button class='frame-trigger' type="button"></button>
+                                <ul class="frame_color_ul">   
+                                    <li><button class='frame-trigger'></button></li>
+                                    <li class='btn_li'>
+                                    </li>
+                                </ul>                              
+                            </div>
+                            <div class='glass-leg'>
+                                <span></span>
+                                <!-- <img src="images/information/tui/c3.png"> -->
+                                <img>
+                            </div>
+                            <div class='glass-leg-color'>
+                                <input type="" name="" value=''>
+                                <button class='leg-trigger' type="button"></button>
+                                <ul class='leg_color_ul'>   
+                                    <li><button class='leg-trigger'></button></li>
+                                    <li class='btn_li'>                                    
+                                    </li>
+                                </ul>                              
+                            </div>
+                        </div>                  
+                    </div>
+                    <div class='clear-both'></div>
+                    <div class='glass-lettering'>
+                        <p class='font-p'>刻字</p>
+                        <div class='frame_lettering'>
+                            <label>刻字信息：</label>
+                            <input type="text" name="" maxlength="4">
+                            <label></label>
+                        </div>
+                        <!-- <div class='frame_lettering'>
+                            <label>镜框左</label>
+                            <input type="text" name="" maxlength="2">
+                            <label></label>
+                            <label>镜框右</label>
+                            <input type="text" name="" maxlength="2">
+                            <label></label>
+                        </div> -->
+                        <!-- <div class='leg_lettering'>
+                            <label> &nbsp;&nbsp;&nbsp; 镜腿</label>
+                            <input type="text" name="" maxlength="2">
+                            <input type="text" name="" maxlength="2">
+                            <input type="text" name="" maxlength="2"> 
+                            <label class='error_leg_lettering'></label>
+                            <input type="text" name="" maxlength="1"> 
+                        </div>  -->    
+                    </div>
+                    <div id='glass_size'>
+                        <p class='font-p'>镜框尺寸</p>
+                        <div id='frame_size'>
+                            <label>镜框宽度：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="text" name="">
+                            <label></label>
+                            <label>镜腿长度/左：</label>
+                            <input type="text" name="">
+                            <label></label>
+                            <label>镜腿长度/右：</label>
+                            <input type="text" name="">
+                            <label></label>
+                        </div>
+                    </div>
+                    <div class='clear-both'></div>
+                    <div class='eyeglass'>
+                        <p class='font-p'>
+                            验光参数
+                            <span></span>
+                        </p>
+                        <ul>
+                           <li class='right_parameter'>
+                                <span>右眼（R）&nbsp;:</span>
+                                <span>S(球镜)</span>
+                                <input type="text" name="">
+                                <span>C(柱镜)</span>
+                                <input type="text" name="">
+                                <span>A(轴向)</span>
+                                <input type="text" name="">
+                            </li>
+                            <li  class='left_parameter'>
+                                <span>左眼（L）&ensp;:</span>
+                                <span>S(球镜)</span>
+                                <input type="text" name="">
+                                <span>C(柱镜)</span>
+                                <input type="text" name="">
+                                <span>A(轴向)</span>
+                                <input type="text" name="">
+                            </li> 
+                            <li class='glass_pupil_dist'>
+                                <span>瞳 距（PD）：</span>
+                                <input type="text" name="">
+                                <label></label>
+                            </li>
+                        </ul>
+                        <div class='transverse'></div>
+                        <p class='font-p'>镜框参数</p>
+                        <ul class='picture_param'>
+                            <li>
+                                <span>镜宽比：</span>
+                                <label></label>
+                                <!-- <span>鼻中位：</span>
+                                <label></label> -->
+                                <span>鼻中宽：</span>
+                                <label></label>
+                            </li>
+                        </ul> 
+                        <div class='transverse'></div>
+                        <div class="glass_userprice">
+                            <label for="">中文姓名：</label>
+                            <input id='user_realname' type="text" name="">
+                            <label for="">原价：</label>
+                            <input id='glass_price' type="text" name="">
+                            <label for="">折扣：</label>
+                            <input id='glass_discount' type="text" name="">
+                        </div>  
+                        <div id='user_realname_error'>
+                        </div>
+                        <!-- <div id='payment_qrcode'> -->
+                            <!-- <p>请扫码付款</p> -->
+                            <!-- <img src="images/fukuan.jpg" alt=""> -->
+                        <!-- </div>    -->
+                    </div>
+                    <div class='information-content-bottom'>
+                        <button id='submit_order' class='btn_danger btn-md'>提 &nbsp; 交</button>    
+                        <button id='submit_preserve' class='btn_info btn-md'>保 &nbsp; 存</button>    
+                        <button id='cancel' class='btn-default btn-md' type='reset'>取 &nbsp; 消</button> 
+                        <button id="schedule" class="btn-md btn_info">商品进度</button>
+                        <div class='data_success'>
+                            <span class='glyphicon glyphicon-ok'></span>
+                            <p></p>                            
+                        </div>
+                        <div class='data_error'>
+                            <span class='glyphicon glyphicon-remove'></span>
+                            <p>当前网络错误请重新连接</p>                            
+                        </div>
+                    </div>                
+                </div>
+                <!-- 快递的信息 -->
+                <div class="particular_schedule">
+                   <h3>商品进度</h3>
+                   <div>当前进度:&nbsp; &nbsp;
+                        <b id="present_schedule"></b>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 45%">
+                            <!-- <span class="sr-only">45% Complete</span> -->
+                          </div>
+                        </div>
+                   </div>
+                   <h3>快递信息</h3>
+                   <div>
+                        <p id="current_progress">快递当前状态:&nbsp; &nbsp;<span></span>&nbsp; &nbsp;<b></b></p>
+                        <div id="express_information"></div>
+                   </div>
+                   <p id="btn_box">
+                         <button id="glasses_data" class="btn-md btn_info">查看眼镜数据</button>
+                   </div>
+                       
+                </div>
+            
+            <!-- 上传眼镜配置 -->
+            <div id='uploadify_box' style='text-align: center;'>
+                <div id="uploadify_content">
+                    <div id= "uploadForm" >
+                        <input type="file" name="uploadify" id="uploadify" required  style="margin:0 auto;">
+                        <input id='uploadify_button' class='btn_info btn-sm' type="button" name="uploadify" value='上传'>
+                        <div id="datauploadsuccess">
+                            <div class="alert alert-success">
+                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                                <strong>上传成功</strong>
+                            </div>
+                            <div class="alert alert-danger">
+                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                                <strong>上传失败</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>     
+            <!-- 上传眼镜配置 -->
+
+            <!-- 快递单号 -->
+            <div id="express_box">
+                 <div id='express'>
+                    <span class='glyphicon glyphicon-remove'></span>
+                    <label>快递公司：</label>
+                    <input type="text"> 
+                    <br> 
+                    <label>快递单号：</label>
+                    <input type="text">
+                    <div>
+                        <button id='confirm_tracking' class='btn_info btn-sm'>确定</button>
+                        <div class='confirm_tracking_success'>
+                            <span class='glyphicon glyphicon-ok'></span>
+                            <p>快递单号保存成功</p>                            
+                        </div>
+                        <div class='confirm_tracking_error'>
+                            <span class='glyphicon glyphicon-remove'></span>
+                            <p>当前网络错误请重新连接</p>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快递单号 END -->
+
+            <div class='versions'>meidai &copy; 2017</div>
+            <div id='payment'>
+                <h5>你确定提交订单吗？</h5>
+                <p>1、订单将变成已支付的状态</p>
+                <p>2、所有的参数将不能修改</p>
+                <div>
+                    <button class='confirm btn_info btn-sm'>确定</button>
+                    <button class='countermand btn_info btn-sm'>取消</button>
+                </div>
+            </div>
+            <div class='masking'></div>
+        </div>
+        
+        
+    </div>
+
+    <!-- 购物小票 -->
+    <button id='return_index' class="btn_info btn-md">返回商家系统</button>
+
+    <div class="shopping_receipts">
+        <div class="login_top">
+            <!-- <img src="images/shoppreceipts/logio.png" alt=""> -->
+            <div class='logo'>美戴科技meidai</div>
+            <span>眼镜智能制造专家</span>
+        </div>
+        <div>
+            <div id='encoding'>编码：<span>20170606102201</span></div>
+            <div>
+                <div id='shopping_data'>
+                    日期：
+                    <span>20170606</span>
+                </div>
+                <div id='shopping_time'>
+                    时间：
+                    <span>10:22</span>
+                </div>
+            </div>
+        </div>
+        <div id='shopping_username'>客户姓名：<span>陈*</span></div>
+        <div id='shopping_phone'>联系方式：<span>188****5678</span></div>
+        <div class='imaginary_line'></div>
+        <div class='shopping_commodity'>
+            <ul id='commodity_name'>
+                <li>商品名称</li>
+                <li>定制眼镜</li>
+                <li></li>
+            </ul>
+            <ul id='commodity_price'>
+                <li>金额</li>
+                <li>9987</li>
+            </ul>
+        </div>
+        <div class='imaginary_line'></div>
+        <div class='sum'>
+            <div id='shopping_discount'>总折扣：<span>80%</span></div>
+            <div id='shopping_amount'>总金额：<span>￥1967.00</span></div>
+        </div>
+        <div id='personaldata'>
+            <p>扫描以下二维码，获取订单详细信息，并附赠：客户电子脸部尺寸&电子视力报告。</p>
+            <div id='qrcode'></div>
+            <!-- <img src="images/shoppreceipts/grwei.png" alt=""> -->
+        </div>
+        <div id='official_wechat'>
+            <p>关注公众二维码，获取更多资料和活动详情</p>
+            <img src="images/shoppreceipts/gwweixin.jpg" alt="">
+        </div>
+        <div class="shopping_receipts_bottom">
+            <p>服务咨询：0571-81182296</p>
+            <p>www.meidaitech.com</p>
+            <p>谢谢惠顾，欢迎再次光临！</p>
+        </div>
+    </div>
+    <script>
+    
+    //查看详情进度
+        $("#schedule").click(function(){
+            $(".information-content").hide(500);
+            $(".particular_schedule").show(500);
+            $('body,html').animate({scrollTop:100},100); 
+        });
+        $("#glasses_data").click(function(){
+            $(".information-content").show(500);
+            $(".particular_schedule").hide(500);
+            $('body,html').animate({scrollTop:100},100); 
+        });
+        //管理操作按钮
+    
+          $("#table_id_example tbody").on("click",'#operation',function(){
+            if($(this).css("height")!="23px"){
+                $(this).css("height","23px");
+            }else{
+                  $(this).css("height","161px");
+            }
+          });
+        /* 年的下拉列表 */
+        var year = new Date().getFullYear();
+        for(var i=0;i<=year-2015; i++){
+            var tmp_year = 2015+i;
+            if(tmp_year>2014) {
+                $('#dropdown_list_year').append('<option value="'+tmp_year+'">'+tmp_year+'年</option>');
+            }   
+        }
+        /* 月的下拉列表 */
+        for( var i=1;i<=12;i++){
+            $('#dropdown_list_month').append('<option value="'+i+'">'+i+'月</option>');
+        }
+
+        /* input自动输入下个的功能 */
+
+
+        // tmp_input_focus($('.frame_lettering input'))
+        // tmp_input_focus($('.leg_lettering input'))
+        function tmp_input_focus(tmp_input_){
+            var tmp_input = [];
+            for(var i=0; i<tmp_input_.length; i++){
+                tmp_input.push($(tmp_input_[i]));
+            }
+            tmp_input_.keyup(function(event){
+                if(event.keyCode > 46 && event.keyCode <= 111 && event.keyCode != 93 && event.keyCode != 91){
+                    for(var i=0; i<tmp_input.length-1; i++){
+                        if(tmp_input[i].is( ":focus" ) == true){ 
+                            if(tmp_input[i].val().length>1){
+                                if(tmp_input[i].context.selectionStart == 2){
+                                    tmp_input[i].val(tmp_input[i].val().slice(0,1).toLocaleUpperCase());
+                                    tmp_input[i+1].val(event.key.toLocaleUpperCase());
+                                    tmp_input[i+1].focus();
+                                }else{
+                                    tmp_input[i].val(tmp_input[i].val().slice(0,1).toLocaleUpperCase());
+                                }
+                            }else{
+                                tmp_input[i].val(tmp_input[i].val().toLocaleUpperCase()); 
+                                tmp_input[i+1].focus();
+                            }
+                            break;
+                        }
+                    }
+                    /* 判定边界 */
+                    if(tmp_input[tmp_input.length-1].is( ":focus" ) == true){ 
+                        if(tmp_input[i].val().length>1){
+                            tmp_input[i].focus();
+                            tmp_input[i].val(tmp_input[i].val().slice(0,1).toLocaleUpperCase());
+                        }
+                    }
+                }else if(event.keyCode == 8){
+                    for(var i=0; i<=tmp_input.length-1; i++){
+                        if(tmp_input[i].is( ":focus" ) == true && i-1>=0){ 
+                            tmp_input[i-1].focus();
+                            break;
+                        }
+                    }
+                }
+            })
+        }
+        /* 把按钮添加到ul里 */
+        $('.btn_li').append(
+            "<button></button>"
+            +"<button></button>"
+            +"<button></button>"
+            +"<button></button>"
+            +"<button></button>"
+            +"<button></button>"
+            +"<button></button>"
+            +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+            // +"<button></button>"
+        );
+  
+        // 给按钮加上颜色
+        btn_color($(".glass-frame-color .btn_li>button"));
+        btn_color($(".glass-leg-color .btn_li>button"));
+
+        // 眼镜的颜色选取
+        $('.glass-frame-color ul').fadeOut(0);
+        $('.glass-leg-color ul').fadeOut(0);
+
+        cut($('.glass-frame-color>button'),$('.glass-frame-color ul'));
+        cut($('.glass-leg-color>button'),$('.glass-leg-color ul'));
+
+        // 输入色值按钮，按钮呈现不同的显色
+        input_color($('.glass-frame-color input'),$('.frame-trigger'));
+        input_color($('.glass-leg-color input'),$('.leg-trigger'));
+
+        // 点击按钮出现不同的色值
+        btn_cut($('.glass-frame-color .btn_li button'),$('.glass-frame-color input'),$('.frame-trigger'));
+        btn_cut($('.glass-leg-color .btn_li button'),$('.glass-leg-color input'),$('.leg-trigger'));
+
+
+
+    </script>
+</body>
+</html>
