@@ -206,14 +206,12 @@ $(function(){
                //根据当前状态选择
                 if(order_status!=""){
                       console.log(order_status)
-                  if(order_status=="topay1"){
-                    paymentstatus="topay";
-                    order_pay_status="topay";
-                    var recently_time = `[[["createdate",">=","${(new Date(year).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(year_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_pay_status}"],["paymentstatus","==","${paymentstatus}"]]]`;
-                  }else if(order_status=="topay2"){
-                    paymentstatus="paid";
-                    order_pay_status="topay";
-                    var recently_time = `[[["createdate",">=","${(new Date(year).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(year_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_pay_status}"],["paymentstatus","==","${paymentstatus}"]]]`;
+                  if(order_status=="topay"){
+                    var recently_time = `[[["createdate",">=","${(new Date(year).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(year_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                  }else if(order_status=="paid"){
+                  
+            
+                    var recently_time = `[[["createdate",">=","${(new Date(year).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(year_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
                   }else{
                     var recently_time = `[[["createdate",">=","${(new Date(year).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(year_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
                   }
@@ -230,14 +228,12 @@ $(function(){
                 var recently_time = '[['+'["createdate"'+',">=","'+(new Date(month).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(month_).toUTCString().replace(/GMT/,'-0000'))+'"]'+']]';
                 //根据当前状态选择
                 if(order_status!=""){
-                     if(order_status=="topay1"){
-                    paymentstatus="topay";
-                    order_pay_status="topay";
-                    var recently_time = `[[["createdate",">=","${(new Date(month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(month_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_pay_status}"],["paymentstatus","==","${paymentstatus}"]]]`;
-                  }else if(order_status=="topay2"){
-                    paymentstatus="paid";
-                    order_pay_status="topay";
-                     var recently_time = `[[["createdate",">=","${(new Date(month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(month_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_pay_status}"],["paymentstatus","==","${paymentstatus}"]]]`
+                     if(order_status=="topay"){
+                  
+                    var recently_time = `[[["createdate",">=","${(new Date(month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(month_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                  }else if(order_status=="paid"){
+                    
+                     var recently_time = `[[["createdate",">=","${(new Date(month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(month_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`
                   }else{
                     var recently_time = `[[["createdate",">=","${(new Date(month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(month_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
                      }
@@ -254,14 +250,12 @@ $(function(){
                var recently_time = '[['+'["createdate"'+',">=","'+(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))+'"]'+']]'; 
                //根据当前状态选择
                if(order_status!=""){
-                   if(order_status=="topay1"){
-                    paymentstatus="topay";
-                    order_pay_status="topay";
-                     var recently_time =`[[["createdate",">=","${(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_pay_status}"],["paymentstatus","==","${paymentstatus}"]]]`; 
-                  }else if(order_status=="topay2"){
-                    paymentstatus="paid";
-                    order_pay_status="topay";
-                     var recently_time =`[[["createdate",">=","${(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_pay_status}"],["paymentstatus","==","${paymentstatus}"]]]`; 
+                   if(order_status=="topay"){
+                    
+                     var recently_time =`[[["createdate",">=","${(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`; 
+                  }else if(order_status=="paid"){
+                    
+                     var recently_time =`[[["createdate",">=","${(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`; 
                   }else{
                    var recently_time =`[[["createdate",">=","${(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`; 
                      }
@@ -277,14 +271,13 @@ $(function(){
 
         }else if(order_status!=""){
              //根据当前状态选择
-              if(order_status=="topay1"){
-                    paymentstatus="topay";
-                    order_pay_status="topay";
-                    var recently_time = `[[["status","==","${order_pay_status}"],["paymentstatus","==","${paymentstatus}"]]]`;
-                  }else if(order_status=="topay2"){
-                    paymentstatus="paid";
-                    order_pay_status="topay";
-                     var recently_time = `[[["status","==","${order_pay_status}"],["paymentstatus","==","${paymentstatus}"]]]`
+             console.log(order_status)
+              if(order_status=="topay"){
+                   
+                    var recently_time = `[[["paymentstatus","==","${order_status}"]]]`;
+                  }else if(order_status=="paid"){
+                   
+                     var recently_time = `[[["paymentstatus","==","${order_status}"]]]`
                   }else{
                      var recently_time =`[[["status","==","${order_status}"]]]`; 
                      }
@@ -686,7 +679,7 @@ $(function(){
     */
     $('#table_id_example tbody').on('click','#download_model',function(){
         var that=$(this);
-        var tmp_deal_uuid =($(this).attr("alternews")).slice(0,($(this).attr("alternews")).length);
+        var tmp_deal_uuid =($(this).attr("alternews")).slice(0);
         console.log(tmp_deal_uuid)
         // var tmp_rawscan_uuid =($(this).attr("rawscanuuid")).slice(0,($(this).attr("rawscanuuid")).length);
         var tmp_rawscan_uuid = all_order_data[all_deal_data[tmp_deal_uuid].owneruuid].rawscan;
