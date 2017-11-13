@@ -143,40 +143,96 @@ $(function(){
     /* 当没有证书情况 END*/
 
     /* 根据时间段选取数据 */
+    
     $('#recently_one_day').click(function(){
         $('#dropdown_list_year,#dropdown_list_month').val('');
+         var order_status=$("#dropdown_list_state").val();
         table.clear()
             .draw();
-        var recently_one_day = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
+        if(order_status!=""){
+         if(order_status=="topay"||order_status=="paid"){
+             var recently_one_day = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+         }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+            var recently_one_day=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+         }
+
+        }else{
+             var recently_one_day = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
+        }
         data_load(recently_one_day);
+    
     })
     $('#recently_hebdomad').click(function(){
         $('#dropdown_list_year,#dropdown_list_month').val('');
+         var order_status=$("#dropdown_list_state").val();
         table.clear()
             .draw();
-        var recently_hebdomad = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
+        if(order_status!=""){
+             if(order_status=="topay"||order_status=="paid"){
+             var recently_hebdomad = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+             }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+            var recently_hebdomad=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+             }
+        }else{
+             var recently_hebdomad = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
+        }
+       
         data_load(recently_hebdomad);
     })
 
     $('#recently_month').click(function(){
+         var order_status=$("#dropdown_list_state").val();
         $('#dropdown_list_year,#dropdown_list_month').val('');
         table.clear()
             .draw();
-        var recently_month = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
+            if(order_status!=""){
+                 if(order_status=="topay"||order_status=="paid"){
+                 var recently_month = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                 }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+                var recently_month=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                 }
+            }else{
+                 var recently_month = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
+            }
+                
         data_load(recently_month);
     })
     $('#recently_one_year').click(function(){
+         var order_status=$("#dropdown_list_state").val();
         $('#dropdown_list_year,#dropdown_list_month').val('');
+         console.log(order_status)
         table.clear()
             .draw();
-        var recently_one_year = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
+            if(order_status!=""){
+                console.log(order_status)
+                 if(order_status=="topay"||order_status=="paid"){
+                  var recently_one_year = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                 }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+                 var recently_one_year=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                  }
+
+            }else{
+              var recently_one_year = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))+'"]]]';   
+            }
+       
         data_load(recently_one_year);
     })
     $('#all_data').click(function(){
+         var order_status=$("#dropdown_list_state").val();
         $('#dropdown_list_year,#dropdown_list_month').val('');
         table.clear()
             .draw();
-        data_load();
+            if(order_status!=""){
+                if(order_status=="topay"||order_status=="paid"){
+                var recently_one_year=`[[["paymentstatus","==","${order_status}"]]]`;
+                }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+                 var recently_one_year=`[[["status","==","${order_status}"]]]`;     
+                }
+              data_load(recently_one_year);
+            }else{
+                data_load(); 
+            }
+       
     })
 
     /* 根据月份来选择数据 */
@@ -271,7 +327,39 @@ $(function(){
 
         }else if(order_status!=""){
              //根据当前状态选择
-             console.log(order_status)
+             // console.log(order_status)
+             var day=$("#recently_one_day").hasClass("bgColor1FB3F0");
+             var hebdomad=$("#recently_hebdomad").hasClass("bgColor1FB3F0");
+             var month=$("#recently_month").hasClass("bgColor1FB3F0");
+             var year=$("#recently_one_year").hasClass("bgColor1FB3F0");
+
+             // console.log(day,hebdomad,month,year)
+             if(day){
+                 if(order_status=="topay"||order_status=="paid"){
+                    var recently_time = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                 }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+                    var recently_time=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                 }
+             }else if(hebdomad){
+                     if(order_status=="topay"||order_status=="paid"){
+                     var recently_time = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                     }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+                     var recently_time=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                   }
+             }else if(month){
+                   if(order_status=="topay"||order_status=="paid"){
+                     var recently_time = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                     }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+                     var recently_time=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                     }
+             }else if(year){
+                    if(order_status=="topay"||order_status=="paid"){
+                    var recently_time = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                   }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
+                    var recently_time=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                    }
+
+             }else{
               if(order_status=="topay"){
                    
                     var recently_time = `[[["paymentstatus","==","${order_status}"]]]`;
@@ -281,6 +369,8 @@ $(function(){
                   }else{
                      var recently_time =`[[["status","==","${order_status}"]]]`; 
                      }
+             }
+              
            
             table.clear()
                 .draw();
