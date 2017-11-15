@@ -151,9 +151,10 @@ $(function(){
             .draw();
         if(order_status!=""){
          if(order_status=="topay"||order_status=="paid"){
-             var recently_one_day = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+             var recently_one_day = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
          }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-            var recently_one_day=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+            var recently_one_day = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
+           
          }
 
         }else{
@@ -169,9 +170,9 @@ $(function(){
             .draw();
         if(order_status!=""){
              if(order_status=="topay"||order_status=="paid"){
-             var recently_hebdomad = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+             var recently_hebdomad = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';             
              }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-            var recently_hebdomad=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+             var recently_hebdomad = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
              }
         }else{
              var recently_hebdomad = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
@@ -187,9 +188,10 @@ $(function(){
             .draw();
             if(order_status!=""){
                  if(order_status=="topay"||order_status=="paid"){
-                 var recently_month = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                 var recently_month = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
+                 
                  }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-                var recently_month=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                var recently_month = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
                  }
             }else{
                  var recently_month = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
@@ -206,9 +208,10 @@ $(function(){
             if(order_status!=""){
                 console.log(order_status)
                  if(order_status=="topay"||order_status=="paid"){
-                  var recently_one_year = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                    var recently_one_year = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
+                    console.log(recently_one_year)
                  }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-                 var recently_one_year=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                 var recently_one_year = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
                   }
 
             }else{
@@ -224,9 +227,9 @@ $(function(){
             .draw();
             if(order_status!=""){
                 if(order_status=="topay"||order_status=="paid"){
-                var recently_one_year=`[[["paymentstatus","==","${order_status}"]]]`;
+                var recently_one_year='[[['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
                 }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-                 var recently_one_year=`[[["status","==","${order_status}"]]]`;     
+                 var recently_one_year='[[['+'"status"'+',"==","'+order_status+'"]]]';     
                 }
               data_load(recently_one_year);
             }else{
@@ -263,13 +266,13 @@ $(function(){
                 if(order_status!=""){
                       console.log(order_status)
                   if(order_status=="topay"){
-                    var recently_time = `[[["createdate",">=","${(new Date(year).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(year_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(year).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(year_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["paymentstatus"'+',"==","'+order_status+'"]]]';
                   }else if(order_status=="paid"){
                   
-            
-                    var recently_time = `[[["createdate",">=","${(new Date(year).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(year_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                     var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(year).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(year_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["paymentstatus"'+',"==","'+order_status+'"]]]';
                   }else{
-                    var recently_time = `[[["createdate",">=","${(new Date(year).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(year_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                     var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(year).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(year_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["status"'+',"==","'+order_status+'"]]]';
+                
                   }
                 }
             }else if($('#dropdown_list_year').val() == '' && $('#dropdown_list_month').val() != ''){
@@ -285,13 +288,13 @@ $(function(){
                 //根据当前状态选择
                 if(order_status!=""){
                      if(order_status=="topay"){
-                  
-                    var recently_time = `[[["createdate",">=","${(new Date(month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(month_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(month).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(month_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["paymentstatus"'+',"==","'+order_status+'"]]]';
+                   
                   }else if(order_status=="paid"){
-                    
-                     var recently_time = `[[["createdate",">=","${(new Date(month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(month_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(month).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(month_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["paymentstatus"'+',"==","'+order_status+'"]]]';
                   }else{
-                    var recently_time = `[[["createdate",">=","${(new Date(month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(month_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(month).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(month_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["status"'+',"==","'+order_status+'"]]]';
+                   
                      }
                 }
             }else{
@@ -307,13 +310,13 @@ $(function(){
                //根据当前状态选择
                if(order_status!=""){
                    if(order_status=="topay"){
+                     var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["paymentstatus"'+',"==","'+order_status+'"]]]';
                     
-                     var recently_time =`[[["createdate",">=","${(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`; 
                   }else if(order_status=="paid"){
-                    
-                     var recently_time =`[[["createdate",">=","${(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`; 
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["paymentstatus"'+',"==","'+order_status+'"]]]'; 
                   }else{
-                   var recently_time =`[[["createdate",">=","${(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))}"],["createdate","<=","${(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`; 
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(tmp_year_month).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["createdate"'+',"<=","'+(new Date(tmp_year_month_).toUTCString().replace(/GMT/,'-0000'))+'"]'+',["status"'+',"==","'+order_status+'"]]]';
+                  
                      }
                  
                }
@@ -336,38 +339,42 @@ $(function(){
              // console.log(day,hebdomad,month,year)
              if(day){
                  if(order_status=="topay"||order_status=="paid"){
-                    var recently_time = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
                  }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-                    var recently_time=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
                  }
              }else if(hebdomad){
                      if(order_status=="topay"||order_status=="paid"){
-                     var recently_time = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
+                    
                      }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-                     var recently_time=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
+                    
                    }
              }else if(month){
                    if(order_status=="topay"||order_status=="paid"){
-                     var recently_time = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
                      }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-                     var recently_time=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*30).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
                      }
              }else if(year){
                     if(order_status=="topay"||order_status=="paid"){
-                    var recently_time = `[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))}"],["paymentstatus","==","${order_status}"]]]`;
+                        var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
+                    
                    }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
-                    var recently_time=`[[["createdate",">=","${(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))}"],["status","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
+                    
                     }
 
              }else{
               if(order_status=="topay"){
                    
-                    var recently_time = `[[["paymentstatus","==","${order_status}"]]]`;
+                    var recently_time = '[[['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
                   }else if(order_status=="paid"){
                    
-                     var recently_time = `[[["paymentstatus","==","${order_status}"]]]`
+                     var recently_time ='[[['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
                   }else{
-                     var recently_time =`[[["status","==","${order_status}"]]]`; 
+                     var recently_time ='[[['+'"status"'+',"==","'+order_status+'"]]]'; 
                      }
              }
               
@@ -645,21 +652,21 @@ $(function(){
                     // format_time(all_deal_data[deal_list[i]].printdate),
                     order_status,
                     // all_deal_data[deal_list[i]].status,   
-                    `<button id='alter_news' class='${tmp_btn_color} btn-sm' alternews ='${deal_list[i]} ' >${tmp_button}</button>`,                
+                    "<button id='alter_news' class='"+tmp_btn_color+" btn-sm' alternews ='"+deal_list[i]+" ' >"+tmp_button+"</button>",                
                     "<button id='print_receipts' class='"+tmp_shopping_class+" btn-sm btn_info' alternews ='"+deal_list[i]+" ' >"+tmp_shopping_receipts+"</button>",
 
                     // "<button id='download_model' class='btn-sm btn_info' alternews ='"+rawscan_uuid+"'>下载扫描数据</button>",                
-                    `<ul id="operation">
-                        <li> <a class=operation_btn>管理操作</a> </li>
-                        <li><button id="start_production" class="operation_btn a_block" orderstatus ='${order_status}' alternews='${deal_list[i]}'>开始生产</button></li>
-                        <li><a id='download_model' class='operation_btn a_block' orderstatus ='${order_status}' alternews='${deal_list[i]}' download ='rawscan.tar.gz' target='_blank' >下载扫描数据</a></li>               
-                        <li><button id='upload_model' class='operation_btn' orderstatus ='${order_status}' alternews ='${deal_list[i]}'>上传打印模型</button></li>
-                        <li><button id="update_model" class="operation_btn a_block" orderstatus ='${order_status}' alternews='${deal_list[i]}' >修改模型数据</button></li>        
-                        <li><a id='download_print_data' class='operation_btn a_block' orderstatus ='${order_status}' alternews ='${deal_list[i]}' download ='genprint.tar.gz'>下载打印数据</a></li>              
-                        <li><button id='tracking_number' class='operation_btn' orderstatus ='${order_status}' alternews ='${deal_list[i]}'>输入快递单号</button></li>                
-                        <li><button id='complete_done' class='operation_btn' orderstatus ='${order_status}' alternews ='${deal_list[i]}'>完成交付</button>
-                    </ul>`,                
-                    // "<a href='shoppingreceipts.html'><button class='btn_info btn-sm "+tmp_shopping_class+"'>"+tmp_shopping_receipts+"</button></a>",                
+                    "<ul id='operation'>"+
+                        "<li> <a class=operation_btn>管理操作</a> </li>"+
+                        "<li><button id='start_production' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews='"+deal_list[i]+"'>开始生产</button></li>"+
+                        "<li><a id='download_model' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews='"+deal_list[i]+"' download ='rawscan.tar.gz' target='_blank' >下载扫描数据</a></li>"+               
+                        "<li><button id='upload_model' class='operation_btn' orderstatus ='"+order_status+"' alternews ='"+deal_list[i]+"'>上传打印模型</button></li>"+
+                        "<li><button id='update_model' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews='"+deal_list[i]+"' >修改模型数据</button></li>"+        
+                        "<li><a id='download_print_data' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews ='"+deal_list[i]+"' download ='genprint.tar.gz'>下载打印数据</a></li>"+              
+                        "<li><button id='tracking_number' class='operation_btn' orderstatus ='"+order_status+"' alternews ='"+deal_list[i]+"'>输入快递单号</button></li>"+                
+                        "<li><button id='complete_done' class='operation_btn' orderstatus ='"+order_status+"' alternews ='"+deal_list[i]+"'>完成交付</button>"+
+                    "</ul>",                
+                    "<a href='shoppingreceipts.html'><button class='btn_info btn-sm "+tmp_shopping_class+"'>"+tmp_shopping_receipts+"</button></a>",                
                     deal_list[i],
                 ]);
             }                                
@@ -876,7 +883,7 @@ $(function(){
          var tmp_deal_uuid =($(this).attr("alternews")).slice(0,($(this).attr("alternews")).length);
 //          window.open("../sjy/glassadmin.html");
 //          document.cookie = "deal="+tmp_deal_uuid+";path=/";  
-         window.open(`../sjy/glassadmin.html?deal=${tmp_deal_uuid}`);   
+          window.open('../sjy/glassadmin.html?deal='+tmp_deal_uuid);   
      })
     
     /*下载打印数据*/
@@ -884,7 +891,7 @@ $(function(){
         // b = createelemet
         var a=document.createElement("a");
         $(a).css("display","none");
-        a.href = `/data?action=download&type=${type}&uuid=${uuid}`;
+        a.href = "/data?action=download&type="+type+"&uuid="+uuid;
         document.body.appendChild(a)
         $(a)[0].click();
         $(a).remove();
@@ -1360,20 +1367,20 @@ $(function(){
                     break;
                     default:
                    }
-                    html+=`<div>
-                       <b>${data[i].status}</b></br>
-                       <span>${format_time(data[i].date)}</span>
-                   </div>`
+                    html+="<div>"+
+                       "<b>"+data[i].status+"</b></br>"+
+                       "<span>"+format_time(data[i].date)+"</span>"+
+                   "</div>"
                   }
 
                  }
              
                 $("#log_list").html(html);
-                console.log(log_unpaid);
-                 $("#log_list").prepend(`<div>
-                       <b>提交订单</b></br>
-                       <span>${log_unpaid}</span>
-                   </div>`)
+                // console.log(log_unpaid);
+                  $("#log_list").prepend("<div>"+
+                        "<b>提交订单</b></br>"+
+                        "<span>"+log_unpaid+"</span>"+
+                    "</div>")
             },
             error:function(){
                 alert("请检查网络连接")
@@ -1510,10 +1517,10 @@ $(function(){
                 $("#current_progress>span").html(present_status);
                  var html="";
                 for(var i in msg.data ){
-                   html+=`<p>
-                            <span>${msg.data[i].time}</span>
-                            <span>${msg.data[i].context}</span>
-                   </p>`
+                   html+="<p>"+
+                            "<span>"+msg.data[i].time+"</span>"+
+                            "<span>"+msg.data[i].context+"</span>"+
+                   "</p>"
 
                     // console.log(msg.data[i])
                 }
@@ -2202,18 +2209,18 @@ $(function(){
             })
 
             /* 中文姓名的判断 */
-            // $('#user_realname').blur(function(){
-            //     var patt1=/^[\u4E00-\u9FA5]+$/;
-            //     if($(this).val() == ''){
-            //         $('#user_realname_error').text('中文名字不能为空');
-            //     }else if(!patt1.test($(this).val())){
-            //         $('#user_realname_error').text('中文名字格式错误');
-            //     }
-            // })
+            $('#user_realname').blur(function(){
+                var patt1=/^[\u4E00-\u9FA5]+$/;
+                if($(this).val() == ''){
+                    $('#user_realname_error').text('中文名字不能为空');
+                }else if(!patt1.test($(this).val())){
+                    $('#user_realname_error').text('中文名字格式错误');
+                }
+            })
 
-            // $('#user_realname').focus(function(){
-            //     $('#user_realname_error').text('');
-            // })
+            $('#user_realname').focus(function(){
+                $('#user_realname_error').text('');
+            })
 
         }
     });   
