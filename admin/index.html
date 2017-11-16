@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <!-- <meta charset="utf-8"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"> -->
+    <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>订单管理-美戴</title>
     <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
+   <!--[if lt IE 9]>
         <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
         <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -59,6 +62,31 @@
             font-size: 14px;
             text-align:center;
         }
+        #close_management{
+            position: fixed;
+            bottom:0;
+            left:20px;
+
+        }
+        #uploadify_close{
+            position:absolute;
+            top:43%;
+            left:59%;
+            z-index:50;
+        }
+        #uploadify_await{
+            display: none;
+            position: fixed;
+            width:100%;
+            height:100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            color: #fff;
+            font-size: 20px;
+            padding-top: 15%;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
@@ -355,8 +383,11 @@
             
             <!-- 上传眼镜配置 -->
             <div id='uploadify_box' style='text-align: center;'>
+            <div id="uploadify_await">上传中...</div>
+             <span id="uploadify_close" class='glyphicon glyphicon-remove'></span>
                 <div id="uploadify_content">
-                    <div id= "uploadForm" >
+                 
+                    <div id="uploadForm">
                         <input type="file" name="uploadify" id="uploadify" required  style="margin:0 auto;">
                         <input id='uploadify_button' class='btn_info btn-sm' type="button" name="uploadify" value='上传'>
                         <div id="datauploadsuccess">
@@ -458,7 +489,7 @@
             <div id='shopping_amount'>总金额：<span>￥1967.00</span></div>
         </div>
         <div id='personaldata'>
-            <p>扫描以下二维码，获取订单详细信息，并附赠：客户电子脸部尺寸&电子视力报告。</p>
+            <p>扫描以下二维码，获取订单详细信息，并附赠：客户电子脸部尺寸 电子视力报告。</p>
             <div id='qrcode'></div>
             <!-- <img src="images/shoppreceipts/grwei.png" alt=""> -->
         </div>
@@ -472,9 +503,22 @@
             <p>谢谢惠顾，欢迎再次光临！</p>
         </div>
     </div>
+    <!-- <a href="../sjy/glassadmin.html?deal=a2d5a28ebae3ece0b2c6b76cf39ee48b">百度</a> -->
+    <!-- <a href="https://www.meidaitech.com/_test_/www/sjy/glassadmin.html?deal=a2d5a28ebae3ece0b2c6b76cf39ee48b">123456</a> -->
+    <!-- <a id="close_management" href="" style="position: fixed; ">返回试戴</a> -->
     <script>
-    
+//     $("#close_management").click(function(e){
+//         e.preventDefault;
+//         window.opener=null;    
+// //window.opener=top;    
+//         window.open("","_self");    
+//         window.close();
+//         console.log(1)
+
+//     })
     //查看详情进度
+   
+    console.log(getServerDate())
         $("#schedule").click(function(){
             $(".information-content").hide(500);
             $(".particular_schedule").show(500);

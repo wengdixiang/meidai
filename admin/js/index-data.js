@@ -734,7 +734,7 @@ $(function(){
     
                 "paid":data.paid,
                  "production":{
-                    "date":new Date(),
+                    "date":getServerDate(),
                     "status":"printing"
                 }           
              };     
@@ -807,16 +807,19 @@ $(function(){
         })
 
         // 下载   
-        $(this).attr('href','/data?action=download&type=rawscan&uuid='+tmp_rawscan_uuid);
+         download_data("rawscan",tmp_rawscan_uuid);
+        //$(this).attr('href','/data?action=download&type=rawscan&uuid='+tmp_rawscan_uuid);
         
        
 })
     /*上传眼镜配置 */
     $('#table_id_example tbody').on('click','#upload_model',function(){
         $("#uploadify_box").show();
+        
          var tmp_deal_uuid =($(this).attr("alternews")).slice(0,($(this).attr("alternews")).length);
         $("input#uploadify_button").unbind('click').click(function(){
             // var owneruuid = all_deal_data[tmp_deal_uuid];
+            $("#uploadify_await").show();
             var type = 'genprint';
             console.log(tmp_deal_uuid)
             var formdata = new FormData();
@@ -842,6 +845,7 @@ $(function(){
                     if(data.result==="true"){
                      $(".alert-success").show();
                      $(".alert-danger").hide();
+                       $("#uploadify_await").hide();
                     $("#datauploadsuccess").show();
                     setTimeout(function(){
                         $("#datauploadsuccess").hide();
@@ -849,6 +853,7 @@ $(function(){
                     }else if(data.result==="false"){
                      $(".alert-success").hide();
                      $(".alert-danger").show();
+                       $("#uploadify_await").hide();
                     $("#datauploadsuccess").show();
                     setTimeout(function(){
                        $("#datauploadsuccess").hide();
@@ -978,7 +983,7 @@ $(function(){
 
         // 点击保存快递单号按钮
         $('#confirm_tracking').unbind('click').click(function(){   
-            // console.log($that.attr("orderstatus"))
+            console.log($that.attr("orderstatus"))
             if($('#express>input').eq(1).val().length<8||$('#express>input').eq(1).val().length>13){
                 alert("请输入正确的快递单号")
             }else{
@@ -1147,7 +1152,7 @@ $(function(){
                     "paid":data.paid,
                    "production":data.production,
                 "transport":{
-                    "date":new Date(),
+                    "date":getServerDate(),
                     "status":"delivering"
                 }
             }
@@ -1223,7 +1228,7 @@ $(function(){
                    "production":data.production,
                    "transport":data.transport,
                 "accomplish":{
-                    "date":new Date(),
+                    "date":getServerDate(),
                     "status":"done"
                 }
              }
@@ -1528,7 +1533,7 @@ $(function(){
             },
 
             error:function(){
-                console.log(flase)
+                console.log("请查看网络")
             }
         })
         }
@@ -2618,9 +2623,10 @@ $(function(){
                 var data=JSON.parse(data.log)
                 console.log(data)
             }
+
                var log_data={
                  "paid":{
-                    "date":new Date(),
+                    "date":getServerDate(),
                     "status":"paid"
                 },
             

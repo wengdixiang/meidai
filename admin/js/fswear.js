@@ -65,7 +65,10 @@ function estimate_time(data_time){
     }
     return data_time;   
 }
-
+/*获取服务器端的时间*/
+ function getServerDate(){
+    return new Date($.ajax({async: false}).getResponseHeader("Date"));
+    }
 
 /**
 * 检测对象的key是否存在
