@@ -86,7 +86,6 @@
             padding-top: 15%;
             font-weight: bold;
         }
-
     </style>
 </head>
 <body>
@@ -532,12 +531,21 @@
         //管理操作按钮
     
           $("#table_id_example tbody").on("click",'#operation',function(){
+            var uuid=$(this).children().eq(4).children().attr("alternews");
+            /*给下载按钮添加地址*/
+             var tmp_deal_uuid =($(this).children().eq(2).children().attr("alternews")).slice(0);
+            //console.log(tmp_deal_uuid)
+            // var tmp_rawscan_uuid =($(this).attr("rawscanuuid")).slice(0,($(this).attr("rawscanuuid")).length);
+            var tmp_rawscan_uuid = all_order_data[all_deal_data[tmp_deal_uuid].owneruuid].rawscan;
+            //console.log(all_deal_data[tmp_deal_uuid])
+             $(this).children().eq(2).children().attr("href",'/data?action=download&type=rawscan&uuid='+tmp_rawscan_uuid);
+            // console.log(uuid)
             if($(this).css("height")!="23px"){
                 $(this).css("height","23px");
             }else{
                   $(this).css("height","184px");
                  var now_state= $(this).closest("tr").children().eq(5).html() ;
-                 console.log(now_state)
+                 // console.log(now_state)
                  // console.log(now_state)
                  /*下载扫描模型：所有已经支付订单*/
                  // if(now_state!="待支付"&&now_state!="完成交付"){
@@ -560,9 +568,9 @@
                  /*修改模型数据：仅"已支付"、"生产中"的订单*/
 
                  if(now_state=="生产中"||now_state=="已支付"){
-                     $(this).children().eq(4).children().prop("disabled",false).css({"color":"#000"});
+                     $(this).children().eq(4).children().prop("disabled",false).css({"color":"#000"}).attr("href",'../sjy/glassadmin.html?deal='+uuid);
                  }else{
-                     $(this).children().eq(4).children().prop("disabled",true).css({"color":"#999"});
+                     $(this).children().eq(4).children().prop("disabled",true).css({"color":"#999"}).attr("href","javascript:0");
                  }
                  /*下载打印数据："生产中"、"运输中"或"已完成"的订单*/
                  if(now_state=="生产中"||now_state=="运输中"||now_state=="完成交付"){

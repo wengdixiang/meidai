@@ -48,7 +48,6 @@ $(function(){
 
         //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变  
         "bScrollCollapse" : true, 
-
         //分页样式
         "pagingType": "full_numbers", 
 
@@ -643,6 +642,7 @@ $(function(){
                 //   tmp_button = '提交订单';
                 //   tmp_btn_color = 'btn_danger';
                 }
+                /*添加操作按钮*/
                 table.row.add([
                     j=j+1,
                     format_time(all_deal_data[deal_list[i]].createdate),                    
@@ -659,9 +659,9 @@ $(function(){
                     "<ul id='operation'>"+
                         "<li> <a class=operation_btn>管理操作</a> </li>"+
                         "<li><button id='start_production' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews='"+deal_list[i]+"'>开始生产</button></li>"+
-                        "<li><a id='download_model' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews='"+deal_list[i]+"' download ='rawscan.tar.gz' target='_blank' >下载扫描数据</a></li>"+               
+                        "<li><a id='download_model' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews='"+deal_list[i]+"' download ='rawscan.tar.gz' >下载扫描数据</a></li>"+               
                         "<li><button id='upload_model' class='operation_btn' orderstatus ='"+order_status+"' alternews ='"+deal_list[i]+"'>上传打印模型</button></li>"+
-                        "<li><button id='update_model' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews='"+deal_list[i]+"' >修改模型数据</button></li>"+        
+                        "<li><a href='../sjy/glassadmin.html?deal="+deal_list[i]+"' id='update_model' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews='"+deal_list[i]+"' >修改模型数据</a></li>"+        
                         "<li><a id='download_print_data' class='operation_btn a_block' orderstatus ='"+order_status+"' alternews ='"+deal_list[i]+"' download ='genprint.tar.gz'>下载打印数据</a></li>"+              
                         "<li><button id='tracking_number' class='operation_btn' orderstatus ='"+order_status+"' alternews ='"+deal_list[i]+"'>输入快递单号</button></li>"+                
                         "<li><button id='complete_done' class='operation_btn' orderstatus ='"+order_status+"' alternews ='"+deal_list[i]+"'>完成交付</button>"+
@@ -682,12 +682,13 @@ $(function(){
         // var column4 = table.column($('input.toggle-vis').eq(3).attr('data-column') );
         // var column5 = table.column($('input.toggle-vis').eq(4).attr('data-column') );
  
-        column1.visible(false);
+       column1.visible(false);
         // column2.visible(false);
         // column3.visible(false);
         // column4.visible(false);
         // column5.visible(false);
-     
+       $('#production_management>span').prev().prop("checked",false);
+
     $('#production_management>span').on( 'click', function (e) {
         e.preventDefault();
         // Get the column API object
@@ -774,44 +775,40 @@ $(function(){
     /*
         下载扫描数据
     */
-    $('#table_id_example tbody').on('click','#download_model',function(){
-        var that=$(this);
-        var tmp_deal_uuid =($(this).attr("alternews")).slice(0);
-        console.log(tmp_deal_uuid)
-        // var tmp_rawscan_uuid =($(this).attr("rawscanuuid")).slice(0,($(this).attr("rawscanuuid")).length);
-        var tmp_rawscan_uuid = all_order_data[all_deal_data[tmp_deal_uuid].owneruuid].rawscan;
-        console.log(all_deal_data[tmp_deal_uuid])
+   // $('#table_id_example tbody').on('click','#download_model',function(){
+        
+       
 
-        var rawscan_data = {
-            "action": "download",
-            "uuid": tmp_rawscan_uuid,
-            "type" : "rawscan",
-        }
-        $.ajax({
-            type: "post",
-            data: rawscan_data,
-            url: "/data",
-            // async:false,
-            success: function(dat) {
+        // var rawscan_data = {
+        //     "action": "download",
+        //     "uuid": tmp_rawscan_uuid,
+        //     "type" : "rawscan",
+        // }
+        // $.ajax({
+        //     type: "post",
+        //     data: rawscan_data,
+        //     url: "/data",
+        //     // async:false,
+        //     success: function(dat) {
 
-                if( dat.result != 'false'){
+        //         if( dat.result != 'false'){
                    
-                }else{
-                    console.log(dat.reasons)
-                }             
-            },
-            error: function(er) {
-                console.log('download rawscan');
-                console.log(er)
-            }
-        })
+        //         }else{
+        //             console.log(dat.reasons)
+        //         }             
+        //     },
+        //     error: function(er) {
+        //         console.log('download rawscan');
+        //         console.log(er)
+        //     }
+        // })
 
         // 下载   
-         download_data("rawscan",tmp_rawscan_uuid);
+        // download_data("rawscan",tmp_rawscan_uuid);
         //$(this).attr('href','/data?action=download&type=rawscan&uuid='+tmp_rawscan_uuid);
         
        
-})
+//})
     /*上传眼镜配置 */
     $('#table_id_example tbody').on('click','#upload_model',function(){
         $("#uploadify_box").show();
@@ -888,7 +885,7 @@ $(function(){
          var tmp_deal_uuid =($(this).attr("alternews")).slice(0,($(this).attr("alternews")).length);
 //          window.open("../sjy/glassadmin.html");
 //          document.cookie = "deal="+tmp_deal_uuid+";path=/";  
-          window.open('../sjy/glassadmin.html?deal='+tmp_deal_uuid);   
+         // window.open('../sjy/glassadmin.html?deal='+tmp_deal_uuid);   
      })
     
     /*下载打印数据*/
@@ -984,7 +981,16 @@ $(function(){
         // 点击保存快递单号按钮
         $('#confirm_tracking').unbind('click').click(function(){   
             console.log($that.attr("orderstatus"))
-            if($('#express>input').eq(1).val().length<8||$('#express>input').eq(1).val().length>13){
+            if($('#express>input').eq(1).val()=="00000000"){
+              console.log(1);
+              $(".confirm_tracking_success").show();
+               setTimeout(function(){
+                $(".confirm_tracking_success").hide();
+                   },3000);
+                 change_order_status()
+               that.closest("tr").children().eq(5).html("运输中") 
+             
+            }else if($('#express>input').eq(1).val().length<7||$('#express>input').eq(1).val().length>13){
                 alert("请输入正确的快递单号")
             }else{
             // if($(this).attr("orderstatus") === '生产中'){
