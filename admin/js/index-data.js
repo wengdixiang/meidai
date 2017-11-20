@@ -21,7 +21,7 @@ $(function(){
     	"columnDefs": [ 
     		{
                 "targets": [8],
-                "visible": false,
+                "visible":true,
                 "searchable": false
             }
             // {
@@ -682,12 +682,12 @@ $(function(){
         // var column4 = table.column($('input.toggle-vis').eq(3).attr('data-column') );
         // var column5 = table.column($('input.toggle-vis').eq(4).attr('data-column') );
  
-       column1.visible(false);
+      // column1.visible(false);
         // column2.visible(false);
         // column3.visible(false);
         // column4.visible(false);
         // column5.visible(false);
-       $('#production_management>span').prev().prop("checked",false);
+       $('#production_management>span').prev().prop("checked",column1.visible());
 
     $('#production_management>span').on( 'click', function (e) {
         e.preventDefault();
@@ -843,6 +843,7 @@ $(function(){
                      $(".alert-success").show();
                      $(".alert-danger").hide();
                        $("#uploadify_await").hide();
+                       $("#uploadify").val("");
                     $("#datauploadsuccess").show();
                     setTimeout(function(){
                         $("#datauploadsuccess").hide();
@@ -852,6 +853,7 @@ $(function(){
                      $(".alert-danger").show();
                        $("#uploadify_await").hide();
                     $("#datauploadsuccess").show();
+                    $("#uploadify").val("")
                     setTimeout(function(){
                        $("#datauploadsuccess").hide();
                     },2000)
