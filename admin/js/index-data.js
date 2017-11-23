@@ -20,8 +20,8 @@ $(function(){
     var table = $('#table_id_example').DataTable({
     	"columnDefs": [ 
     		{
-                "targets": [8],
-                "visible":true,
+                "targets": [9],
+                "visible":false,
                 "searchable": false
             }
             // {
@@ -64,7 +64,7 @@ $(function(){
         "bSort": false, 
 
         //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态
-        "bStateSave" : true, 
+        "bStateSave" : false, 
 
         //状态保存的有效期
         "stateDuration": 60 * 60 * 24,  
@@ -480,6 +480,7 @@ $(function(){
                 'paymentstatus' :'',
                 "discount" : '',
                 "genprint" : '',
+                "scratch":'',
             };
 
             $.ajax({
@@ -530,7 +531,7 @@ $(function(){
                 'scandate':'',
                 'preconfig':'',
                 'collecteddata':'',	              
-        		"pinfo": "",
+        		    "pinfo": "",
                 'scanphoto'	: '',
                 "rawscan" : "",
             };
@@ -597,11 +598,13 @@ $(function(){
                 var deal_status = all_deal_data[deal_list[i]].status;
                 var tmp_button = '' ;
                 var tmp_btn_color;
-
                 //购物小票
                 var tmp_shopping_receipts;
                 var tmp_shopping_class;
-
+                var tmp_scratch=all_deal_data[deal_list[i]].scratch;
+                if(tmp_scratch!=""){
+                  tmp_scratch=JSON.parse(tmp_scratch).carve;
+                };
                 /* 判断 deal paymentstatus */
                 switch(deal_paymentstatus)
                 {
@@ -642,6 +645,7 @@ $(function(){
                 //   tmp_button = '提交订单';
                 //   tmp_btn_color = 'btn_danger';
                 }
+                console.log()
                 /*添加操作按钮*/
                 table.row.add([
                     j=j+1,
@@ -650,8 +654,10 @@ $(function(){
                     all_order_data[all_deal_data[deal_list[i]].owneruuid].pinfo ? all_order_data[all_deal_data[deal_list[i]].owneruuid].pinfo.phone : "",
                     all_order_data[all_deal_data[deal_list[i]].owneruuid].pinfo ? all_order_data[all_deal_data[deal_list[i]].owneruuid].pinfo.email : "",
                     // format_time(all_deal_data[deal_list[i]].printdate),
+                    tmp_scratch,
                     order_status,
-                    // all_deal_data[deal_list[i]].status,   
+                    // all_deal_data[deal_list[i]].status, 
+                      
                     "<button id='alter_news' class='"+tmp_btn_color+" btn-sm' alternews ='"+deal_list[i]+" ' >"+tmp_button+"</button>",                
                     "<button id='print_receipts' class='"+tmp_shopping_class+" btn-sm btn_info' alternews ='"+deal_list[i]+" ' >"+tmp_shopping_receipts+"</button>",
 
@@ -676,13 +682,13 @@ $(function(){
 	/* 插入数据 END */
 
     /*显示和隐藏生产管理*/
-        var column1 = table.column($('input.toggle-vis').eq(0).attr('data-column') );
+        var column1 = table.column($('input.toggle-vis').eq(1).attr('data-column') );
         // var column2 = table.column($('input.toggle-vis').eq(1).attr('data-column') );
         // var column3 = table.column($('input.toggle-vis').eq(2).attr('data-column') );
         // var column4 = table.column($('input.toggle-vis').eq(3).attr('data-column') );
         // var column5 = table.column($('input.toggle-vis').eq(4).attr('data-column') );
  
-      // column1.visible(false);
+        column1.visible(false);
         // column2.visible(false);
         // column3.visible(false);
         // column4.visible(false);
@@ -755,7 +761,7 @@ $(function(){
                         if(inspect_data(all_deal_data[dealuuid],'status') !== ''){
                             all_deal_data[dealuuid].status = 'printing';
                         }
-                          that.closest("tr").children().eq(5).html("生产中") 
+                          that.closest("tr").children().eq(6).html("生产中") 
                         // table.clear()
                         //     .draw();
                             // data_load();
@@ -812,11 +818,12 @@ $(function(){
     /*上传眼镜配置 */
     $('#table_id_example tbody').on('click','#upload_model',function(){
         $("#uploadify_box").show();
-        
+        var that=$(this);
          var tmp_deal_uuid =($(this).attr("alternews")).slice(0,($(this).attr("alternews")).length);
         $("input#uploadify_button").unbind('click').click(function(){
             // var owneruuid = all_deal_data[tmp_deal_uuid];
             $("#uploadify_await").show();
+           
             var type = 'genprint';
             console.log(tmp_deal_uuid)
             var formdata = new FormData();
@@ -824,6 +831,7 @@ $(function(){
             formdata.append('owneruuid', tmp_deal_uuid);
             formdata.append('type', type);      
             console.log(tmp_deal_uuid)
+            console.log(formdata)
             $.ajax({
                 url: "/data?action=upload",
                 type: "POST",
@@ -847,7 +855,27 @@ $(function(){
                     $("#datauploadsuccess").show();
                     setTimeout(function(){
                         $("#datauploadsuccess").hide();
-                    },2000)
+                    },2000);
+                     //上传刻字信息
+                    var tmp_scratch=$("#upscratch").val();
+                    var tmp_scratch_={"carve":tmp_scratch};
+                    var tmp_scratch_data={
+                      "action":"update",
+                      "uuid":tmp_deal_uuid,
+                      "scratch":JSON.stringify(tmp_scratch_)
+                    }
+                    $.ajax({
+                      url:"/deal",
+                      type:"post",
+                      data:tmp_scratch_data,
+                      success:function(data){
+                        console.log(data);
+                        that.closest("tr").children().eq(5).html(tmp_scratch) 
+                      },
+                      error:function(){
+
+                      }
+                    });
                     }else if(data.result==="false"){
                      $(".alert-success").hide();
                      $(".alert-danger").show();
@@ -990,7 +1018,7 @@ $(function(){
                 $(".confirm_tracking_success").hide();
                    },3000);
                  change_order_status()
-               that.closest("tr").children().eq(5).html("运输中") 
+               that.closest("tr").children().eq(6).html("运输中") 
              
             }else if($('#express>input').eq(1).val().length<7||$('#express>input').eq(1).val().length>13){
                 alert("请输入正确的快递单号")
@@ -1035,7 +1063,7 @@ $(function(){
                                     $(".confirm_tracking_success").hide();
                                   },3000);
                                   change_order_status()
-                                  that.closest("tr").children().eq(5).html("运输中") 
+                                  that.closest("tr").children().eq(6).html("运输中") 
                             }else{
                                 console.log(dat.reasons)
                             }
@@ -1260,7 +1288,7 @@ $(function(){
                     // table.clear()
                     //     .draw();
                     //     data_load();
-                    that.closest("tr").children().eq(5).html("完成交付") 
+                    that.closest("tr").children().eq(6).html("完成交付") 
                     $('#complete_done_success').show(); 
 
                     /* 取消提交成功之后的显示 */

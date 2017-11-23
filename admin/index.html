@@ -86,6 +86,10 @@
             padding-top: 15%;
             font-weight: bold;
         }
+        /*刻字信息*/
+        #upscratch{
+            margin-bottom:20px;
+        }
     </style>
 </head>
 <body>
@@ -150,6 +154,7 @@
                             <th>姓名</th>
                             <th>手机</th>
                             <th>邮箱</th>
+                            <th>刻字信息</th>
                             <th>订单状态</th> 
                             <th>订单详情</th>
                             <th>打印小票</th>
@@ -388,6 +393,8 @@
                  
                     <div id="uploadForm">
                         <input type="file" name="uploadify" id="uploadify" required  style="margin:0 auto;">
+                        <label for="upscratch">上传刻字信息</label>
+                        <input type="text" id="upscratch" >
                         <input id='uploadify_button' class='btn_info btn-sm' type="button" name="uploadify" value='上传'>
                         <div id="datauploadsuccess">
                             <div class="alert alert-success">
@@ -515,9 +522,15 @@
 //         console.log(1)
 
 //     })
+  function getDate(){
+   
+    return new Date($.ajax({async: false}).getResponseHeader("Date"));
+    }
+    console.log(getDate())
+
     //查看详情进度
    
-    console.log(getServerDate())
+    //console.log(getServerDate())
         $("#schedule").click(function(){
             $(".information-content").hide(500);
             $(".particular_schedule").show(500);
@@ -544,7 +557,7 @@
                 $(this).css("height","23px");
             }else{
                   $(this).css("height","184px");
-                 var now_state= $(this).closest("tr").children().eq(5).html() ;
+                 var now_state= $(this).closest("tr").children().eq(6).html() ;
                  // console.log(now_state)
                  // console.log(now_state)
                  /*下载扫描模型：所有已经支付订单*/
@@ -568,9 +581,9 @@
                  /*修改模型数据：仅"已支付"、"生产中"的订单*/
 
                  if(now_state=="生产中"||now_state=="已支付"){
-                     $(this).children().eq(4).children().prop("disabled",false).css({"color":"#000"}).attr("href",'../sjy/glassadmin.html?deal='+uuid);
+                     $(this).children().eq(4).children().css({"color":"#000"}).attr("href",'../sjy/glassadmin.html?deal='+uuid);
                  }else{
-                     $(this).children().eq(4).children().prop("disabled",true).css({"color":"#999"}).attr("href","javascript:0");
+                     $(this).children().eq(4).children().css({"color":"#999"}).attr("href","javascript:0");
                  }
                  /*下载打印数据："生产中"、"运输中"或"已完成"的订单*/
                  if(now_state=="生产中"||now_state=="运输中"||now_state=="完成交付"){
@@ -578,7 +591,7 @@
                  }else{
                     $(this).children().eq(5).children().prop("disabled",true).css({"color":"#999"});
                  }
-                 /*输入快递单号：仅限"生产中"的订单*/
+                 /*输入快递单号：仅限"生产中" "运输中"的订单*/
                  if(now_state=="生产中"||now_state=="运输中"){
                    $(this).children().eq(6).children().prop("disabled",false).css({"color":"#000"});
                  
