@@ -11,7 +11,7 @@ $(function(){
     var table = $('#table_id_example').DataTable({
         "columnDefs": [ 
             {
-                "targets": [6],
+                "targets": [7],
                 "visible": false,
                 "searchable": true,
             },
@@ -202,8 +202,10 @@ $(function(){
                         if(parseInt(data.page.split('#')[2]) < parseInt(data.totalpage)-1 ){
                             current_page = current_page+1;
                             load_order_list(condition_);
+                            console.log(data)
                         }else{
                             load_order_data();
+                             console.log(data)
 
                         }
                     }else{
@@ -248,6 +250,7 @@ $(function(){
                 'scanphoto': '',
 
             };
+            //console.log(tmp_order_list)
             $.ajax({
                 type: "post",
                 data: post_data,
@@ -277,6 +280,7 @@ $(function(){
         // var all_order_data;
 
         // var time_createdate = []
+       // console.log(order_list)
         function structure_data(){
             table.clear()
                 .draw();
@@ -296,7 +300,7 @@ $(function(){
                                 format_time(all_order_data[order_list[i]].scandate),
                                 // "<a href = 'fswear://"+jQuery.parseJSON(all_order_data[order_list[i]].collecteddata).user_path +"'><button id='alter_news' class='btn_info btn-sm'>启动试戴</button></a>",
                                 "<a target='_blank' href = 'http://127.0.0.1:9100/tryon/"+all_order_data[order_list[i]].collecteddata.user_path +"'><button id='alter_news' class='btn_info btn-sm'>启动试戴</button></a>",
-                                // "<a href = 'fswear://"+all_order_data[order_list[i]].collecteddata.user_path +"'><button id='alter_news' class='btn_info btn-sm'>启动试戴</button></a>",
+                                 "<a href='../sjy/glassadjust.html' class='btn_info' id='adjust' data="+order_list[i]+">调整下单</a>",
                                 order_list[i],
                             ]);    
                             table.draw(false); 
@@ -318,5 +322,10 @@ $(function(){
             all_order_data = {};               
         } 
     }
+    $("tbody").on("click","#adjust",function(){
+        var order_uuid=$(this).attr("data");
+         document.cookie = "UserUUID="+order_uuid+";path=/";  
+
+    })
 })
 

@@ -848,34 +848,39 @@ $(function(){
                 success: function(response) {
                     var data=JSON.parse(response);
                     if(data.result==="true"){
-                     $(".alert-success").show();
-                     $(".alert-danger").hide();
+                       $(".alert-success").show();
+                       $(".alert-danger").hide();
                        $("#uploadify_await").hide();
                        $("#uploadify").val("");
-                    $("#datauploadsuccess").show();
-                    setTimeout(function(){
-                        $("#datauploadsuccess").hide();
-                    },2000);
+                       $("#datauploadsuccess").show();
+                        setTimeout(function(){
+                          $("#datauploadsuccess").hide();
+                           },2000);
                      //上传刻字信息
-                    var tmp_scratch=$("#upscratch").val();
-                    var tmp_scratch_={"carve":tmp_scratch};
-                    var tmp_scratch_data={
+                       var tmp_scratch=$("#upscratch").val();
+                       if(tmp_scratch!=""){
+                      var tmp_scratch_={"carve":tmp_scratch};
+                      var tmp_msg={"BridgeMessage":tmp_scratch};
+                      var tmp_scratch_data={
                       "action":"update",
                       "uuid":tmp_deal_uuid,
+                      "config_literal":JSON.stringify(tmp_msg),
                       "scratch":JSON.stringify(tmp_scratch_)
-                    }
-                    $.ajax({
-                      url:"/deal",
-                      type:"post",
-                      data:tmp_scratch_data,
-                      success:function(data){
-                        console.log(data);
-                        that.closest("tr").children().eq(5).html(tmp_scratch) 
-                      },
-                      error:function(){
+                       }
+                       $.ajax({
+                          url:"/deal",
+                          type:"post",
+                          data:tmp_scratch_data,
+                          success:function(data){
+                            console.log(data);
+                            that.closest("tr").children().eq(5).html(tmp_scratch) 
+                          },
+                          error:function(){
 
-                      }
-                    });
+                          }
+                        });     
+                       }
+                   
                     }else if(data.result==="false"){
                      $(".alert-success").hide();
                      $(".alert-danger").show();
@@ -946,9 +951,14 @@ $(function(){
                  url: "/deal",
                  success: function(da) {
                     var data=JSON.parse(da)
-                           download_data("genprint",data.genprint) ;
-
-                        },
+                    console.log(data)
+                    if(data.genprint!=""){
+                       download_data("genprint",data.genprint) ;
+                        }else{
+                          alert("用户资料保存有误")
+                        }
+                          
+                   },
                  error: function(err) {
                     console.log(false)
                           }
@@ -1259,15 +1269,32 @@ $(function(){
                 var data=JSON.parse(data)
                 var data=JSON.parse(data.log)
                 console.log(data)
-                   var log_data={
+                console.log(data.transport)
+                if(data.transport!==undefined){
+                  var log_data={
                     "paid":data.paid,
                    "production":data.production,
                    "transport":data.transport,
                 "accomplish":{
                     "date":getServerDate(),
                     "status":"done"
+                    }
+                  }
+                }else{
+                  var log_data={
+                   "paid":data.paid,
+                   "production":data.production,
+                   "transport":{
+                     "date":getServerDate(),
+                     "status":"oneself"
+                   },
+                   "accomplish":{
+                    "date":getServerDate(),
+                    "status":"done"
+                     }
+                   }
                 }
-             }
+                   
 
              var new_complete_data = {
             'action' : 'update',
@@ -1402,6 +1429,9 @@ $(function(){
                     break;
                     case 'delivering':
                     data[i].status="开始运输";
+                    break;
+                    case 'oneself':
+                    data[i].status="用户自提";
                     break;
                     case 'done':
                     data[i].status="完成交付";

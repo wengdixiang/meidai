@@ -70,7 +70,7 @@
         defaultOrderUuid="be3f2732e8f1068dcec2ae9c94ba90fd",
         loginUrl="./login.html?returnUrl=glassclient.html",
         scannerUrl="./scanner.html",
-        adminUrl="/admin/";
+        adminUrl="../admin/";
         
     //initialization and main entrance
     $(document).ready(function(){
@@ -372,7 +372,15 @@
           },
           cache: false,
           success: function(response) {
-            location.href=adminUrl;
+             var  response=JSON.parse(response);
+              if(response.result==="true"){
+                 if(window.confirm('订单提交成功，是否跳转到管理页面？')){
+                  location.href=adminUrl;
+                 }
+              }else{
+                alert("订单提交失败")
+              }
+            
           },
           error: function(err) {
             alert("提交订单错误："+err);

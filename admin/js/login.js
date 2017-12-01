@@ -321,17 +321,17 @@ $("#registration_form .registration_confirm_password").on("blur",function(){
 	            	// console.log("re",re);
 		            if(re.result=="true"){
 		            //单个用户
-		            	setCookie("uuid",re.uuid,0);
+		            	setCookie("UserUUID",re.uuid,0);
 		              	login_fsw_success_infor(true,"登录成功");
 		             	_cookiedata[0]= $emailPhoneVal;
 			            _cookiedata[1]=re.uuid;
 			            if($("#login_form .remember input[type='checkbox']")[0].checked){
 			            	setCookie("isgoto",true,7);	
 			            	// setCookie("uuid",_cookiedata[1],7);
-			            	setCookie("uuid",_cookiedata[1],0.21);
+			            	setCookie("UserUUID",_cookiedata[1],0.21);
 			            }else{
 			            	setCookie("isgoto",false,7);
-			            	setCookie("uuid",_cookiedata[1],1);
+			            	setCookie("UserUUID",_cookiedata[1],1);
 		            	}
 		            	goTohtml();
 	            	}			
@@ -376,7 +376,7 @@ $("#login_form .remember input[type='checkbox']").click(function(){
 		else{
 			setCookie("checkbox","false",0);
 			setCookie("userName","",0);
-		  setCookie("uuid","",0);
+		  setCookie("UserUUID","",0);
 		}
 })
 
@@ -480,7 +480,7 @@ if(document.URL.lastIndexOf('uuid') != -1){
             	var re = JSON.parse(re);
             	if(re.result=="true"){
             		// setCookie("uuid",re.uuid,1); //0.21
-            		setCookie("uuid",re.uuid,0.21); 
+            		setCookie("UserUUID",re.uuid,0.21); 
 
             		login_fsw_success_infor(true,"登录成功");
             		goTohtml();
@@ -488,7 +488,7 @@ if(document.URL.lastIndexOf('uuid') != -1){
 		            	_cookiedata[0]= $emailPhoneVal;
 		            	_cookiedata[1]=re.uuid;
 		            	setCookie("userName",_cookiedata[0],7);
-		            	setCookie("uuid",_cookiedata[1],7);
+		            	setCookie("UserUUID",_cookiedata[1],7);
 		           	}
 					//window.setTimeout("window.location.href='https://www.baidu.com/'",3000);
             	}else{

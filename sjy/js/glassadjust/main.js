@@ -329,14 +329,14 @@
         idTimerLdesign=null;
         ldListHeight=Math.ceil($('a.Ldesign').length/3)*designPerHeight;
         updateLayout();
-        $('a.Ldesign').click(function (){
-          if($(this).children('img').attr('id')!=='Ldesign-selected'){
-            console.log("Leg Design Selection: "+$(this).attr('data'));
-            $('#Ldesign-selected').removeAttr('id');
-            $(this).children('img').attr('id','Ldesign-selected');
-            updateGlass();
-          }
-        });
+        // $('a.Ldesign').click(function (){
+        //   if($(this).children('img').attr('id')!=='Ldesign-selected'){
+        //     console.log("Leg Design Selection: "+$(this).attr('data'));
+        //     $('#Ldesign-selected').removeAttr('id');
+        //     $(this).children('img').attr('id','Ldesign-selected');
+        //     updateGlass();
+        //   }
+        // });
       }
     };
     
@@ -375,10 +375,15 @@
           },
           cache: false,
           success: function(response) {
-           if(window.confirm('提交订单成功，是否跳转到管理页面？')){
-             location.href=adminUrl;
-           }
-           
+            var  response=JSON.parse(response);
+              if(response.result==="true"){
+                 if(window.confirm('订单提交成功，是否跳转到管理页面？')){
+                  location.href=adminUrl;
+                 }
+              }else{
+                alert("订单提交失败")
+
+              }
           },
           error: function(err) {
             alert("提交订单错误："+err);
