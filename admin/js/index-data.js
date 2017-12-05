@@ -534,6 +534,7 @@ $(function(){
         		    "pinfo": "",
                 'scanphoto'	: '',
                 "rawscan" : "",
+                "scanstation":"",
             };
 
             $.ajax({
@@ -552,8 +553,10 @@ $(function(){
                         if(current_page_owneruuid < current_page){
                             current_page_owneruuid = current_page_owneruuid+1;
                             load_deal_data()
+                             console.log(all_order_data)
                         }else{
                             struture_data(); 
+                            console.log(all_order_data)
                         }
                     }else{
                         console.log(dat.reasons)
