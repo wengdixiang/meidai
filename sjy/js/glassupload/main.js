@@ -124,7 +124,7 @@
   
     function startLogin(){
       console.log("startLogin()");
-      userUuid=cookie.getCookie("uuid");
+      userUuid=cookie.getCookie("UserUUID");
       console.log("user uuid: "+userUuid);
       if(userUuid !== ''){
         $.ajax({
@@ -150,7 +150,7 @@
               }
               $('#login').html('<a href="./personal.html">'+userName+'</a><a href="##" id="delCookie">退出</a>');
                 $('#delCookie').click(function(){
-                  cookie.delCookie('uuid');
+                  cookie.delCookie('UserUUID');
                   location.href=loginUrl;
               })
             }

@@ -139,7 +139,7 @@
         $('#login').html('<a href="./personal.html">'+userName+'</a><a href="##" id="delCookie">退出</a>');
                 $('#delCookie').click(function(){
                   cookie.delCookie('UserUUID');
-                  //location.href=loginUrl;
+                  location.href="../admin/scan.html";
                    })
                   startDownload();
              
