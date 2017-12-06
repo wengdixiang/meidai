@@ -728,6 +728,7 @@ label{
             top:0;
             left:0;
             display:none;
+            z-index:2;
         }
         #uploadify_content{
             width:400px;
@@ -741,8 +742,8 @@ label{
         }
         #uploadify{
             text-align:center;
-        width:210px;
-        margin:30px auto !important;
+            width:210px;
+            margin:25px auto !important;
         }
         .alert{
             display:none;

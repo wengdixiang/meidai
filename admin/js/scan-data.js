@@ -280,7 +280,7 @@ $(function(){
         // var all_order_data;
 
         // var time_createdate = []
-       // console.log(order_list)
+       //console.log(all_order_data[order_list])
         function structure_data(){
             table.clear()
                 .draw();
