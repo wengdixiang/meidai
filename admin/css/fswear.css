@@ -352,3 +352,15 @@ table.dataTable{
 	display: block;
 	margin:0 auto;
 }
+#remind{
+	position:absolute;
+	left:450px;
+	top:43px;
+	display: none;
+	color:#ff4f4f;
+    font-weight: 600;
+    font-size: 18px
+}
+#remind a{
+	color:#000;
+}

@@ -125,10 +125,27 @@
       url: "/cert",
         // async: false,
         success: function(data) {
-        //  console.log(JSON.parse(data))
+         // console.log(JSON.parse(data))
         if(JSON.parse(data) && JSON.parse(data).result == 'true'){
           var tmp_condition_ = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
           data_load(tmp_condition_);
+           console.log(JSON.parse(data));
+                var data=JSON.parse(data);
+                    data=data.left;
+               var date_days=data.substring(0, data.indexOf('days'));
+               console.log(date_days);
+                if(date_days<=14){
+                    $("#remind").css("display","block");
+                }else{
+                    $("#remind").css("display","none");
+                };
+                   data=data.replace("days","天");
+                   data=data.substring(0, data.indexOf('.')+1);
+                   data=data.replace(",","");
+                   data=data.replace(":","小时");
+                   data=data.replace(":","分");
+                   data=data.replace(".","秒");
+               $(".credential_date").html(data);
                 // data_load();  
               }else{
                 certificate_none();
@@ -178,6 +195,7 @@
           'condition': _condition_,
 
         };
+        console.log(init_data)
         $.ajax({
           type: "post",
           data: init_data,
@@ -185,7 +203,7 @@
           url: "/deal",
                 // async: false,
                 success: function(data) {
-                  //console.log(data)
+                  console.log(data)
                   if(data.result == 'true'){
                     deal_totalpage = parseInt(data.totalpage);
                     deal_list = deal_list.concat(data.list);
@@ -400,10 +418,10 @@
       }
     }
     if(data>=3&&JSON.stringify(hash)!="{}"){
-      console.log(hash)
+     //console.log(hash)
       all_deal_data=hash
       struture_data()
-      console.log(all_deal_data)
+     // console.log(all_deal_data)
   }else{
    var order_status=$("#dropdown_list_state").val();
    $('#dropdown_list_year,#dropdown_list_month').val('');
@@ -721,7 +739,7 @@ data=4;
         function load_deal_data(){
         	var tmp_deal_list = deal_list.slice(current_page_list*PAGE_SIZE,Math.min((current_page_list+1)*PAGE_SIZE,deal_list.length));
           /*查询订单*/
-
+          console.log(tmp_deal_list)
           var post_data = {
             "action": "query",
             "uuid": JSON.stringify(tmp_deal_list),
@@ -1102,7 +1120,7 @@ data=4;
   //})
   /*上传眼镜配置 */
   $('#table_id_example tbody').on('click','#upload_model',function(){
-    $("#uploadify_box").show();
+    $("#uploadify_box").fadeIn();
     var that=$(this);
     var tmp_deal_uuid =($(this).attr("alternews")).slice(0,($(this).attr("alternews")).length);
     $("input#uploadify_button").unbind('click').click(function(){
@@ -1182,8 +1200,9 @@ data=4;
                setTimeout(function(){
                  $("#datauploadsuccess").hide();
                },2000)
-             }
-             console.log(data.result);   
+         
+             console.log(data.result);  
+             } 
            },
            error: function() {
                     // Fail message
@@ -1199,13 +1218,13 @@ data=4;
   })
   //点击隐藏上传输入界面
   $("#uploadify_box").click(function(){
-    $(this).hide();
+    $(this).fadeOut(500);
   })
   $("#uploadify_content").click(function(){
     window.event.cancelBubble = true
   })
   $("#datauploadsuccess").on('click','.close',function(){
-    $("#datauploadsuccess").hide()
+    $("#datauploadsuccess").fadeOut(500)
   })
   //修改模型数据
 

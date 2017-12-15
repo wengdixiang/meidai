@@ -16,6 +16,7 @@
    <!--[if lt IE 9]>
         <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
         <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/fswear.css">
@@ -183,6 +184,7 @@
                     </thead>
                     <tbody></tbody>
                 </table>
+                
             </div>
     
             <!-- 当没有证书时的显示 -->
@@ -537,17 +539,17 @@
     return new Date($.ajax({async: false}).getResponseHeader("Date"));
     }
     console.log(getDate())
-    /*商家下拉表*/
-    $("#certificate").focus(function(){
-        $(this).attr("size",5);
-    }).blur(function(){
-        $(this).removeAttr("size")
-    })
-    $("#certificate").on("click","option",function(e){
-        e.stopPropagation();
-        $(this).parent().removeAttr("size").blur();
+    // /*商家下拉表*/
+    // $("#certificate").focus(function(){
+    //     $(this).attr("size",5);
+    // }).blur(function(){
+    //     $(this).removeAttr("size")
+    // })
+    // $("#certificate").on("click","option",function(e){
+    //     e.stopPropagation();
+    //     $(this).parent().removeAttr("size").blur();
 
-    });
+    // });
 
 
     //查看详情进度

@@ -77,6 +77,24 @@ $(function(){
                 var tmp_condition_ = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*6).toUTCString().replace(/GMT/,'-0000'))+'"]]]';
                 data_load(tmp_condition_);
                 // data_load(); 
+                 console.log(JSON.parse(data));
+                var data=JSON.parse(data);
+                    data=data.left;
+               var date_days=data.substring(0, data.indexOf('days'));
+               console.log(date_days)
+                if(date_days<=14){
+                    $("#remind").css("display","block");
+                }else{
+                    $("#remind").css("display","none");
+                }
+              
+                   data=data.replace("days","天");
+                   data=data.substring(0, data.indexOf('.')+1);
+                   data=data.replace(",","");
+                   data=data.replace(":","小时");
+                   data=data.replace(":","分");
+                   data=data.replace(".","秒");
+               $(".credential_date").html(data);
             }else{
                 certificate_none();
             }

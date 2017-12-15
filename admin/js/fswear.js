@@ -6,6 +6,10 @@ function certificate_none(){
     $('.versions').css('display','none');
     $('.order_data').css('display','none');
     $('.timezone').css('display','none');
+    $('#credential_info').css('display','none');
+    $('#credential_all').css('display','none');
+    $('#credential_list').css('display','none');
+
 }    
 
 /* config 的文本转换成JSON格式 */
@@ -141,8 +145,46 @@ function checklogin(check_success, check_fail) {
         }); 
     }else check_fail();
 };
+// (function(){
+//      var data = {'action':'check'}
+//     $.ajax({
+//         type: "post",
+//         data: data,
+//         url: "/cert",
+//         // async: false,
+//         success: function(data) {
+//             if(JSON.parse(data) && JSON.parse(data).result == 'true'){
+//                console.log(JSON.parse(data));
+//                 var data=JSON.parse(data);
+//                     data=data.left;
+//                var date=data.substring(0, data.indexOf('days'));
+//                console.log(date)
+//                 if(date<=14){
+//                     $("#remind").css("display","block");
+//                 }else{
+//                     $("#remind").css("display","block");
+//                 }
+              
+//                    data=data.replace("days","天");
+//                    data=data.substring(0, data.indexOf('.')+1);
+//                    console.log(data);
+//                    data=data.replace(",","");
+//                    data=data.replace(":","小时");
+//                    data=data.replace(":","分");
+//                    data=data.replace(".","秒");
+//                var html=data
+//                $(".credential_date").html(html)
+//             }else{
+//                 certificate_none();
+//             }
+//         },error: function() {
+//             certificate_none();
+//         }
 
+//     })      
 
+// })()
+ 
 ;(function($){
     $.fn.extend({
         "setword":function(options){
