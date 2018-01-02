@@ -88,7 +88,7 @@ define(function(){'use strict';
         cache: false,
         success: function(data) {
         var configinfo=JSON.parse(data);
-        console.log("configinfo");
+        console.log("configinfo"+configinfo);
         console.log("index :"+index);
         configUuid=configinfo.uuid;
         if(configinfo.result==="true"){

@@ -18,7 +18,7 @@
         tabFixedHeight=57,
         scrollHeight=30,
         detaHeight=16,
-        
+        idTimerColor=null,
         idTimerHead=null,
         idTimerGlass=null,
         headUrlInterval=100,
@@ -797,6 +797,15 @@
         display.changeLegsColor($(selectlcolor).attr('data'));
       }
     };
+    $("#button-obvious").click(function(){
+      console.log("highlight");
+      display.changeFrameColor("0xffffffff");
+    });
+    $("#button-restore").click(function(){
+      var tmp_color=$("#textParam1").val();
+      console.log(tmp_color);
+      display.changeFrameColor(tmp_color);
+    })
     
   })
     

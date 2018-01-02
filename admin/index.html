@@ -74,6 +74,7 @@
             top:43%;
             left:59%;
             z-index:50;
+            cursor: pointer
         }
         #uploadify_await{
             display: none;
@@ -91,17 +92,17 @@
         #upscratch{
             margin-bottom:10px;
         }
-       #certificate{
+      /* #certificate{
             position:absolute;
             z-index:1;
-       }
+       }*/
        #certificate>option:hover{
         background:#2D89FB;
         color:#fff;
        }
-       #determine_the_time{
+      /* #determine_the_time{
              margin-left:130px;
-       }
+       }*/
     </style>
 </head>
 <body>
@@ -405,7 +406,9 @@
             
             <!-- 上传眼镜配置 -->
             <div id='uploadify_box' style='text-align: center;'>
-            <div id="uploadify_await">上传中...</div>
+            <div id="uploadify_await">
+                    <img src="images/loading2.gif" alt="">
+            </div>
              <span id="uploadify_close" class='glyphicon glyphicon-remove'></span>
                 <div id="uploadify_content">
                  
@@ -556,13 +559,13 @@
    
     //console.log(getServerDate())
         $("#schedule").click(function(){
-            $(".information-content").hide(500);
-            $(".particular_schedule").show(500);
+            $(".information-content").fadeOut();
+            $(".particular_schedule").fadeIn();
             $('body,html').animate({scrollTop:100},100); 
         });
         $("#glasses_data").click(function(){
-            $(".information-content").show(500);
-            $(".particular_schedule").hide(500);
+            $(".information-content").fadeIn();
+            $(".particular_schedule").fadeOut();
             $('body,html').animate({scrollTop:100},100); 
         });
         //管理操作按钮

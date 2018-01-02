@@ -259,7 +259,7 @@ $(function(){
       console.log(cert_name,cert_phone,cert_email,cert_qq,cert_fullname,cert_shortname,cert_country,cert_province,cert_city,cert_address,cert_zipcode,cert_open);
       var dataUint8=[],
       cert_uuid="";
-      var cert_url="/cert?action=new&email="+cert_email+"&country="+cert_country+"&province="+cert_province+"&city="+cert_city 
+      var cert_url="/cert?action=create&email="+cert_email+"&country="+cert_country+"&province="+cert_province+"&city="+cert_city 
            //console.log(cert_url);
            _downloadTarFile(cert_url)
            function _downloadTarFile(url){
@@ -306,12 +306,17 @@ $(function(){
                     data:tmp_data,
                     success:function(data){
                       if(JSON.parse(data).result=="true"){
+                        cert_list.push(cert_uuid);
                         alert("证书申请成功！");
+                        queryCert();
 
                       }else{
                         alert("证书申请失败");
                       }
                       $(".form-control").val("");
+                      $("#cert_country").val("");
+                      $("#cert_province").val("");
+                      $("#cert_city").val("")
                     },
                     error:function(){   
                       console.log("false");
@@ -462,18 +467,26 @@ $(function(){
       var JiangXi={
                   "NanChang":"南昌市","GanZhou":"赣州市","ShangRao":"上饶市","JiAn":"吉安市","JiuJiang":"九江市","XinYu":"新余市","FuZHou":"抚州市","YiChun":"宜春市","JingDeZhen":"景德镇","PingXiang":"萍乡市","YingTan":"鹰潭市"
                    };                                                                                                                            
-       $("#cert_country").change(function(){
-            if($(this).val()=="CN"){
-                var html="<option>选择省份</option>";
+       // $("#cert_country").change(function(){
+       //      if($(this).val()=="CN"){
+       //          var html="<option value=''>选择省份</option>";
+       //          for(var i in province ){
+       //              html+="<option value="+i+">"+province[i]+"</option>"
+       //          }
+       //          $("#cert_province").html(html)
+       //      }else{
+       //           $("#cert_province").html("<option>选择省份</option>")
+       //      }
+       //      //$("#cert_province")
+       // })
+       (function(){
+         var html="<option value=''>选择省份</option>";
                 for(var i in province ){
                     html+="<option value="+i+">"+province[i]+"</option>"
                 }
-                $("#cert_province").html(html)
-            }else{
-                 $("#cert_province").html("<option>选择省份</option>")
-            }
-            //$("#cert_province")
-       })
+                $("#cert_province").html(html);
+       })();
+      
         $("#cert_province").change(function(){
             var that=$(this).val();
             var city="";
@@ -568,11 +581,13 @@ $(function(){
                   case "ShanDong":
                    city = ShanDong;
                   break;
+                  default:
+
 
              }
 
             //$("#cert_province")
-            var html="<option>选择城市</option>";
+            var html="<option value=''>选择城市</option>";
             for(var i in city){
                 html+="<option value="+i+">"+city[i]+"</option>"
                 }

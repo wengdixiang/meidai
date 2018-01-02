@@ -533,6 +533,7 @@ define(function(){'use strict';
     if(framecolor!==glassFrameColor){
       console.log("changeFrameColor: "+framecolor.toString(16));
       glassFrameColor=framecolor;
+     
       if(isGlassSetup&&frameMaterial!=="metal"){
         glassMeshes.frame.material.color.setHex(framecolor);
         _renderCanvas();        
@@ -622,7 +623,6 @@ define(function(){'use strict';
   };
 
   function _renderCanvas(){
-    
     myCamera.up.copy(cameraUpVec3);
     
     myRenderer.render(myScene, myCamera);

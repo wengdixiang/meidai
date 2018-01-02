@@ -173,7 +173,7 @@
       $('#dropdown_list_month').append('<option value="'+i+'">'+i+'月</option>');
     }
     /*商家列表的下拉表*/
-
+    /*获取所有订单商家下拉表*/
     data_load_s();
     function data_load_s(condition_){
 
@@ -186,16 +186,16 @@
       /* 设置读取服务器的数据的分页 */
       var current_page = 0;
       
-      load_deal_list(condition_);  
+      load_deal_list_s(condition_);  
 
-      function load_deal_list(_condition_) {
+      function load_deal_list_s(_condition_) {
         var init_data = {
           "action" : "list",
           "page" : '*#'+current_page,
           'condition': _condition_,
 
         };
-        console.log(init_data)
+        //console.log(init_data)
         $.ajax({
           type: "post",
           data: init_data,
@@ -203,15 +203,15 @@
           url: "/deal",
                 // async: false,
                 success: function(data) {
-                  console.log(data)
+                //  console.log(data)
                   if(data.result == 'true'){
                     deal_totalpage = parseInt(data.totalpage);
                     deal_list = deal_list.concat(data.list);
                     if(parseInt(data.page.split('#')[2]) < parseInt(data.totalpage)-1 ){
                       current_page = current_page+1;                     
-                      load_deal_list(condition_);
+                      load_deal_list_s(condition_);
                     }else{
-                      load_deal_data();
+                      load_deal_data_s();
                     } 
                   }else{
                   }
@@ -228,14 +228,14 @@
 
       var current_page_list =  0;                     
       /* 获取deal的list查找deal的订单 */
-      function load_deal_data(){
+      function load_deal_data_s(){
         var tmp_deal_list = deal_list.slice(0,deal_list.length);
-        /*查询订单*/
+        /*查询订单获得所有商家证书uuid*/
 
         var post_data = {
           "action": "query",
           "uuid": JSON.stringify(tmp_deal_list),
-          "owneruuid":"",
+          'submitstation':"",
 
         };
 
@@ -244,15 +244,48 @@
           data: post_data,
           dataType: "json",
                 // async: false,
-                url: "/deal",
-                success: function(dt) {
-                  if( dt.result != 'false'){
-                  // console.log(dt)
-                  for(var i in dt){
-                    all_deal_data[i] = dt[i] 
-                  }
+          url: "/deal",
+          success: function(dat) {
+              if( dat.result != 'false'){
+                   console.log(dat);
+                for(var i in dat){    
+                  if(hash[dat[i].submitstation]==undefined){
+                    hash[dat[i].submitstation]=1;
+                    scanstation_list.push(dat[i].submitstation)
+                  }             
 
-                  load_order_data();
+                }
+                /*用获得的证书uuid查询获得商家名字*/
+                 var tmp_cert_data={
+                  "action":"query",
+                  "uuid":JSON.stringify(scanstation_list),
+                  "fullname":""
+                };
+                $.ajax({
+                  type:"post",
+                  url:"/cert",
+                  dataType: "json",
+                  data:tmp_cert_data,
+                  success:function(data){
+                   // console.log(data);
+                    var html="<option value='all'>--选择全部--</option>";
+                    for(var i in data){
+                      if(i==""){
+                        html+='<option value="'+i+'">未知</option>' 
+                      }
+                      if(data[i].result=="true"){
+                        html+='<option value="'+i+'">'+data[i].fullname+'</option>'  
+                      }
+                    }
+                     $("#certificate").html(html);
+                      if(JSON.stringify(all_order_data)=="{}"){
+                     $('.dataTables_empty').text('没有数据');
+                       }
+                  },
+                  error:function(){
+                    console.log("false")
+                  }
+                });
                    // console.log(all_deal_data)
 
                  }else{
@@ -268,74 +301,6 @@
       }
       /* 获取deal的list查找deal的订单 END*/
 
-      var current_page_owneruuid = 0;
-      /* 获取listl的owneruuid查找order的数据 */
-      function load_order_data(){
-        var tmp_deal_uuid = [];
-        for (var i in all_deal_data) {
-          tmp_deal_uuid.push(all_deal_data[i].owneruuid) 
-        }
-
-        var tmp_deal_owneruuid = tmp_deal_uuid.slice(0,tmp_deal_uuid.length);
-
-        var post_data = {
-          "action": "query",
-          "uuid": JSON.stringify(tmp_deal_owneruuid),
-          "scanstation":''
-        };
-
-        $.ajax({
-          type: "post",
-          data: post_data,
-          dataType: "json",
-          url: "/order",
-                // async:false,
-                success: function(dat) {
-               //  console.log(dat);                 
-               if( dat.result != 'false'){
-                for(var i in dat){    
-                  if(hash[dat[i].scanstation]==undefined){
-                    hash[dat[i].scanstation]=1;
-                    scanstation_list.push(dat[i].scanstation)
-                  }             
-
-                }
-                console.log(scanstation_list)
-                console.log(hash)
-                var html="<option value='all'>--选择全部--</option>";
-                var merchant;
-                for(var i=0;i<scanstation_list.length;i++){
-                 switch(scanstation_list[i])
-                 {
-                  case "":
-                  merchant="未知";
-                  break;
-                  default:
-                  merchant="美戴商家";
-                }
-                html+='<option value="'+scanstation_list[i]+'">'+merchant+i+'</option>'
-              }
-              $("#certificate").html(html)
-
-
-              if(JSON.stringify(all_order_data)=="{}"){
-                $('.dataTables_empty').text('没有数据');
-                
-
-              }
-            }else{
-              console.log(dat.reasons)
-            }
-
-          },
-          error: function(er) {
-            console.log('order query');
-            console.log(er)
-            $('.dataTables_empty').text('没有网络');
-          }
-        });
-      }
-
     }
 
     /* 根据时间段选取数据 */
@@ -349,10 +314,10 @@
         }
       }
       if(data>=1&&JSON.stringify(hash)!="{}"){
-         console.log(hash)
+         //console.log(hash)
          all_deal_data=hash
          struture_data()
-         console.log(all_deal_data)
+        // console.log(all_deal_data)
       
      }else{
 
@@ -386,10 +351,10 @@
       }
       
       if(data>=2&&JSON.stringify(hash)!="{}"){
-         console.log(hash)
+        // console.log(hash)
          all_deal_data=hash
          struture_data()
-         console.log(all_deal_data)
+        // console.log(all_deal_data)
      }else{
       $('#dropdown_list_year,#dropdown_list_month').val('');
       var order_status=$("#dropdown_list_state").val();
@@ -451,10 +416,10 @@ data=3;
       }
     }
     if(data>=4&&JSON.stringify(hash)!="{}"){      
-       console.log(hash)
+     //  console.log(hash)
        all_deal_data=hash
        struture_data()
-       console.log(all_deal_data)
+      // console.log(all_deal_data)
    }else{
      var order_status=$("#dropdown_list_state").val();
      $('#dropdown_list_year,#dropdown_list_month').val('');
@@ -462,10 +427,10 @@ data=3;
     table.clear()
     .draw();
     if(order_status!=""){
-      console.log(order_status)
+      //console.log(order_status)
       if(order_status=="topay"||order_status=="paid"){
         var recently_one_year = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"paymentstatus"'+',"==","'+order_status+'"]]]';
-        console.log(recently_one_year)
+       // console.log(recently_one_year)
       }else if(order_status=="printing"||order_status=="delivering"||order_status=="done"){
        var recently_one_year = '[[['+'"createdate"'+',">=","'+(new Date(Date.parse(new Date().toDateString())-86400000*300).toUTCString().replace(/GMT/,'-0000'))+'"],['+'"status"'+',"==","'+order_status+'"]]]';
      }
@@ -636,8 +601,6 @@ data=4;
           var recently_time ='[[['+'"status"'+',"==","'+order_status+'"]]]'; 
         }
       }
-
-
       table.clear()
       .draw();
                 // console.log(recently_time)
@@ -739,7 +702,7 @@ data=4;
         function load_deal_data(){
         	var tmp_deal_list = deal_list.slice(current_page_list*PAGE_SIZE,Math.min((current_page_list+1)*PAGE_SIZE,deal_list.length));
           /*查询订单*/
-          console.log(tmp_deal_list)
+          //console.log(tmp_deal_list)
           var post_data = {
             "action": "query",
             "uuid": JSON.stringify(tmp_deal_list),
@@ -760,7 +723,7 @@ data=4;
             "discount" : '',
             "genprint" : '',
             "scratch":'',
-            'scanstation':"",
+            'submitstation':"",
           };
 
           $.ajax({
@@ -773,8 +736,12 @@ data=4;
                   if( dt.result != 'false'){
                   // console.log(dt)
                   for(var i in dt){
-                    all_deal_data[i] = dt[i] 
+                     if(scanstation=="all"||dt[i].submitstation==scanstation){
+                       all_deal_data[i] = dt[i] 
+                     }
+                   
                   }
+                  //console.log(all_deal_data)
                   if(current_page_list < current_page){
                     current_page_list = current_page_list+1;
 
@@ -826,24 +793,22 @@ data=4;
             url: "/order",
                 // async:false,
                 success: function(dat) {
-                // console.log(dat);                 
+                //console.log(dat);                 
                 if( dat.result != 'false'){
                   for(var i in dat){    
-                    if(scanstation=="all"||dat[i].scanstation==scanstation){
-                     all_order_data[i] = dat[i]; 
-                   }
+                     all_order_data[i] = dat[i];                  
                  }
 
                  if(current_page_owneruuid < current_page){
                   current_page_owneruuid = current_page_owneruuid+1;
-                  //console.log(all_order_data)
+                  
                   load_deal_data()
                 }else{
                   struture_data(); 
                   if(JSON.stringify(all_order_data)=="{}"){
                     $('.dataTables_empty').text('没有数据');
                   }
-                //  console.log(all_order_data)
+               
               }
             }else{
              //   console.log(dat.reasons)
@@ -867,8 +832,14 @@ data=4;
   /* 插入数据 */
   // var time_createdate=[];
   function struture_data(){
+
     deal_list.reverse();
-    struture_data_insertion(); 
+    struture_data_insertion();
+   // load_order_data();
+    // if($('.dataTables_empty').text()=="载入中..."){
+    //   $('.dataTables_empty').text("没有数据")
+    // }
+   
   }
   function struture_data_insertion(){
     table.clear()
@@ -1189,6 +1160,8 @@ data=4;
                     alert("刻字信息上传失败！请检查网络连接")
                   }
                 });     
+                }else{
+                  alert("刻字信息不变")
                 }
 
               }else if(data.result==="false"){
@@ -1217,12 +1190,13 @@ data=4;
           })
   })
   //点击隐藏上传输入界面
-  $("#uploadify_box").click(function(){
-    $(this).fadeOut(500);
+  $("#uploadify_close").click(function(){
+    $("#uploadify_box").fadeOut(500);
+
   })
-  $("#uploadify_content").click(function(){
-    window.event.cancelBubble = true
-  })
+  // $("#uploadify_content").click(function(){
+  //   window.event.cancelBubble = true
+  // })
   $("#datauploadsuccess").on('click','.close',function(){
     $("#datauploadsuccess").fadeOut(500)
   })

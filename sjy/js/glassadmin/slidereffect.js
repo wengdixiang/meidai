@@ -71,7 +71,6 @@ define(function(){'use strict';
     var tempcolor=glassFrameColor,
         tempbgr=[],
         tempfillcolor="rgba(";
-       
     for(var i=0;i<3;++i){
       tempbgr.push(tempcolor&0xff);
       tempcolor=tempcolor>>>8;

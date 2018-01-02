@@ -290,6 +290,7 @@ define(function(){'use strict';
   };
 
   function _renderCanvas(){
+    debugger;
     myRenderer.render(myScene, myCamera);
   };
   
