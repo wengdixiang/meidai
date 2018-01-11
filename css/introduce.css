@@ -1,0 +1,22 @@
+/*顾&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 问页面 */
+.introduce{position: relative;margin-top:50px;display:block;zoom:1;overflow:hidden;}
+.introduce-left{min-width:126px;margin-right:3%;}
+#vertical{height:100%;}
+
+.introduce-right{margin-bottom: 100px;}
+.introduce-recommend img{width:19%;min-width: 208px;}
+.introduce-recommend{margin-bottom: 50px;display:block;zoom:1;overflow:hidden;}
+.recommend span:first-child{font-size: 24px;color:#01365E;}
+.recommend span:nth-child(2){font-size: 18px;color:#01365E;margin-left:70px;}
+.recommend p{font-size: 16px;margin-top:30px;line-height: 30px;}
+
+/*设置子页面的图片ban大小*/
+#nav_carousel{overflow: hidden;width:100%;}
+#nav_carousel img{width:100%;}
+
+@media all and (max-width:767px){
+    /*顾&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 问页面 */
+    .introduce-recommend{text-align: center;}
+    .introduce-recommend img{width:100% !important;cursor: pointer;}
+
+}

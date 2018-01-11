@@ -1,0 +1,4 @@
+.news{display: block;zoom:1;overflow: hidden;min-height:700px;margin:50px 0;}
+#vertical{height:100%;min-height: 700px;}
+.contant-vertical{border-top:2px solid #ebebeb;height:0px;margin-top: 10px;}
+.news_right_contant h4 a{text-decoration: none;color:#000;}

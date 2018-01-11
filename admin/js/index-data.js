@@ -2665,7 +2665,7 @@ data=4;
               var scanphoto_uuid = all_order_data[all_deal_data[deal_uuid].owneruuid].scanphoto;      
               if(scanphoto_uuid != ''){        
                 $('.user_photo>img').attr('src','/data?action=download&type=scanphoto&uuid='+scanphoto_uuid);
-                $('.user_photo>img').css({'top':'-20px','left':'-140px'});
+                //$('.user_photo>img').css({'top':'-20px','left':'-140px'});
               }else{
                 $('.user_photo>img').attr('src','images/touxiang.png');
               }

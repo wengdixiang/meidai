@@ -749,3 +749,77 @@ label{
             display:none;
             margin-top:20px;
         }
+        /* 适配手机端 */
+        @media screen and (max-width:767px) {
+            #production_management{
+                display:none;
+            }
+            .btn-sm{
+                width:70px;
+            }
+            .message{
+                float:left;
+                width:100%;
+                font-size:12px;
+            }
+            .timezone{
+                font-size:12px;
+            }
+            #table_id_example tr td{
+                font-size:12px;
+                height:0;
+                padding:5px 0;
+            }
+            .information-content{
+                width:100%;
+                text-align: center;
+            }
+            .information-content>ul{
+                float:left;
+                width:100%;
+                font-size:18px;
+
+            }
+            .information-content>ul>li{
+                width:100%;
+            }
+            #order_email{
+                position: relative;
+                top:0;
+                left:0;
+            }
+            .information-middle{
+                float:left;
+                width:100%;
+            }
+            .user_photo{
+                width:100%;
+                height:100%;
+            }
+            .user_photo>img{
+                width:70%;
+                position:relative;
+            }
+            .glass{
+                float:left;
+                margin-left:20%;
+            }
+            .right_parameter>span{
+                display: inline-block;
+                width:50%;
+
+            }
+            .right_parameter>span:first-child{
+                display: block;
+            }
+            .left_parameter>span{
+                display: inline-block;
+                width:50%;  
+            }
+            .left_parameter>span:first-child{
+                display:block;
+            }
+            .glass_userprice>label{
+                width:50%;
+            }
+        }

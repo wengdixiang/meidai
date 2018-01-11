@@ -284,6 +284,11 @@ button.button-param{
   font-weight: bold;
   margin: 10px;
 }
+#button-obvious,#button-restore{
+  outline:none;
+  font-weight: bold;
+  border-radius:10px;
+}
 
 
 

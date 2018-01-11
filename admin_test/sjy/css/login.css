@@ -1,0 +1,772 @@
+/*IE input X 去掉文本框的叉叉和密码输入框的眼睛图标*/
+::-ms-clear,::-ms-reveal{display:none;}
+
+@media (min-width:992px ) {
+		/*#tittle{
+			margin: 160px auto 0px;
+		}*/
+		#selector {
+			margin-top:154px;
+		}
+		#user_login .login_box1,
+		#user_registration .registration_box1{
+			width: 850px;
+			height: 500px;
+			background-color: #fff;
+			position: absolute;
+			left: calc(50% - 425px);
+			top: calc(50% - 150px);
+			border-radius: 10px;
+		}
+		#user_login .login_box1 .user_qiehua,
+		#user_registration .registration_box1 .registration_qiehua
+		{
+			width: 50px;
+			height: 500px;
+			float: left;
+			position: relative;
+		}
+		#user_login .login_box1 .user_qiehua i{
+			display: inline-block;
+			text-align: center;
+			width: 50px;
+			height: 30px;
+			font-family: arial;
+			font-size: 30px;
+			line-height: 30px;
+			position: absolute;
+			top: calc(50% - 65px);
+			cursor: pointer;
+		}
+		#user_registration .registration_box1 .registration_qiehua i{
+			display: inline-block;
+			text-align: center;
+			width: 50px;
+			height: 30px;
+			font-family: arial;
+			font-size: 30px;
+			line-height: 30px;
+			position: absolute;
+			top: calc(50% - 120px);
+			cursor: pointer;
+		}
+		#user_login .login_box1 .login_userlist,
+		#user_registration .registration_box1 .registration_userlist{
+			width: 750px;
+			height: 500px;
+			float: left;
+			overflow: hidden;
+			position: relative;
+		}
+		#user_login .login_box1 .login_userlist .select_user
+		{
+			font-family: "微软雅黑";
+			font-size: 18px;
+			padding-left: 30px;
+			margin-top: 35px;
+		}
+		#user_login .login_box1 .login_userlist .fsw_box1{
+			width: 100%;
+			height: 300px;
+			margin-top:35px;
+			position: relative;
+		}
+		#user_registration .registration_box1 .registration_userlist .fsw_registration_box1{
+			width: 100%;
+			height: 300px;
+			margin-top:40px;
+			position: relative;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info
+		{
+			width: 100%;
+			height: 300px;
+			display: table;
+			overflow: hidden;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			background: #fff;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_td,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_td{
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+			
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info,
+		#user_registration  .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info{
+			width:240px;
+			height:300px;
+			display: inline-block;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img{
+			width:240px;
+			height: 240px;
+			border: 5px solid rgb(2,207,225) ;
+			border-radius: 5px;
+			overflow: hidden;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img:hover,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img:hover{
+			border-color: red;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img img,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img img{
+			width: 240px;
+			height: 240px;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_name,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_name{
+			width: 240px;
+			height: 20px;
+			margin-top: 10px;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_name p,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_name p{
+			width:240px;	
+			font-family: "微软雅黑";
+			font-size: 18px;
+			text-align: center;
+			line-height: 20px;	
+		}
+		#user_registration .registration_box1 .registration_userlist .registration_user{
+			font-family: "微软雅黑";
+			font-size: 18px;
+			text-align: center;
+			margin-top: 10px;
+		}
+		#user_registration .registration_box1 .registration_userlist .registration_btn{
+			width: 150px;
+			height: 30px;
+			border: transparent;
+			background: orange;
+			margin: 0 auto;
+			margin-top: 50px;
+			border-radius: 5px;
+			font-family: "微软雅黑";
+			color: #fff;
+			font-size: 18px;
+			line-height: 30px;
+			display: block;
+		}
+		#content .fsw_maxbox{
+			max-width: 400px;
+			margin: 0px auto;
+		}
+}
+@media (min-width: 768px) and (max-width:991px) {
+		#selector {
+			margin-top:100px;
+		}
+		#user_login .login_box1,
+		#user_registration .registration_box1{
+			width: 600px;
+			height: 400px;
+			background-color: #fff;
+			position: absolute;
+			left: calc(50% - 300px);
+			top: calc(50% - 85px);
+			border-radius: 10px;
+		}
+		#user_login .login_box1 .user_qiehua,
+		#user_registration .registration_box1 .registration_qiehua{
+			width: 50px;
+			height: 400px;
+			float: left;
+			position: relative;
+		}
+		#user_login .login_box1 .user_qiehua i{
+			display: inline-block;
+			text-align: center;
+			width: 50px;
+			height: 30px;
+			font-family: arial;
+			font-size: 30px;
+			line-height: 30px;
+			position: absolute;
+			top: calc(50% - 45px);
+			cursor: pointer;
+			
+		}
+		#user_registration .registration_box1 .registration_qiehua i{
+			display: inline-block;
+			text-align: center;
+			width: 50px;
+			height: 30px;
+			font-family: arial;
+			font-size: 30px;
+			line-height: 30px;
+			position: absolute;
+			top: calc(50% - 102px);
+			cursor: pointer;
+		}
+		#user_login .login_box1 .login_userlist,
+		#user_registration .registration_box1 .registration_userlist{
+			width: 500px;
+			height: 400px;
+			float: left;
+			overflow: hidden;
+			position: relative;
+		}
+		#user_login .login_box1 .login_userlist .select_user{
+			font-family: "微软雅黑";
+			font-size: 18px;
+			padding-left: 30px;
+			margin-top: 35px;
+		}
+		#user_login .login_box1 .login_userlist .fsw_box1,
+		#user_registration .registration_box1 .registration_userlist .fsw_registration_box1{
+			width: 100%;
+			height: 230px;
+			margin-top:20px;
+			position: relative;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info{
+			width: 100%;
+			height: 230px;
+			overflow: hidden;
+			position: absolute;
+			display: table;
+			top: 0px;
+			left: 0px;
+			background: #fff;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_td,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_td{
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info,
+		#user_registration  .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info{
+			width:160px;
+			height:230px;
+			display: inline-block;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img{
+			width:160px;
+			height: 160px;
+			border: 5px solid rgb(2,207,225) ;
+			border-radius: 5px;
+			overflow: hidden;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img:hover,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img:hover{
+			border-color: red;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img img,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img img{
+			width: 160px;
+			height: 160px;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_name,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_name{
+			width: 160px;
+			height: 30px;
+			margin-top: 10px;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_name p,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_name p{
+			width:160px;	
+			height: 30px;
+			font-family: "微软雅黑";
+			font-size: 18px;
+			text-align: center;
+			line-height: 30px;	
+		}
+		#user_registration .registration_box1 .registration_userlist .registration_user{
+			font-family: "微软雅黑";
+			font-size: 18px;
+			text-align: center;
+		}
+		#user_registration .registration_box1 .registration_userlist .registration_btn{
+			width: 150px;
+			height: 30px;
+			border: transparent;
+			background: orange;
+			display: block;
+			margin: 0 auto;
+			margin-top: 50px;
+			border-radius: 5px;
+			font-family: "微软雅黑";
+			color: #fff;
+			font-size: 18px;
+			line-height: 30px;
+		}
+		#content .fsw_maxbox{
+			max-width: 400px;
+			margin: 0px auto;
+		}
+}
+@media (max-width:767px) {
+		#tittle p{
+			margin-left: -15px;
+			margin-right: -15px;
+		}
+		#selector {
+			margin-top:15px ;
+		}
+		#user_login .login_box1,
+		#user_registration .registration_box1{
+			width: 350px;
+			height: 250px;
+			background-color: #fff;
+			position: absolute;
+			left: calc(50% - 175px);
+			top: calc(50% - 85px);
+			border-radius: 10px;
+		}
+		#user_login .login_box1 .user_qiehua,
+		#user_registration .registration_box1 .registration_qiehua{
+			width: 25px;
+			height: 250px;
+			float: left;
+			position: relative;
+		}
+		#user_login .login_box1 .user_qiehua i{
+			display: inline-block;
+			text-align: center;
+			width: 25px;
+			height: 30px;
+			font-family: arial;
+			font-size: 30px;
+			line-height: 30px;
+			position: absolute;
+			top: calc(50% - 25px);
+			cursor: pointer;
+			
+		}
+		#user_registration .registration_box1 .registration_qiehua i{
+			display: inline-block;
+			text-align: center;
+			width: 25px;
+			height: 30px;
+			font-family: arial;
+			font-size: 30px;
+			line-height: 30px;
+			position: absolute;
+			top: calc(50% - 70px);
+			cursor: pointer;
+		}
+		#user_login .login_box1 .login_userlist,
+		#user_registration .registration_box1 .registration_userlist{
+			width: 300px;
+			height: 250px;
+			float: left;
+			overflow: hidden;
+			position: relative;
+		}
+		#user_login .login_box1 .login_userlist .select_user{
+			font-family: "微软雅黑";
+			font-size: 16px;
+			padding-left: 20px;
+			margin-top: 20px;
+		}
+		#user_login .login_box1 .login_userlist .fsw_box1,
+		#user_registration .registration_box1 .registration_userlist .fsw_registration_box1{
+			width: 100%;
+			height: 140px;
+			margin-top:20px;
+			position: relative;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info{
+			width: 100%;
+			height: 140px;
+			overflow: hidden;
+			position: absolute;
+			display: table;
+			background: #FFF;
+			top: 0px;
+			left: 0px;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_td,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_td{
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+			
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info,
+		#user_registration  .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info{
+			width:90px;
+			height:140px;
+			display: inline-block;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img{
+			width:90px;
+			height:90px;
+			border: 5px solid rgb(2,207,225) ;
+			border-radius: 5px;
+			overflow: hidden;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img:hover,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img:hover{
+			border-color: red;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_img img,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_img img{
+			width: 90px;
+			height: 90px;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_name,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_name{
+			width: 90px;
+			height: 30px;
+			margin-top: 10px;
+		}
+		#user_login .login_box1 .login_userlist .login_userlist_info .login_danuser_info .login_danuser_info_name p,
+		#user_registration .registration_box1 .registration_userlist .registration_userlist_info .registration_danuser_info .registration_danuser_info_name p{
+			width:90px;	
+			height: 30px;
+			font-family: "微软雅黑";
+			font-size: 18px;
+			text-align: center;
+			line-height: 30px;	
+		}
+		#user_registration .registration_box1 .registration_userlist .registration_user{
+			font-family: "微软雅黑";
+			line-height: 18px;
+			font-size: 18px;
+			text-align: center;
+			margin-bottom: 10px;
+		}
+		#user_registration .registration_box1 .registration_userlist .registration_btn{
+			width: 150px;
+			height: 30px;
+			border: transparent;
+			background: orange;
+			display: block;
+			margin: 0 auto;
+			margin-top: 20px;
+			border-radius: 5px;
+			font-family: "微软雅黑";
+			color: #fff;
+			font-size: 18px;
+			line-height: 30px;
+		}
+		#content .fsw_maxbox{
+			max-width: 400px;
+			margin: 0px auto;
+		}
+		#fsw_table .fsw_td .fsw_center{
+			padding-left:15px ;
+			padding-right: 15px;
+		}
+}
+*{
+	margin: 0px;
+	padding: 0px;
+}
+input[type="submit"]{
+  height:50px;
+  background: #00d2ff ;
+  outline: none;
+}
+input[type='checkbox']{
+  margin-right: 5px;
+  border: 0px;
+}
+button, input, select,
+textarea,h1 ,h2, h3, h4, h5, h6,p {
+ 	 font-family: '宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+html,body{height:100%;}
+
+#fsw_table{
+	width:100%;
+	height:100%;
+    display:table;
+}
+#fsw_table .fsw_td{
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+#fsw_table .fsw_td .fsw_center{
+	width: 100%;
+	max-width: 400px;
+	display: inline-block;
+	text-align: left;
+}
+#tittle{
+  text-align: center;
+}
+#tittle>img{
+	width:130px;
+}
+#tittle p{
+	font-family: "微软雅黑";
+  	font-size: 36px;
+  	margin-top: 10px;
+}
+ul li,ol li{
+  	list-style: none;
+}
+#selector {
+	width:185px;
+	height:auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
+	position: relative;
+}
+
+#selector li{
+	width: 50px;
+	height: 24px;
+	font-size: 24px;
+	font-family:"微软雅黑";
+	line-height: 24px;
+	text-align: center;
+	cursor: pointer;
+	float: left;
+	color: rgb(163,166,167);
+}
+#selector li:nth-child(2){
+	float: right;
+}
+#selector .select_active{
+	color:#76daf6;
+}
+#move{
+	width: 50px;
+	height: 2px;
+	background:#00d2ff;
+	position: absolute;
+	top: 28px;
+	left: 0px;
+}
+.clearbox{
+	width: 0px;
+	height: 0px;
+	clear: both;
+}
+/********************/
+
+#login_form .selected>label{
+	display:block;
+	margin-bottom: 10px;
+}
+#registration_form .selected>label{
+	display: block;
+	margin-bottom: 10px;
+}
+
+#content .fsw_juerr{
+	margin-bottom: 10px;
+	position: relative;
+	padding: 0px 12px;
+	color: red;
+}
+#content .fws_input_danger{
+	border-color: red;
+}
+#content .fsw_querr{
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+	border-radius: 5px;
+	background-color:rgb(255,184,184);
+	padding-right: 12px;
+	overflow: hidden;
+	display: none;
+}
+#content .fsw_querr span{
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	text-align: center;
+	line-height: 40px;
+	font-size: 24px;
+	margin-top: 5px;
+	border-right: 1px solid rgb(252,74,74);	
+	float: left;
+	color:rgb(252,74,74);
+}
+#content .fsw_querr .fsw_querr_infor{
+	height: 40px;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: left;
+	line-height: 40px;
+	font-size: 18px;
+	color:rgb(255,0,0);
+}
+#content  .fsw_success{
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+	border-radius: 5px;
+	background-color:rgb(196,226,170);
+	padding-right: 12px;
+	display: none;
+	overflow: hidden;
+}
+#content .fsw_success span{
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	text-align: center;
+	line-height: 40px;
+	font-size: 24px;
+	margin-top: 5px;
+	border-right: 1px solid rgb(50,108,0);	
+	float: left;
+	color:rgb(50,108,0);
+}
+#content .fsw_success .fsw_success_infor{
+	height: 40px;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: left;
+	line-height: 40px;
+	font-size: 18px;
+	color:rgb(50,108,0);
+}
+/*
+ *
+ * */
+#user_login{
+  width:100%;
+  height:100%;
+  position:absolute;
+  left:0;
+  top:0;
+  z-index: 11;
+  display: none;
+}
+form{
+  display:none;
+}
+form.active_selected{
+  display: block;
+
+}
+#user_registration{
+  width:100%;
+  height:100%;
+  position:absolute;
+  left:0;
+  top:0;
+  display: none;
+  z-index: 11;
+}
+#user_registration p {
+  font-size: 18px;
+  font-family: NotoSansHans Light;
+  color:#7d7c7d;
+  text-indent: 10px;
+  margin-bottom: 10px !important;
+
+}
+.select_user{
+  visibility: visible;
+  height:auto;
+}
+.com_registration{
+  height:30px;
+  background: yellow;
+  width:100px;
+  background:#ffc845;
+  -webkit-border-radius: 5px  !important;
+  -moz-border-radius: 5px  !important;
+  -o-border-radius: 5px  !important;
+  border-radius: 5px  !important;
+  line-height: 30px;
+  text-align: center;
+  margin:0 auto;
+  font-family:NotoSansHans Light;
+  color:#fff;
+  margin-top:5rem;
+
+}
+.do_login,.do_registration{
+  width:100%;
+  border:none;
+  color:#fff;
+  font-family: NotoSansHans Light;
+  font-size:24px;
+
+}
+.remember ,.shejiao{
+  height: 30px;
+  color:#9b9d9f ;
+  font-size: 18px;
+  margin-top: 10px;
+  position: relative;
+}
+.shejiao a{
+  
+  color:#9b9d9f ;
+}
+.remember input{
+	width: 18px;
+	height: 18px;
+	vertical-align: middle;
+}
+.remember span:nth-of-type(1){
+	position: absolute;
+	left:25px;
+	top:3px;
+}
+.remember span:nth-of-type(2){
+	position: absolute;
+	right: 0px;
+	top:3px;
+}
+#login_form input[type='text'],
+#login_form input[type='password'],
+#registration_form input[type='text'],
+#registration_form input[type='password']{
+  -webkit-border-radius: 5px  !important;
+  -moz-border-radius: 5px  !important;
+  -o-border-radius: 5px  !important;
+  border-radius: 5px  !important;
+  height:50px;
+  font-size: 24px;
+  font-weight:100;
+}
+.shejiao{
+  margin-top: 30px;
+}
+.user{
+  width:100%;
+  height:auto;
+  margin:0 auto !important;
+}
+/*.user ul{
+  width:100%;
+  display: flex;
+  margin :0 auto !important;
+  visibility:hidden;
+  height:0;
+}*/
+/*.user .select_userName{
+  visibility: visible;
+  height:20px;
+}
+.user  ul li{
+  margin-right: 2px;
+  flex:1;
+  line-height: 20px;
+  text-align: center;
+}*/
+#fsw_bj{
+	width:100%;
+ 	height:100%;
+	background: rgba(127,127,127,.4);
+	position:fixed;
+	display: none;
+  	left:0px;
+  	top:0px;
+}
+
+

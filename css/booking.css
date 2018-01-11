@@ -1,0 +1,260 @@
+.btn-default {
+    background:#00caf1;
+    border-color:#00caf1;
+    color: #fff;
+    border-radius:5px;
+    width:200px;
+    text-align:center;
+    margin:auto;
+    line-height:40px;
+    cursor: pointer;
+}
+.btn-default:focus,
+.btn-default.focus {
+    color: #fff;
+    background-color: #00c9f1;
+    border-color: #00c9f1;
+    outline: none;
+}
+.btn-default:hover {
+    color: #fff;
+    background-color: #00acce;
+    border-color: #00acce;
+    transition: background 0.3s;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+    color: #fff;
+    background-color: #00acce;
+    border-color: #00acce;
+}
+.btn-default:active:hover,
+.btn-default.active:hover,
+.open > .dropdown-toggle.btn-default:hover,
+.btn-default:active:focus,
+.btn-default.active:focus,
+.open > .dropdown-toggle.btn-default:focus,
+.btn-default:active.focus,
+.btn-default.active.focus,
+.open > .dropdown-toggle.btn-default.focus {
+    color: #fff;
+    background-color: #00c9f1;
+    border-color: #00c9f1;
+    outline: none;
+}
+
+
+/*body{
+    background-image: url(../images/booking/beijing1.jpg);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-size:cover;  /* cover contain
+}*/
+
+.login div.logo_img{
+    margin:0 auto;
+    text-align: center;
+}
+.login div.logo_img img{
+    max-width: 135px;
+    width:100%;
+}
+.login div>p{
+    font-size: 16px;
+    text-align: center;
+}
+
+
+/*
+* form 表单
+ */
+#qrcode_text{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 15%;
+}
+#qrcode_text h3{
+    color:red;
+}
+#qrcode_text button{
+    font-size: 16px;
+    margin-top: 30px;
+    border:0px;
+}
+#phone{
+    max-width:300px;
+    width:90%;
+    height:35px;
+    color:#fff;
+    /*color:#000;*/
+    /*border:1px solid #333333;*/
+    border:1px solid #fff;
+    background-color:transparent;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+.error{
+    color:red;
+    display: none;
+    margin-top: 5px;
+}
+
+/*姓氏的填写*/
+#user{
+    width:330px;
+    margin:0 auto;
+}   
+#user>div{
+    width:100%;
+    display: block;
+    overflow: hidden;
+} 
+#username{
+    max-width:145px;
+    width:70%;
+    height:35px;
+    font-size: 16px;
+    color:#fff;
+    /*color:#000;*/
+    /*border:1px solid #333333;*/
+    border:1px solid #fff;
+    background-color:transparent;
+    border-radius: 5px; 
+    margin-top: 20px;
+    text-align: center;
+} 
+#user>div:last-child{
+    display: inline-block;
+}
+.user_name label{
+    margin-left: -15px;
+}
+
+/*选择男士女士按钮*/
+input{
+    padding: 0;
+    margin: 0; border: 0; 
+}
+.sex{
+    width:51%;
+    margin-top: 17px;
+}
+.sex:before {
+    content: ""; 
+    display: table; 
+}
+.sex:after { 
+    content: ""; 
+    display: table; 
+    clear: both; 
+}
+.sex > div { 
+    position: relative; 
+    float: left; 
+    /*margin-right: 50px;*/ 
+    width: 80px; 
+    height: 40px; 
+    line-height: 40px; 
+}
+.sex > div.banana{
+    float: right;
+    margin-top: -40px;
+} 
+.sex > div:last-child { 
+    margin-right: 0; 
+}
+.sex label { 
+    display: block; 
+    width: 50px; 
+    height: 40px; 
+    line-height: 40px; 
+    cursor: pointer; 
+}
+.sex input { 
+    z-index: 3; 
+    display: block;
+    opacity: 0;
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 50px; 
+    margin: auto; 
+    width: 30px; 
+    height: 30px; 
+    cursor: pointer; 
+}
+.sex .user-defined { 
+    z-index: 2; 
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 50px; 
+    margin: auto; 
+    width: 20px; 
+    height: 20px; 
+    border: 1px solid #fff; 
+    border-radius: 50%; 
+    cursor: pointer; 
+}
+.sex .user-defined span.circle  { 
+    display: block; 
+    width: 14px; 
+    height: 14px; 
+    margin-top: 2px; 
+    margin-left: 2px; 
+    background-color: transparent; 
+    border-radius: 50%; 
+}
+.sex .user-defined span.active  { 
+    background-color: #fff; 
+}
+
+
+/*
+ * 预约报错信息
+*/
+.data_success,.data_error,.teacher_error{
+    width:345px;
+    min-width: 311px;
+    height:35px;
+    border-radius: 10px;
+    display: none;
+    margin:20px auto;
+}
+.data_success>span,.data_error>span,.teacher_error>span{
+    display: block; 
+    width:9%;
+    height:32px;
+    font-size: 16px;
+    line-height: 32px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.data_success>p,.data_error>p,.teacher_error>p{
+    text-align: left;
+    margin: -26px 0 0 30px;
+}
+.data_success{
+    background: #C4E2AA;
+}
+.data_success>span{
+    border-right:1px solid #326C00;
+    background: #C4E2AA;color:#326C00;
+}
+.data_success>p{
+    color:#326C00;
+}
+.data_error,.teacher_error{
+    background: #FFB8B8;
+}
+.data_error>span,.teacher_error>span{
+    border-right:1px solid #FF4949;
+    background: #FFB8B8;color:#FF4949;
+}
+.data_error>p,.teacher_error>p{
+    color:#FF4949;
+}

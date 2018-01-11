@@ -1,421 +1,459 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Glass Client</title>
-    <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
-    <link rel="stylesheet" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
-    <script src="3rd/jquery-3.1.0.min.js"></script>
-    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="3rd/bootstrap-slider/bootstrap-slider.min.css">
-    <script src="3rd/bootstrap-slider/bootstrap-slider.min.js"></script>
-    <script src="3rd/jcanvas/jcanvas.min.js"></script>
-    <link rel="stylesheet" href="css/glassconfig.css">
-    <script src="3rd/three/three.js"></script>
-    <script src="3rd/three/OrbitControls.js"></script>
-  </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row" id="row-header">
-        <div class="col-xs-9">
-          <img id="logo" src='images/glassclient/logo.png'/>
-        </div>
-        <div class="col-xs-3">
-          <div id="login">
-            
-          </div>
-        </div>
+
+<head>
+  <title>Glass Client</title>
+  <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+  <link rel="stylesheet" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+  <script src="3rd/jquery-3.1.0.min.js"></script>
+  <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="3rd/bootstrap-slider/bootstrap-slider.min.css">
+  <script src="3rd/bootstrap-slider/bootstrap-slider.min.js"></script>
+  <script src="3rd/jcanvas/jcanvas.min.js"></script>
+  <link rel="stylesheet" href="css/glassconfig.css">
+  <script src="3rd/three/three.js"></script>
+  <script src="3rd/three/OrbitControls.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row" id="row-header">
+      <div class="col-xs-9">
+        <img id="logo" src='images/glassclient/logo.png' />
       </div>
-      <div class="row" id="row-content">
-        <div class="col-xs-9" id="display">
-          <canvas id="canvasDisp" width="800" height="800"></canvas>
-          <canvas id="canvasMark" width="800" height="800"></canvas>
-          <div id="canvas-interface">
-            <img class="canvas-interface-button" id="camera-up-button" src='images/glassclient/button_camera_up.png'/>
-            <img class="canvas-interface-button" id="camera-front-button" src='images/glassclient/button_camera_front.png'/>
-            <img class="canvas-interface-button" id="camera-rear-button" src='images/glassclient/button_camera_rear.png'/>
-            <img class="canvas-interface-button" id="camera-left-button" src='images/glassclient/button_camera_left.png'/>
-            <img class="canvas-interface-button" id="camera-right-button" src='images/glassclient/button_camera_right.png'/>
-            
-            <img class="canvas-interface-button" id="head-hide-button" src='images/glassclient/head_effect_hide.png'/>
-          </div>
-          <div id="loadprogress">
-            <img id="loadprogressImage" src='images/glassclient/loadprogress.gif'/>
-            <div id="loadprogressPercent">
-              0%
-            </div>
-            <div id="loadprogressMessage">
-              Loading
-            </div>
-          </div>
-          <div id="updateprogress">
-            <div id="updateprogressPercent">
-              &nbsp&nbsp&nbsp&nbsp&nbsp0%
-            </div>
-            <div id="updateprogressMessage">
-              读取数据...
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-xs-3" id="interface">
-          <div class="panel-group" id="accordionArea">
-            <div class="panel panel-default" id="panelFrame">
-              <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseFrame">
-                <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png'/>
-                <img class="accordion-icon"  src='images/glassclient/panel_heading_frame.png'/>
-                <div class="accordion-text">镜框设置</div>
-              </div>
-              <div class="accordion-body collapse" id="collapseFrame">
-                <div class="pills-left">
-                  <ul class="nav">
-                    <li class="nav-selected">
-                      <span>
-                        <a href="#tabFrameDesign" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="DESIGN"
-                          src='images/glassclient/icon_frame.png'/>
-                        </a>
-                      </span>
-                    </li>
-                    <li>
-                      <span>
-                        <a href="#tabFrameColor" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="COLOR"
-                          src='images/glassclient/icon_color.png'/>
-                        </a>
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="tab-content">
-                  <div class="tab-pane fade in active" id="tabFrameDesign">
-                    <div class="tab-title">
-                      镜框设计
-                    </div>
-                    <div class="scroll-up">
-                      <img class="scroll-up-png" id="scroll-up-Fdesign" src='images/glassclient/scrollup_disabled.png'/>
-                    </div>
-                    <ul class="design-list scroll-list" id="Fdesign-list">
+      <div class="col-xs-3">
+        <div id="login">
 
-                    </ul>
-                    <div class="scroll-down">
-                      <img class="scroll-down-png" id="scroll-down-Fdesign" src='images/glassclient/scrolldown_normal.png'/>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="tabFrameColor">
-                    <div class="tab-title">
-                      镜框色彩
-                    </div>
-                    <ul class="color-list" id="Fcolor-list">
-
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="panel panel-default" id="panelLeg">
-              <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseLeg">
-                <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png'/>
-                <img class="accordion-icon" src='images/glassclient/panel_heading_leg.png'/>
-                <div class="accordion-text">镜腿设置</div>
-              </div>
-              <div class="accordion-body collapse" id="collapseLeg">
-                <div class="pills-left">
-                  <ul class="nav">
-                    <li class="nav-selected">
-                      <span>
-                        <a href="#tabLegDeisign" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="DESIGN"
-                          src='images/glassclient/icon_leg.png'/>
-                        </a>
-                      </span>
-                    </li>
-                    <li>
-                      <span>
-                        <a href="#tabLegColor" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="COLOR"
-                          src='images/glassclient/icon_color.png'/>
-                        </a>
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="tab-content">
-                  <div class="tab-pane fade in active" id="tabLegDeisign">
-                    <div class="tab-title">
-                      镜腿设计
-                    </div>
-                    <div class="scroll-up">
-                      <img class="scroll-up-png" id="scroll-up-Ldesign" src='images/glassclient/scrollup_disabled.png'/>
-                    </div>
-                    <ul class="design-list" id="Ldesign-list">
-
-                    </ul>
-                    <div class="scroll-down">
-                      <img class="scroll-down-png" id="scroll-down-Ldesign" src='images/glassclient/scrolldown_normal.png'/>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="tabLegColor">
-                    <div class="tab-title">
-                      镜腿色彩
-                    </div>
-                    <ul class="color-list" id="Lcolor-list">
-
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="panel panel-default" id="panelParam">
-              <div class="accordion-heading" id="toggled"  data-toggle="collapse" data-parent="#accordionArea" href="#collapseParam">
-                <img class="accordion-arrow" src='images/glassclient/panel_arrow_selected.png'/>
-                <img class="accordion-icon"  src='images/glassclient/panel_heading_param.png'/>
-                <div class="accordion-text">参数设置</div>
-              </div>
-              <div class="accordion-body collapse in" id="collapseParam">
-                <div class="pills-left">
-                  <ul class="nav">
-                    <li class="nav-selected">
-                      <span>
-                        <a href="#tabParam-gene" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="GENERAL"
-                          src='images/glassclient/icon_param.png'/>
-                        </a>
-                      </span>
-                    </li>
-                    
-                    <li>
-                      <span>
-                        <a href="#tabParam-frame" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="FRAME"
-                          src='images/glassclient/icon_param.png'/>
-                        </a>
-                      </span>
-                    </li>
-                    
-                    <li>
-                      <span>
-                        <a href="#tabParam-upbri" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="UPBRIDGE"
-                          src='images/glassclient/icon_param.png'/>
-                        </a>
-                      </span>
-                    </li>
-                    
-                    <li>
-                      <span>
-                        <a href="#tabParam-downbri" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="DOWNBRIDGE"
-                          src='images/glassclient/icon_param.png'/>
-                        </a>
-                      </span>
-                    </li>
-                    
-                    <li>
-                      <span>
-                        <a href="#tabParam-nosepad" data-toggle="pill">
-                          <img data-toggle="tooltip" data-placement="left" title="NOSEPAD"
-                          src='images/glassclient/icon_param.png'/>
-                        </a>
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div class="tab-content">
-                  <div class="tab-pane fade in active" id="tabParam-gene">
-                    <div class="tab-title">
-                      款式外观
-                    </div>
-                    <ul id="param-list-gene" class="param-list">
-                      <li>
-                        <div>运动款/非运动款: </div>
-                        <select name="SportGlass" id="selectParam0">  
-                          <option>true</option>  
-                          <option>false</option>
-                        </select>
-                      </li>
-                      <li>
-                        <div>四边形/三角形: </div>
-                        <select name="QuadSlot" id="selectParam1">  
-                          <option>true</option>  
-                          <option>false</option>
-                        </select>
-                      </li>
-                      <li>
-                        <div id="LensProfileIdentifier">镜框型号: </div>
-                        <input name="LensProfileIdentifier" id="textParam0" type="text" placeholder="只读的哟"/>
-                      </li>
-                      <li>
-                        <div id="LegProfile">镜框颜色: </div>
-                        <input name="FrameColor" id="textParam1" type="text" readonly placeholder="只读的哟"/>
-                      </li>
-                      <li>
-                        <div id="">镜腿型号: </div>
-                        <input name="LegProfile" id="textParam2" type="text" readonly placeholder="只读的哟"/>
-                      </li>
-                      <li>
-                        <div id="LegColor">镜腿颜色: </div>
-                        <input name="LegColor" id="textParam3" type="text" readonly placeholder="只读的哟"/>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="tab-pane fade" id="tabParam-frame">
-                    <div class="tab-title">
-                      镜框参数
-                    </div>
-                    <ul id="param-list-frame" class="param-list">
-                      <li>
-                        <div>尺寸（镜宽比）: <span id="svalWidthScale">loading</span></div>
-                        <span>0.7</span>
-                        <input name="WidthScale" class="sliderbarParam" id="sliderbarParam0" data-slider-id='Param0Slider' type="text" data-slider-min="0.7" data-slider-max="1.0" data-slider-step="0.01" data-slider-value="0.82" data-slider-tooltip="hide"/>
-                        <span>1.0</span>
-                      </li>
-                      <li>
-                        <div>宽度（俯视）: <span id="svalFrameThickness">loading</span></div>
-                        <span>0.5</span>
-                        <input name="FrameThickness" class="sliderbarParam" id="sliderbarParam1" data-slider-id='Param1Slider' type="text" data-slider-min="0.5" data-slider-max="5.0" data-slider-step="0.1" data-slider-value="2.2" data-slider-tooltip="hide"/>
-                        <span>5.0</span>
-                      </li>
-                      <li>
-                        <div>最小厚度限制: </div>
-                        <select name="ClampFrameWidth" id="selectParam2">  
-                          <option>true</option>  
-                          <option>false</option>
-                        </select>
-                      </li>
-                      <li>
-                        <div>厚度（正视）: <span id="svalFrameWidth">loading</span></div>
-                        <span>0.5</span>
-                        <input name="FrameWidth" class="sliderbarParam" id="sliderbarParam2" data-slider-id='Param2Slider' type="text" data-slider-min="0.5" data-slider-max="5.0" data-slider-step="0.1" data-slider-value="2.2" data-slider-tooltip="hide"/>
-                        <span>5.0</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="tab-pane fade" id="tabParam-upbri">
-                    <div class="tab-title">
-                      上梁
-                    </div>
-                    <ul id="param-list-upbri" class="param-list">
-                      <li>
-                        <div>双中梁: </div>
-                        <select name="DoubleBridge" id="selectParam3">  
-                          <option>true</option>  
-                          <option>false</option>
-                        </select>
-                      </li>
-                      <li>
-                        <div>上梁定位锁定: </div>
-                        <select name="UpBridgeAssign" id="selectParam4">  
-                          <option>true</option>
-                          <option>false</option>
-                        </select>
-                      </li>
-                      <li>
-                        <div>上梁厚度: <span id="svalUpBridgeWidth">loading</span></div>
-                        <span>1.0</span>
-                        <input name="UpBridgeWidth" class="sliderbarParam" id="sliderbarParam3" data-slider-id='Param3Slider' type="text" data-slider-min="1.0" data-slider-max="10.0" data-slider-step="0.1" data-slider-value="5.0" data-slider-tooltip="hide"/>
-                        <span>10.0</span>
-                      </li>
-                      <li>
-                        <div>上梁位置: <span id="svalUpBridgeHeightScale">loading</span></div>
-                        <span>0.0</span>
-                        <input name="UpBridgeHeightScale" class="sliderbarParam" id="sliderbarParam4" data-slider-id='Param4Slider' type="text" data-slider-min="0.0" data-slider-max="1.0" data-slider-step="0.05" data-slider-value="0.5" data-slider-tooltip="hide"/>
-                        <span>1.0</span>
-                      </li>
-                      <li>
-                        <div>上梁上弧弯度: <span id="svalUpBridgeBendingUp">loading</span></div>
-                        <span>-5</span>
-                        <input name="UpBridgeBendingUp" class="sliderbarParam" id="sliderbarParam5" data-slider-id='Param5Slider' type="text" data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"/>
-                        <span>5</span>
-                      </li>
-                      <li>
-                        <div>上梁下弧弯度: <span id="svalUpBridgeBendingDown">loading</span></div>
-                        <span>-5</span>
-                        <input name="UpBridgeBendingDown" class="sliderbarParam" id="sliderbarParam6" data-slider-id='Param6Slider' type="text" data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"/>
-                        <span>5</span>
-                      </li>
-                      <li>
-                        <div>上梁前后弯度: <span id="svalUpBridgeBendingFront">loading</span></div>
-                        <span>-5</span>
-                        <input name="UpBridgeBendingFront" class="sliderbarParam" id="sliderbarParam7" data-slider-id='Param7Slider' type="text" data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"/>
-                        <span>5</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="tab-pane fade" id="tabParam-downbri">
-                    <div class="tab-title">
-                      下梁
-                    </div>
-                    <ul id="param-list-downbri" class="param-list">
-                      <li>
-                        <div>下梁定位锁定: </div>
-                        <select name="DownBridgeAssign" id="selectParam5">  
-                          <option>true</option>  
-                          <option>false</option>
-                        </select>
-                      </li>
-                      <li>
-                        <div>下梁厚度: <span id="svalDownBridgeWidth">loading</span></div>
-                        <span>1.0</span>
-                        <input name="DownBridgeWidth" class="sliderbarParam" id="sliderbarParam8" data-slider-id='Param8Slider' type="text" data-slider-min="1.0" data-slider-max="10.0" data-slider-step="0.1" data-slider-value="5.0" data-slider-tooltip="hide"/>
-                        <span>10.0</span>
-                      </li>
-                      <li>
-                        <div>下梁位置: <span id="svalDownBridgeHeightScale">loading</span></div>
-                        <span>0.0</span>
-                        <input name="DownBridgeHeightScale" class="sliderbarParam" id="sliderbarParam9" data-slider-id='Param9Slider' type="text" data-slider-min="0.0" data-slider-max="1.0" data-slider-step="0.05" data-slider-value="0.5" data-slider-tooltip="hide"/>
-                        <span>1.0</span>
-                      </li>
-                      <li>
-                        <div>下梁上弧弯度: <span id="svalDownBridgeBendingUp">loading</span></div>
-                        <span>-5</span>
-                        <input name="DownBridgeBendingUp" class="sliderbarParam" id="sliderbarParam10" data-slider-id='Param10Slider' type="text" data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"/>
-                        <span>5</span>
-                      </li>
-                      <li>
-                        <div>下梁下弧弯度: <span id="svalDownBridgeBendingDown">loading</span></div>
-                        <span>-5</span>
-                        <input name="DownBridgeBendingDown" class="sliderbarParam" id="sliderbarParam11" data-slider-id='Param11Slider' type="text" data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"/>
-                        <span>5</span>
-                      </li>
-                      <li>
-                        <div>下梁前后弯度: <span id="svalDownBridgeBendingFront">loading</span></div>
-                        <span>-5</span>
-                        <input name="DownBridgeBendingFront" class="sliderbarParam" id="sliderbarParam12" data-slider-id='Param12Slider' type="text" data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"/>
-                        <span>5</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="tab-pane fade" id="tabParam-nosepad">
-                    <div class="tab-title">
-                      鼻托参数
-                    </div>
-                    <ul id="param-list-nosepad" class="param-list">
-                      <li>
-                        <span>生长鼻托: </span>
-                        <select name="GenerateNosePad" id="selectParam6">
-                          <option>true</option>
-                          <option>false</option>
-                        </select>
-                      </li>
-                    </ul>
-                  </div>
-                  <button type="button" id="button-markp-disp" class="button-param">标记点</button>
-                  <button type="button" id="button-marki-disp" class="button-param">标记号</button>
-                  <button type="button" id="button-param-reset" class="button-param">重&nbsp&nbsp&nbsp置</button>
-                  <button type="button" id="button-param-update" class="button-param">刷&nbsp&nbsp&nbsp新</button>
-                  <button type="button" id="button-param-download" class="button-param">下&nbsp&nbsp&nbsp载</button>
-                </div>
-              </div>
-            </div>
-            
-            
-          </div>
         </div>
       </div>
     </div>
-    <script src="3rd/require/require.min.js" defer async="true" data-main="js/glassconfig/main"></script>
-  </body>
+    <div class="row" id="row-content">
+      <div class="col-xs-9" id="display">
+        <canvas id="canvasDisp" width="800" height="800"></canvas>
+        <canvas id="canvasMark" width="800" height="800"></canvas>
+        <div id="canvas-interface">
+          <img class="canvas-interface-button" id="camera-up-button" src='images/glassclient/button_camera_up.png' />
+          <img class="canvas-interface-button" id="camera-front-button" src='images/glassclient/button_camera_front.png' />
+          <img class="canvas-interface-button" id="camera-rear-button" src='images/glassclient/button_camera_rear.png' />
+          <img class="canvas-interface-button" id="camera-left-button" src='images/glassclient/button_camera_left.png' />
+          <img class="canvas-interface-button" id="camera-right-button" src='images/glassclient/button_camera_right.png' />
+
+          <img class="canvas-interface-button" id="head-hide-button" src='images/glassclient/head_effect_hide.png' />
+        </div>
+        <div id="loadprogress">
+          <img id="loadprogressImage" src='images/glassclient/loadprogress.gif' />
+          <div id="loadprogressPercent">
+            0%
+          </div>
+          <div id="loadprogressMessage">
+            Loading
+          </div>
+        </div>
+        <div id="updateprogress">
+          <div id="updateprogressPercent">
+            &nbsp&nbsp&nbsp&nbsp&nbsp0%
+          </div>
+          <div id="updateprogressMessage">
+            读取数据...
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3" id="interface">
+        <div class="panel-group" id="accordionArea">
+          <div class="panel panel-default" id="panelFrame">
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseFrame">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_frame.png' />
+              <div class="accordion-text">镜框设置</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseFrame">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabFrameDesign" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="DESIGN" src='images/glassclient/icon_frame.png' />
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#tabFrameColor" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="COLOR" src='images/glassclient/icon_color.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabFrameDesign">
+                  <div class="tab-title">
+                    镜框设计
+                  </div>
+                  <div class="scroll-up">
+                    <img class="scroll-up-png" id="scroll-up-Fdesign" src='images/glassclient/scrollup_disabled.png' />
+                  </div>
+                  <ul class="design-list scroll-list" id="Fdesign-list">
+
+                  </ul>
+                  <div class="scroll-down">
+                    <img class="scroll-down-png" id="scroll-down-Fdesign" src='images/glassclient/scrolldown_normal.png' />
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="tabFrameColor">
+                  <div class="tab-title">
+                    镜框色彩
+                  </div>
+                  <ul class="color-list" id="Fcolor-list">
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default" id="panelLeg">
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseLeg">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_leg.png' />
+              <div class="accordion-text">镜腿设置</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseLeg">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabLegDeisign" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="DESIGN" src='images/glassclient/icon_leg.png' />
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#tabLegColor" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="COLOR" src='images/glassclient/icon_color.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabLegDeisign">
+                  <div class="tab-title">
+                    镜腿设计
+                  </div>
+                  <div class="scroll-up">
+                    <img class="scroll-up-png" id="scroll-up-Ldesign" src='images/glassclient/scrollup_disabled.png' />
+                  </div>
+                  <ul class="design-list" id="Ldesign-list">
+
+                  </ul>
+                  <div class="scroll-down">
+                    <img class="scroll-down-png" id="scroll-down-Ldesign" src='images/glassclient/scrolldown_normal.png' />
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="tabLegColor">
+                  <div class="tab-title">
+                    镜腿色彩
+                  </div>
+                  <ul class="color-list" id="Lcolor-list">
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default" id="panelParam">
+            <div class="accordion-heading" id="toggled" data-toggle="collapse" data-parent="#accordionArea" href="#collapseParam">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_selected.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_param.png' />
+              <div class="accordion-text">参数设置</div>
+            </div>
+            <div class="accordion-body collapse in" id="collapseParam">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabParam-gene" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="GENERAL" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+
+                  <li>
+                    <span>
+                      <a href="#tabParam-frame" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="FRAME" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+
+                  <li>
+                    <span>
+                      <a href="#tabParam-upbri" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="UPBRIDGE" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+
+                  <li>
+                    <span>
+                      <a href="#tabParam-downbri" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="DOWNBRIDGE" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+
+                  <li>
+                    <span>
+                      <a href="#tabParam-nosepad" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="NOSEPAD" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabParam-gene">
+                  <div class="tab-title">
+                    款式外观
+                  </div>
+                  <ul id="param-list-gene" class="param-list">
+                    <li>
+                      <div>运动款/非运动款: </div>
+                      <select name="SportGlass" id="selectParam0">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                    <li>
+                      <div>四边形/三角形: </div>
+                      <select name="QuadSlot" id="selectParam1">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                    <li>
+                      <div id="LensProfileIdentifier">镜框型号: </div>
+                      <input name="LensProfileIdentifier" id="textParam0" type="text" placeholder="只读的哟" />
+                    </li>
+                    <li>
+                      <div id="LegProfile">镜框颜色: </div>
+                      <input name="FrameColor" id="textParam1" type="text" readonly placeholder="只读的哟" />
+                    </li>
+                    <li>
+                      <div id="">镜腿型号: </div>
+                      <input name="LegProfile" id="textParam2" type="text" readonly placeholder="只读的哟" />
+                    </li>
+                    <li>
+                      <div id="LegColor">镜腿颜色: </div>
+                      <input name="LegColor" id="textParam3" type="text" readonly placeholder="只读的哟" />
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="tabParam-frame">
+                  <div class="tab-title">
+                    镜框参数
+                  </div>
+                  <ul id="param-list-frame" class="param-list">
+                    <li>
+                      <div>尺寸（镜宽比）:
+                        <span id="svalWidthScale">loading</span>
+                      </div>
+                      <span>0.7</span>
+                      <input name="WidthScale" class="sliderbarParam" id="sliderbarParam0" data-slider-id='Param0Slider' type="text" data-slider-min="0.7"
+                        data-slider-max="1.0" data-slider-step="0.01" data-slider-value="0.82" data-slider-tooltip="hide" />
+                      <span>1.0</span>
+                    </li>
+                    <li>
+                      <div>宽度（俯视）:
+                        <span id="svalFrameThickness">loading</span>
+                      </div>
+                      <span>0.5</span>
+                      <input name="FrameThickness" class="sliderbarParam" id="sliderbarParam1" data-slider-id='Param1Slider' type="text" data-slider-min="0.5"
+                        data-slider-max="5.0" data-slider-step="0.1" data-slider-value="2.2" data-slider-tooltip="hide" />
+                      <span>5.0</span>
+                    </li>
+                    <li>
+                      <div>最小厚度限制: </div>
+                      <select name="ClampFrameWidth" id="selectParam2">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                    <li>
+                      <div>厚度（正视）:
+                        <span id="svalFrameWidth">loading</span>
+                      </div>
+                      <span>0.5</span>
+                      <input name="FrameWidth" class="sliderbarParam" id="sliderbarParam2" data-slider-id='Param2Slider' type="text" data-slider-min="0.5"
+                        data-slider-max="5.0" data-slider-step="0.1" data-slider-value="2.2" data-slider-tooltip="hide" />
+                      <span>5.0</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="tabParam-upbri">
+                  <div class="tab-title">
+                    上梁
+                  </div>
+                  <ul id="param-list-upbri" class="param-list">
+                    <li>
+                      <div>双中梁: </div>
+                      <select name="DoubleBridge" id="selectParam3">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                    <li>
+                      <div>上梁定位锁定: </div>
+                      <select name="UpBridgeAssign" id="selectParam4">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                    <li>
+                      <div>上梁厚度:
+                        <span id="svalUpBridgeWidth">loading</span>
+                      </div>
+                      <span>1.0</span>
+                      <input name="UpBridgeWidth" class="sliderbarParam" id="sliderbarParam3" data-slider-id='Param3Slider' type="text" data-slider-min="1.0"
+                        data-slider-max="10.0" data-slider-step="0.1" data-slider-value="5.0" data-slider-tooltip="hide" />
+                      <span>10.0</span>
+                    </li>
+                    <li>
+                      <div>上梁位置:
+                        <span id="svalUpBridgeHeightScale">loading</span>
+                      </div>
+                      <span>0.0</span>
+                      <input name="UpBridgeHeightScale" class="sliderbarParam" id="sliderbarParam4" data-slider-id='Param4Slider' type="text" data-slider-min="0.0"
+                        data-slider-max="1.0" data-slider-step="0.05" data-slider-value="0.5" data-slider-tooltip="hide" />
+                      <span>1.0</span>
+                    </li>
+                    <li>
+                      <div>上梁上弧弯度:
+                        <span id="svalUpBridgeBendingUp">loading</span>
+                      </div>
+                      <span>-5</span>
+                      <input name="UpBridgeBendingUp" class="sliderbarParam" id="sliderbarParam5" data-slider-id='Param5Slider' type="text" data-slider-min="-5.0"
+                        data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
+                      <span>5</span>
+                    </li>
+                    <li>
+                      <div>上梁下弧弯度:
+                        <span id="svalUpBridgeBendingDown">loading</span>
+                      </div>
+                      <span>-5</span>
+                      <input name="UpBridgeBendingDown" class="sliderbarParam" id="sliderbarParam6" data-slider-id='Param6Slider' type="text" data-slider-min="-5.0"
+                        data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
+                      <span>5</span>
+                    </li>
+                    <li>
+                      <div>上梁前后弯度:
+                        <span id="svalUpBridgeBendingFront">loading</span>
+                      </div>
+                      <span>-5</span>
+                      <input name="UpBridgeBendingFront" class="sliderbarParam" id="sliderbarParam7" data-slider-id='Param7Slider' type="text"
+                        data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"
+                      />
+                      <span>5</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="tabParam-downbri">
+                  <div class="tab-title">
+                    下梁
+                  </div>
+                  <ul id="param-list-downbri" class="param-list">
+                    <li>
+                      <div>下梁定位锁定: </div>
+                      <select name="DownBridgeAssign" id="selectParam5">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                    <li>
+                      <div>下梁厚度:
+                        <span id="svalDownBridgeWidth">loading</span>
+                      </div>
+                      <span>1.0</span>
+                      <input name="DownBridgeWidth" class="sliderbarParam" id="sliderbarParam8" data-slider-id='Param8Slider' type="text" data-slider-min="1.0"
+                        data-slider-max="10.0" data-slider-step="0.1" data-slider-value="5.0" data-slider-tooltip="hide" />
+                      <span>10.0</span>
+                    </li>
+                    <li>
+                      <div>下梁位置:
+                        <span id="svalDownBridgeHeightScale">loading</span>
+                      </div>
+                      <span>0.0</span>
+                      <input name="DownBridgeHeightScale" class="sliderbarParam" id="sliderbarParam9" data-slider-id='Param9Slider' type="text"
+                        data-slider-min="0.0" data-slider-max="1.0" data-slider-step="0.05" data-slider-value="0.5" data-slider-tooltip="hide"
+                      />
+                      <span>1.0</span>
+                    </li>
+                    <li>
+                      <div>下梁上弧弯度:
+                        <span id="svalDownBridgeBendingUp">loading</span>
+                      </div>
+                      <span>-5</span>
+                      <input name="DownBridgeBendingUp" class="sliderbarParam" id="sliderbarParam10" data-slider-id='Param10Slider' type="text"
+                        data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"
+                      />
+                      <span>5</span>
+                    </li>
+                    <li>
+                      <div>下梁下弧弯度:
+                        <span id="svalDownBridgeBendingDown">loading</span>
+                      </div>
+                      <span>-5</span>
+                      <input name="DownBridgeBendingDown" class="sliderbarParam" id="sliderbarParam11" data-slider-id='Param11Slider' type="text"
+                        data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"
+                      />
+                      <span>5</span>
+                    </li>
+                    <li>
+                      <div>下梁前后弯度:
+                        <span id="svalDownBridgeBendingFront">loading</span>
+                      </div>
+                      <span>-5</span>
+                      <input name="DownBridgeBendingFront" class="sliderbarParam" id="sliderbarParam12" data-slider-id='Param12Slider' type="text"
+                        data-slider-min="-5.0" data-slider-max="5.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide"
+                      />
+                      <span>5</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="tabParam-nosepad">
+                  <div class="tab-title">
+                    鼻托参数
+                  </div>
+                  <ul id="param-list-nosepad" class="param-list">
+                    <li>
+                      <span>生长鼻托: </span>
+                      <select name="GenerateNosePad" id="selectParam6">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                  </ul>
+                </div>
+                <button type="button" id="button-markp-disp" class="button-param">标记点</button>
+                <button type="button" id="button-marki-disp" class="button-param">标记号</button>
+                <button type="button" id="button-param-reset" class="button-param">重&nbsp&nbsp&nbsp置</button>
+                <button type="button" id="button-param-update" class="button-param">刷&nbsp&nbsp&nbsp新</button>
+                <button type="button" id="button-param-download" class="button-param">下&nbsp&nbsp&nbsp载</button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="3rd/require/require.min.js" defer async="true" data-main="js/glassconfig/main"></script>
+</body>
+
 </html>

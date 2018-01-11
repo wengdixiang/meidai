@@ -76,6 +76,7 @@ define(function(){'use strict';
     for(tempobj in tempsliderparams){
       tempconfig+=tempsliderparams[tempobj].name+" "+$(tempsliderparams[tempobj].domid).attr("data")+"\n";
     }
+    tempconfig+="CarveBridge"+" "+false;
     console.log("uploading config:");
     console.log(tempconfig);
 

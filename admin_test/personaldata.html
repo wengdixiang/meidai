@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>个人脸部扫描数据页</title>
+
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    
+    <link href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="css/fswear.css"> -->
+
+    <link href="css/personaldata.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="3rd/jquery.min.js"></script> -->
+    <script src="3rd/jquery-3.1.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src='js/fswear.js'></script>
+    <!-- <script type="text/javascript" src='js/fswear_user.js'></script> -->
+    <script type="text/javascript" src='js/personaldata.js'></script>
+
+	<style>
+        img.user_glass{width:100%;}
+	</style>
+</head>
+<body>
+ 	<div id='nav'>
+        <div id='login_user'>
+            
+        </div>
+    </div>
+    <div class="change_password">
+        <p>您的密码为默认密码，建议您修改密码</p>
+        <button id='login_password' class="btn_info btn-sm">修改密码</button>
+    </div>
+    <h3>颜值宝典</h3>
+    <div id='userimg'>
+        <img class='user_glass' src="images/personaldata/yanjing.png" alt="">
+
+        <!-- <div class='col-lg-1 col-md-1 col-sm-1'></div> -->
+        <!-- <img class='head_portrait col-lg-3 col-md-3 col-sm-3 col-xs-12' src="images/personaldata/touxiang.png" alt=""> -->
+        <!-- <div class='col-lg-1 col-md-1 col-sm-1'></div> -->
+        <!-- <img class='user_glass col-lg-6 col-md-6 col-sm-6 col-xs-12' src="images/personaldata/yanjing.png" alt=""> -->
+        <!-- <div class='col-lg-1 col-md-1 col-sm-1'></div> -->
+    </div>
+    <div class='userdata'>
+        <div id='head_portrait_data' class="pull-left">
+            <div class='head_data_top'><img src="images/personaldata/tubiao.png" alt=""><b>人脸数据</b></div>
+            <div class='head_data_bottom'>
+                <ul class='pull-left'>
+                    <li>
+                        <label>脸部宽度：</label>
+                        <input id='user_EPWidth' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>鼻梁宽度：</label>
+                        <input id='user_NoseWidth' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>左侧脸宽：</label>
+                        <input id='user_LeftFaceWidth' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>左眼度数：</label>
+                        <input id='user_left_degrees' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>左眼散光：</label>
+                        <input id='user_left_cyl' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>左眼轴向：</label>
+                        <input id='user_left_axis' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>瞳&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;距：</label>
+                        <input id='user_PupilDistance' type="text" readonly>
+                    </li>
+                </ul>
+                <ul class='pull-right'>
+                    <li>
+                        <label>脸部长度：</label>
+                        <input id='user_FaceHeight' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>鼻梁高度：</label>
+                        <input id='user_NoseHeight' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>右侧脸宽：</label>
+                        <input id='user_RightFaceWidth' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>右眼度数：</label>
+                        <input id='user_right_degrees' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>右眼散光：</label>
+                        <input id='user_right_cyl' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>右眼轴向：</label>
+                        <input id='user_right_axis' type="text" readonly>
+                    </li>  
+                </ul>
+            </div>
+        </div>
+        <div id='user_glass_data' class="pull-right">
+            <div class='head_data_top'><img src="images/personaldata/tubiao.png" alt=""><b>眼镜数据</b></div>
+            <div class='head_data_bottom'>
+                <ul class='pull-left'>
+                    <li>
+                        <label>镜框宽度：</label>
+                        <input id='user_FrameWidth' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>左鼻托高：</label>
+                        <input id='user_LeftNosePadHeight' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>左镜腿长：</label>
+                        <input id='user_LeftLegLength' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>镜片宽度：</label>
+                        <input id='user_LensWidth' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>中梁宽度：</label>
+                        <input id='user_BridgeWidth' type="text" readonly>
+                    </li>
+                </ul>
+                <ul class='pull-right'>
+                    <li>
+                        <label>镜框高度：</label>
+                        <input id='user_FrameHeight' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>右鼻托高：</label>
+                        <input id='user_RightNosePadHeight' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>右镜腿长：</label>
+                        <input id='user_RightLegLength' type="text" readonly>
+                    </li>
+                    <li>
+                        <label>镜片高度：</label>
+                        <input id='user_LensHeight' type="text" readonly>
+                    </li>
+                    <li class="li_input_hidden">
+                        <label></label>
+                        <input class='empty_input' type="text" readonly>
+                    </li>
+                    <li class="li_input_hidden">
+                        <label></label>
+                        <input class='empty_input' type="text" readonly>
+                    </li>
+                    <li class="li_input_hidden">
+                        <label></label>
+                        <input class='empty_input' type="text" readonly>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div style='clear: both;'></div>
+    </div>
+    <div id='network_report_error'>
+        网络错误请重新连接
+    </div>
+	<script>
+		
+	</script>
+</body>
+</html>

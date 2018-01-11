@@ -1,0 +1,50 @@
+/*轮播的一键预约的设置*/
+#index{border-bottom:5px solid #ea212e;color:#ea212e;}
+.taste-bottom-contant{margin-top:10px;}
+.taste-bottom-contant p{font-size: 18px;}
+.carousel-indicators li{border:1px solid #0be3fd;}
+.carousel-indicators .active{background:#0be3fd;} /*//0be3fd*/
+#carousel_inner_button{position: absolute;text-align: center;top:50%;left:50%;transform: translate(-50%,85%);width:18%;height:13%;border:0px;font-size: 18px;display: none;}
+
+
+.product_img{text-align: center;margin:2% auto;width:100%; display: block;overflow: hidden;zoom:1;}
+.product_img img{width:100%;display: block;}
+.product_img img:hover{cursor: pointer;}
+
+.glasses_pictures{margin:30px auto;text-align: center;}
+.glasses_pictures>p{text-align:center;font-size:30px; margin-bottom:-30px;}
+.glasses_pictures>div{margin-bottom:-30px;}
+.glasses_pictures>div>p{text-align:center;font-size:30px;margin:0;}
+
+
+.mouseenter-show{position: relative;}
+
+.overlay-block{
+    width:100%;height:100%;position: absolute;top:0px;left:0px;color:#fff;text-align: center;display: none;
+}
+.overlay-block ul{
+    width:100%;height:100%;background:rgba(0,0,0,0.50);color:#fff;display: block;text-align: center;position: relative;cursor: pointer;
+}
+.overlay-block li button{width: 20%;height: 50px;line-height: 50px;background: transparent;border: 1px solid #fff;color:#fff;}
+.overlay-block li button:hover{background: #fff;color:#000;transition:background 0.3s;}
+.overlay-block li p:first-child{font-size: 18px;line-height: 40px;}
+.overlay-block li{width:100%;font-size: 14px;line-height: 10px;overflow: hidden;position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+.col-xs-6,.col-sm-6,.col-md-6,.col-lg-6{padding:0px !important;}
+
+@media all and (max-width:767px){
+    #index{border-bottom:0px solid #ea212e;color:#ea212e;}
+
+    /*轮播*/
+    #myCarousel .carousel-prev{top:40% !important;}      
+    #myCarousel .carousel-next{top:40% !important;left:90% !important;}
+    /*轮播里的按钮*/
+    #carousel_inner_button{font-size: 12px !important;border-radius: 5px !important;}
+    .carousel-indicators{top:88% !important;}
+
+    .product_introduce p,.glasses_pictures p{font-size:21px !important;}
+    .product_introduce>div>a>button{width:20% !important;height: 35px !important;margin:0 1% !important;font-size: 14px !important;}
+
+}
+@media all and (max-width:320px){
+
+}

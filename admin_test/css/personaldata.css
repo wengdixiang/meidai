@@ -1,0 +1,199 @@
+*{
+    margin:0;padding:0;
+    font-family:'微软雅黑';
+}
+li{
+    list-style: none;
+}
+body{
+    background: #F0F0F0;
+}
+h3{
+    text-align: center;
+    color:#000;
+    margin: 30px 2%;
+}
+#nav{
+    width:100%;
+    height:60px;
+    background: #4DB7FE;
+}
+#login_user{
+    height:60px;
+    float: right;
+    margin-right:2%;
+}
+#login_user img{
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+}
+#login_user span{
+    display: inline-block;
+    line-height: 60px;
+    margin-left:5px;
+}
+#login_user #delCookie{
+    margin-left:5px;
+    display: inline-block;
+    color:#000;
+    cursor: pointer;
+}
+#login_user a{
+    display: inline-block;
+    color:#000;
+    line-height: 60px;
+}
+#userimg{
+    width:90%;
+    max-width: 1200px;
+    background: #fff;
+    margin:0 auto;
+    border-radius:5px;
+    overflow:auto;
+    padding:10px;
+    box-shadow: 5px 5px 5px #c2c2c2;
+}
+
+.head_portrait:hover{
+    transform: scale(1.1,1.1);
+}
+.user_glass{
+    margin-top:8%;
+}
+
+/* 修改密码样式 */
+.btn_info {
+    cursor: pointer;
+    border:1px;color: #f2f2f2;
+    background-color: #1f87d9;
+    border-color: #1f87d9;
+    border-radius: 10px;
+}
+.btn_info:focus{
+    color: #f2f2f2;
+    background-color: #378ed3;
+    border-color: #378ed3;
+    outline: none;
+}
+.btn_info:hover {
+    color: #f2f2f2;
+    background-color: #3b98e2;
+    border-color: #3b98e2;
+    transition: background 0.3s;
+}
+.btn-sm{
+    width:80px;
+    height:20px;
+    padding: 0px;
+}
+div.change_password{
+    text-align: right;
+    margin-right:20px;
+    display: none;
+}
+
+/* 脸部数据 */
+div.userdata{
+    width:90.5%;
+    margin:0 auto;
+    margin-top: 26px;
+    max-width: 1200px;
+    margin-bottom: 26px;
+    display:block;
+    zoom:1;
+    overflow:hidden;
+}
+#head_portrait_data,
+#user_glass_data{
+    width:49%;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #c2c2c2;
+}
+#user_glass_data{
+    margin-right:5px;
+    margin-bottom:10px;
+}
+.head_data_top{
+    background: #C2C2C2;
+    width:100%;
+    height:43px;
+    font-size: 24px;
+    color:#424242;
+    padding: 0 20px;
+    line-height: 43px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.head_data_top img{
+    margin-right:10px;
+}
+.head_data_bottom{
+    overflow:auto;
+    padding:5% 20px;
+}
+.head_data_bottom ul{
+    width:50%;
+}
+.head_data_bottom li{
+    padding:10px 0px;
+    text-align: center;
+}
+.head_data_bottom li input{
+    width:35%;
+    height:35px;
+    border-radius: 5px;
+    border:1px solid #4D464D;
+    color:#19191a;
+    background: #ECECEC;
+    text-align: center;
+}
+.head_data_bottom li label{
+    color:#666;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: right;
+}
+
+/* 空的脸部数据 */
+input.empty_input{
+    background: transparent !important;
+    border:0px solid !important;
+}
+
+@media all and (min-width:768px) and (max-width:991px){
+    .head_data_bottom li label{
+        font-size: 14px !important;
+    }
+}
+@media all and (max-width:767px){
+    .head_data_bottom li label{
+        font-size: 14px !important;
+    }
+    #head_portrait_data,
+    #user_glass_data{
+        width:98% !important;
+    }
+    #head_portrait_data{
+        margin-bottom: 30px;
+    }
+
+    .head_portrait:hover{
+        transform: scale(1,1) !important;
+    }
+
+    li.li_input_hidden{
+        display:none !important;
+    }
+}
+
+/* 网路连接错误报错 */
+#network_report_error{
+    text-align: center;
+    font-size: 24px;
+    padding:20px 0;
+    clear: both;
+    color:red;
+    display: none;
+}

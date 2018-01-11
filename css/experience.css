@@ -1,0 +1,28 @@
+/*设置子页面的图片ban大小*/
+#taste{border-bottom:5px solid #ea212e;color:#ea212e;}
+
+#nav_img{overflow: hidden;width:100%;}
+#nav_img img{width:100%;}
+
+.taste{margin-top: 50px;margin-bottom: 100px;display:block;zoom:1;overflow:hidden;}
+
+#left-h3{width:150px;}
+#vertical{height:100%;}
+.taste-right div{display:block;zoom:1;overflow:hidden;margin-bottom: 10%;}
+.taste-right img{width:30%;min-width:130px;}
+@media all and (min-width:1200px){ 
+	.taste-right p{font-size: 24px;padding-top: 10%;}
+
+}
+@media all and (min-width:992px) and (max-width:1199px){
+	.taste-right p{font-size: 18px;padding-top: 8%;}
+
+}
+@media all and (min-width:768px) and (max-width:991px){
+	.taste-right p{font-size: 18px;padding-top: 10%;}
+}
+@media all and (max-width:767px){
+    #taste{border-bottom:0px solid #ea212e;color:#ea212e;}
+
+	.taste-right p{font-size: 16px;padding-top: 0%;}
+}
