@@ -153,6 +153,30 @@
           dealvalue: "",
           type: "sliderbar"
         },
+        LensRotY:{
+          domid: "#sliderbarParam14",
+          defaultvalue: "-6.0",
+          dealvalue: "",
+          type: "sliderbar"
+        },
+        DownBridgeBendingFront:{
+          domid: "#sliderbarParam15",
+          defaultvalue: "0.0",
+          dealvalue: "",
+          type: "sliderbar"
+        },
+        // NosePadWidth:{
+        //   domid: "#sliderbarParam16",
+        //   defaultvalue: "8.0",
+        //   dealvalue: "",
+        //   type: "sliderbar"
+        // },
+        FrameThickness :{
+          domid: "#sliderbarParam17",
+          defaultvalue: "3.5",
+          dealvalue: "",
+          type: "sliderbar"
+        },
         CarveBridge: {
           domid: "#selectParam0",
           defaultvalue: "true",

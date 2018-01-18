@@ -253,7 +253,7 @@
                         <option>false</option>
                       </select>
                     </li>
-                    <li>
+                    <li title="两瞳孔的距离">
                       <div>瞳距:
                         <span id="svalPupilDistance">loading</span>
                       </div>
@@ -262,7 +262,7 @@
                         data-slider-max="80.0" data-slider-step="0.5" data-slider-value="62.5" data-slider-tooltip="hide" />
                       <span>80.0</span>
                     </li>
-                    <li>
+                    <li title="指定lens的中心到瞳孔中心的距离，控制frame到和脸部的贴近程度。">
                       <div>镜眼距:
                         <span id="svalEyeDistance">loading</span>
                       </div>
@@ -271,7 +271,7 @@
                         data-slider-max="20.0" data-slider-step="0.1" data-slider-value="12.0" data-slider-tooltip="hide" />
                       <span>20.0</span>
                     </li>
-                    <li>
+                    <li title="指定frame全宽与人脸宽度的比例值.">
                       <div>镜宽比:
                         <span id="svalWidthScale">loading</span>
                       </div>
@@ -280,7 +280,7 @@
                         data-slider-max="1.0" data-slider-step="0.02" data-slider-value="0.8" data-slider-tooltip="hide" />
                       <span>1.0</span>
                     </li>
-                    <li>
+                    <li title="指定bridge的宽度相对于人脸宽度的比例值。">
                       <div>鼻中宽:
                         <span id="svalBridgeSpanRatio">loading</span>
                       </div>
@@ -289,6 +289,42 @@
                         data-slider-max="0.8" data-slider-step="0.05" data-slider-value="0.4" data-slider-tooltip="hide" />
                       <span>0.8</span>
                     </li>
+                    <li title="指定lens以Y轴为旋转轴的旋转角度。默认值1.0。运动款失效。 ">
+                      <div>弧面角:
+                        <span id="svalLensRotY">loading</span>
+                      </div>
+                      <span>-15.0</span>
+                      <input name="LensRotY" class="sliderbarParam" id="sliderbarParam14" data-slider-id='Param3Slider' type="text" data-slider-min="-15.0"
+                        data-slider-max="0.0" data-slider-step="-1.0" data-slider-value="-1.0" data-slider-tooltip="hide" />
+                      <span>0</span>
+                    </li>
+                    <li title="指眼镜中间鼻中的弧度">
+                      <div>鼻中正面弧度:
+                        <span id="svalDownBridgeBendingFront">loading</span>
+                      </div>
+                      <span>0.0</span>
+                      <input name="DownBridgeBendingFront" class="sliderbarParam" id="sliderbarParam15" data-slider-id='Param3Slider' type="text" data-slider-min="0.0"
+                        data-slider-max="6.0" data-slider-step="0.2" data-slider-value="0.2" data-slider-tooltip="hide" />
+                      <span>6.0</span>
+                    </li>
+                    <!-- <li title="指鼻托的宽度">
+                      <div>鼻托宽度:
+                        <span id="svalNosePadWidth">loading</span>
+                      </div>
+                      <span>5.0</span>
+                      <input name="NosePadWidth" class="sliderbarParam" id="sliderbarParam16" data-slider-id='Param3Slider' type="text" data-slider-min="5.0"
+                        data-slider-max="12.0" data-slider-step="1.0" data-slider-value="1.0" data-slider-tooltip="hide" />
+                      <span>12.0</span>
+                    </li> -->
+                    <li title="指眼镜框的厚度">
+                      <div>框厚:
+                        <span id="svalFrameThickness">loading</span>
+                      </div>
+                      <span>2.5</span>
+                      <input name="FrameThickness" class="sliderbarParam" id="sliderbarParam17" data-slider-id='Param3Slider' type="text" data-slider-min="2.5"
+                        data-slider-max="5.0" data-slider-step="0.1" data-slider-value="0.1" data-slider-tooltip="hide" />
+                      <span>5.0</span>
+                    </li>
                   </ul>
                 </div>
                 <div class="tab-pane fade" id="tabParam-cali">
@@ -296,7 +332,7 @@
                     校准参数
                   </div>
                   <ul id="param-list-cali" class="param-list">
-                    <li>
+                    <li title="头部仰角校正">
                       <div>头部仰角校正:
                         <span id="svalFrontRot">loading</span>
                       </div>
@@ -305,7 +341,7 @@
                         data-slider-max="10.0" data-slider-step="1.0" data-slider-value="-4.0" data-slider-tooltip="hide" />
                       <span>10.0</span>
                     </li>
-                    <li>
+                    <li title="特征点横向位移">
                       <div>特征点横向位移:
                         <span id="svalMarksOffsetX">loading</span>
                       </div>
@@ -314,7 +350,7 @@
                         data-slider-max="8.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
                       <span>8.0</span>
                     </li>
-                    <li>
+                    <li title="特征点纵向位移">
                       <div>特征点纵向位移:
                         <span id="svalMarksOffsetY">loading</span>
                       </div>
@@ -323,7 +359,7 @@
                         data-slider-max="8.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
                       <span>8.0</span>
                     </li>
-                    <li>
+                    <li title="指定镜腿（leg）拐点相对耳上点的前后方向位移 ">
                       <div>耳上点前后位移:
                         <span id="svalEarPointOffset">loading</span>
                       </div>
@@ -332,7 +368,7 @@
                         data-slider-max="20.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
                       <span>20.0</span>
                     </li>
-                    <li>
+                    <li title="指定镜腿（leg）拐点相对耳上点的上下方向位移 ">
                       <div>耳上点上下位移:
                         <span id="svalEarPointOffsetY">loading</span>
                       </div>
@@ -341,7 +377,7 @@
                         data-slider-max="20.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
                       <span>20.0</span>
                     </li>
-                    <li>
+                    <li title="指定右镜腿（leg）拐点相对耳上点的左右方向位移 ">
                       <div>右耳上点左右位移:
                         <span id="svalEarPointOffsetX0">loading</span>
                       </div>
@@ -350,7 +386,7 @@
                         data-slider-max="10.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
                       <span>10.0</span>
                     </li>
-                    <li>
+                    <li title="指定左镜腿（leg）拐点相对耳上点的左右方向位移 ">
                       <div>左耳上点左右位移:
                         <span id="svalEarPointOffsetX1">loading</span>
                       </div>
@@ -359,6 +395,15 @@
                         data-slider-max="10.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
                       <span>10.0</span>
                     </li>
+                    <!-- <li>
+                      <div>测试:
+                        <span id="svalFrontRot1">loading</span>
+                      </div>
+                      <span>-9.0</span>
+                      <input name="FrontRot1" class="sliderbarParam" id="sliderbarParam11" data-slider-id='Param4Slider' type="text" data-slider-min="-10.0"
+                        data-slider-max="10.0" data-slider-step="1.0" data-slider-value="-4.0" data-slider-tooltip="hide" />
+                      <span>9.0</span>
+                    </li> -->
                   </ul>
                 </div>
                 <div class="tab-pane fade" id="tabParam-msge">
@@ -404,7 +449,7 @@
                         <option>false</option>
                       </select>
                     </li>
-                    <li>
+                    <li title="指定三角形bevel顶端的角度。角度制。默认110。 ">
                       <div>镜片导角:
                         <span id="svalBevelAngle">loading</span>
                       </div>
@@ -414,7 +459,7 @@
                       />
                       <span>140.0</span>
                     </li>
-                    <li>
+                    <li title="指定bevel（三角形或四边形）的底端宽度.">
                       <div>镜片导角宽:
                         <span id="svalBevelWidth">loading</span>
                       </div>
@@ -423,7 +468,7 @@
                         data-slider-max="3.0" data-slider-step="0.1" data-slider-value="2.0" data-slider-tooltip="hide" />
                       <span>3.0</span>
                     </li>
-                    <li>
+                    <li title="指定四边形bevel的深度。">
                       <div>镜片导角深:
                         <span id="svalBevelDepth">loading</span>
                       </div>
