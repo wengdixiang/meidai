@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>模型调整</title>
+  <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+  <link rel="stylesheet" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+  <script src="3rd/jquery-3.1.0.min.js"></script>
+  <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="3rd/bootstrap-slider/bootstrap-slider.min.css">
+  <script src="3rd/bootstrap-slider/bootstrap-slider.min.js"></script>
+  <script src="3rd/jcanvas/jcanvas.min.js"></script>
+  <link rel="stylesheet" href="css/glassadmin.css">
+  <style>
+    @keyframes waggle {
+      0% {
+        transform: translateX(0)
+      }
+      25% {
+        transform: translateX(10px)
+      }
+      50% {
+        transform: translateX(5px)
+      }
+      100% {
+        transform: translateX(0)
+      }
+    }
+
+    #hint {
+      position: absolute;
+      top: 145px;
+      left: 185px;
+      z-index: 51;
+      color: red;
+      /* background-image: url("images/arrows.jpg") ; */
+      background-position: 50px 50px;
+      background-size: 50%;
+      display: none;
+    }
+
+    /* #camera-right-button{
+      z-index:52;
+    } */
+
+    .highlight {
+      z-index: 52;
+    }
+
+    .highlight-right {
+      z-index: 52;
+      position: relative;
+      background: #eee;
+    }
+
+    #box {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      min-width: 448px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 50;
+      display: none;
+    }
+
+    #box-hint {
+      position: absolute;
+      top: 100px;
+      left: 13%;
+      /* transform: translate(-50%, -50%); */
+      color: #6C6C6C;
+      font-size: 16px;
+      width: 250px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      z-index: 52;
+      display: none;
+    }
+
+    #box_explain {
+      position: absolute;
+      top: 330px;
+      right: 650px;
+      /* transform: translate(-50%, -50%); */
+      color: #6C6C6C;
+      font-size: 16px;
+      width: 250px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      z-index: 52;
+      display: none;
+    }
+
+    #box_explain>p {
+      color: red;
+      font-size: 12px;
+    }
+
+    #explain {
+      margin: 10px 0;
+    }
+
+    #explain u {
+      color: red;
+
+    }
+
+    #hint-content {
+      margin: 10px 0;
+    }
+
+    #hint-content u {
+      color: red;
+    }
+
+    #hint-right {
+      display: none;
+      position: absolute;
+      top: 195px;
+      right: 500px;
+    }
+
+    @media screen and (max-width:1750px) {
+      #hint-right {
+        right: 460px;
+      }
+
+    }
+
+    #hint-right>ul {
+      list-style: none;
+      color: red;
+    }
+
+    #hint-right>ul li {
+      margin: 1px 0;
+      text-align: right;
+      animation: waggle 1s linear infinite;
+    }
+
+    #hint-right>ul li img {
+      width: 37%;
+    }
+
+    #finger>li:nth-child(2) {
+      visibility: hidden;
+    }
+
+    #box-hint>p {}
+
+    #panelDeal {
+      position: relative;
+      margin-top: 0;
+    }
+
+    #remind-sub {
+      color: red;
+      position: absolute;
+      top: 10px;
+      left: -175px;
+      display: none;
+      width: 175px;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    #remind-sub img {
+      width: 25%;
+    }
+
+    .user_pramas {
+      list-style: none;
+    }
+
+    #user_list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #user_list li {
+      margin: 5px;
+      width: 37%;
+    }
+
+    #user_list input {
+      width: 50px;
+    }
+  </style>
+  <script src="3rd/three/three.js"></script>
+  <script src="3rd/three/OrbitControls.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row" id="row-header">
+      <div class="col-xs-9">
+        <img id="logo" src='images/glassclient/logo.png' />
+      </div>
+      <div class="col-xs-3">
+        <div id="login">
+
+        </div>
+      </div>
+    </div>
+    <div class="row" id="row-content">
+      <div class="col-xs-9" id="display">
+        <canvas id="canvasDisp" width="800" height="800"></canvas>
+        <canvas id="canvasMark" width="800" height="800"></canvas>
+        <div id="canvas-interface">
+          <img class="canvas-interface-button" id="camera-up-button" src='images/glassclient/button_camera_up.png' />
+          <img class="canvas-interface-button" id="camera-front-button" src='images/glassclient/button_camera_front.png' />
+          <img class="canvas-interface-button" id="camera-rear-button" src='images/glassclient/button_camera_rear.png' />
+          <img class="canvas-interface-button" id="camera-left-button" src='images/glassclient/button_camera_left.png' />
+          <img class="canvas-interface-button highlight" id="camera-right-button" src='images/glassclient/button_camera_right.png'
+          />
+          <img class="canvas-interface-button" id="head-hide-button" src='images/glassclient/head_effect_hide.png' />
+        </div>
+        <div id="loadprogress">
+          <img id="loadprogressImage" src='images/glassclient/loadprogress.gif' />
+          <div id="loadprogressPercent">
+            0%
+          </div>
+          <div id="loadprogressMessage">
+            Loading
+          </div>
+        </div>
+        <div id="updateprogress">
+          <div id="updateprogressPercent">
+            &nbsp&nbsp&nbsp&nbsp&nbsp0%
+          </div>
+          <div id="updateprogressMessage">
+            读取数据...
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3" id="interface">
+        <div class="panel-group" id="accordionArea">
+          <div class="panel panel-default" id="panelFrame">
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseFrame">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_frame.png' />
+              <div class="accordion-text">镜框设置</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseFrame">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabFrameDesign" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="DESIGN" src='images/glassclient/icon_frame.png' />
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#tabFrameColor" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="COLOR" src='images/glassclient/icon_color.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabFrameDesign">
+                  <div class="tab-title">
+                    镜框设计
+                  </div>
+                  <div class="scroll-up">
+                    <img class="scroll-up-png" id="scroll-up-Fdesign" src='images/glassclient/scrollup_disabled.png' />
+                  </div>
+                  <ul class="design-list scroll-list" id="Fdesign-list">
+
+                  </ul>
+                  <div class="scroll-down">
+                    <img class="scroll-down-png" id="scroll-down-Fdesign" src='images/glassclient/scrolldown_normal.png' />
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="tabFrameColor">
+                  <div class="tab-title">
+                    镜框色彩
+                  </div>
+                  <ul class="color-list" id="Fcolor-list">
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default" id="panelLeg">
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseLeg">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_leg.png' />
+              <div class="accordion-text">镜腿设置</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseLeg">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabLegDeisign" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="DESIGN" src='images/glassclient/icon_leg.png' />
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#tabLegColor" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="COLOR" src='images/glassclient/icon_color.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabLegDeisign">
+                  <div class="tab-title">
+                    镜腿设计
+                  </div>
+                  <div class="scroll-up">
+                    <img class="scroll-up-png" id="scroll-up-Ldesign" src='images/glassclient/scrollup_disabled.png' />
+                  </div>
+                  <ul class="design-list" id="Ldesign-list">
+
+                  </ul>
+                  <div class="scroll-down">
+                    <img class="scroll-down-png" id="scroll-down-Ldesign" src='images/glassclient/scrolldown_normal.png' />
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="tabLegColor">
+                  <div class="tab-title">
+                    镜腿色彩
+                  </div>
+                  <ul class="color-list" id="Lcolor-list">
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default" id="panelParam">
+            <div class="accordion-heading" id="toggled" data-toggle="collapse" data-parent="#accordionArea" href="#collapseParam">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_selected.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_param.png' />
+              <div class="accordion-text">参数设置</div>
+            </div>
+            <div class="accordion-body collapse in" id="collapseParam">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabParam-gene" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="GENERAL" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+
+                  <li>
+                    <span>
+                      <a href="#tabParam-eye" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="EYE&FRAME" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+
+                  <li>
+                    <span>
+                      <a href="#tabParam-cali" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="CALIBRATION" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+
+                  <li>
+                    <span>
+                      <a href="#tabParam-msge" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="MESSAGE" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+
+                  <li>
+                    <span>
+                      <a href="#tabParam-bevel" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="BEVEL" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabParam-gene">
+                  <div class="tab-title">
+                    外观颜色
+                  </div>
+                  <ul id="param-list-gene" class="param-list">
+                    <li>
+                      <div id="LensProfileIdentifier">镜框型号: </div>
+                      <input name="LensProfileIdentifier" id="textParam0" type="text" readonly placeholder="只读的哟" />
+                    </li>
+                    <li>
+                      <div id="LegProfile">镜框颜色: </div>
+                      <input name="FrameColor" id="textParam1" type="text" readonly placeholder="只读的哟" />
+                    </li>
+                    <li>
+                      <div id="">镜腿型号: </div>
+                      <input name="LegProfile" id="textParam2" type="text" readonly placeholder="只读的哟" />
+                    </li>
+                    <li>
+                      <div id="LegColor">镜腿颜色: </div>
+                      <input name="LegColor" id="textParam3" type="text" readonly placeholder="只读的哟" />
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="tab-pane fade" id="tabParam-eye">
+                  <div class="tab-title">
+                    镜眼参数
+                  </div>
+                  <ul id="param-list-eye" class="param-list">
+                    <li>
+                      <span>开启鼻托: </span>
+                      <select name="GenerateNosePad" id="selectParam2">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                    <li title="两瞳孔的距离">
+                      <div>瞳距:
+                        <span id="svalPupilDistance">loading</span>
+                      </div>
+                      <span>50.0</span>
+                      <input name="PupilDistance" class="sliderbarParam" id="sliderbarParam0" data-slider-id='Param0Slider' type="text" data-slider-min="50.0"
+                        data-slider-max="80.0" data-slider-step="0.5" data-slider-value="62.5" data-slider-tooltip="hide" />
+                      <span>80.0</span>
+                    </li>
+                    <li title="指定lens的中心到瞳孔中心的距离，控制frame到和脸部的贴近程度。">
+                      <div>镜眼距:
+                        <span id="svalEyeDistance">loading</span>
+                      </div>
+                      <span>8.0</span>
+                      <input name="EyeDistance" class="sliderbarParam" id="sliderbarParam1" data-slider-id='Param1Slider' type="text" data-slider-min="8.0"
+                        data-slider-max="20.0" data-slider-step="0.1" data-slider-value="12.0" data-slider-tooltip="hide" />
+                      <span>20.0</span>
+                    </li>
+                    <li title="指定frame全宽与人脸宽度的比例值.">
+                      <div>镜宽比:
+                        <span id="svalWidthScale">loading</span>
+                      </div>
+                      <span>0.7</span>
+                      <input name="WidthScale" class="sliderbarParam" id="sliderbarParam2" data-slider-id='Param2Slider' type="text" data-slider-min="0.7"
+                        data-slider-max="1.0" data-slider-step="0.02" data-slider-value="0.8" data-slider-tooltip="hide" />
+                      <span>1.0</span>
+                    </li>
+                    <li title="指定bridge的宽度相对于人脸宽度的比例值。">
+                      <div>鼻中宽:
+                        <span id="svalBridgeSpanRatio">loading</span>
+                      </div>
+                      <span>0.1</span>
+                      <input name="BridgeSpanRatio" class="sliderbarParam" id="sliderbarParam3" data-slider-id='Param3Slider' type="text" data-slider-min="0.1"
+                        data-slider-max="0.8" data-slider-step="0.05" data-slider-value="0.4" data-slider-tooltip="hide" />
+                      <span>0.8</span>
+                    </li>
+                    <li title="指定lens以Y轴为旋转轴的旋转角度。默认值1.0。运动款失效。 ">
+                      <div>弧面角:
+                        <span id="svalLensRotY">loading</span>
+                      </div>
+                      <span>-15.0</span>
+                      <input name="LensRotY" class="sliderbarParam" id="sliderbarParam14" data-slider-id='Param3Slider' type="text" data-slider-min="-15.0"
+                        data-slider-max="0.0" data-slider-step="-1.0" data-slider-value="-6.0" data-slider-tooltip="hide" />
+                      <span>0</span>
+                    </li>
+                    <li title="指眼镜中间鼻中的弧度">
+                      <div>鼻中正面弧度:
+                        <span id="svalDownBridgeBendingFront">loading</span>
+                      </div>
+                      <span>0.0</span>
+                      <input name="DownBridgeBendingFront" class="sliderbarParam" id="sliderbarParam15" data-slider-id='Param3Slider' type="text"
+                        data-slider-min="0.0" data-slider-max="6.0" data-slider-step="0.2" data-slider-value="0.0" data-slider-tooltip="hide"
+                      />
+                      <span>6.0</span>
+                    </li>
+                    <!-- <li title="指鼻托的宽度">
+                      <div>鼻托宽度:
+                        <span id="svalNosePadWidth">loading</span>
+                      </div>
+                      <span>5.0</span>
+                      <input name="NosePadWidth" class="sliderbarParam" id="sliderbarParam16" data-slider-id='Param3Slider' type="text" data-slider-min="5.0"
+                        data-slider-max="12.0" data-slider-step="1.0" data-slider-value="8.0" data-slider-tooltip="hide" />
+                      <span>12.0</span>
+                    </li> -->
+                    <li title="指眼镜框的厚度">
+                      <div>框厚:
+                        <span id="svalFrameThickness">loading</span>
+                      </div>
+                      <span>2.5</span>
+                      <input name="FrameThickness" class="sliderbarParam" id="sliderbarParam17" data-slider-id='Param3Slider' type="text" data-slider-min="2.5"
+                        data-slider-max="5.0" data-slider-step="0.1" data-slider-value="3.0" data-slider-tooltip="hide" />
+                      <span>5.0</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="tabParam-cali">
+                  <div class="tab-title">
+                    校准参数
+                  </div>
+                  <ul id="param-list-cali" class="param-list">
+                    <li title="头部仰角校正">
+                      <div>头部仰角校正:
+                        <span id="svalFrontRot">loading</span>
+                      </div>
+                      <span>-10.0</span>
+                      <input name="FrontRot" class="sliderbarParam" id="sliderbarParam4" data-slider-id='Param4Slider' type="text" data-slider-min="-10.0"
+                        data-slider-max="10.0" data-slider-step="1.0" data-slider-value="-4.0" data-slider-tooltip="hide" />
+                      <span>10.0</span>
+                    </li>
+                    <li title="特征点横向位移">
+                      <div>特征点横向位移:
+                        <span id="svalMarksOffsetX">loading</span>
+                      </div>
+                      <span>-8.0</span>
+                      <input name="MarksOffsetX" class="sliderbarParam" id="sliderbarParam5" data-slider-id='Param5Slider' type="text" data-slider-min="-8.0"
+                        data-slider-max="8.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
+                      <span>8.0</span>
+                    </li>
+                    <li title="特征点纵向位移">
+                      <div>特征点纵向位移:
+                        <span id="svalMarksOffsetY">loading</span>
+                      </div>
+                      <span>-8.0</span>
+                      <input name="MarksOffsetY" class="sliderbarParam" id="sliderbarParam6" data-slider-id='Param6Slider' type="text" data-slider-min="-8.0"
+                        data-slider-max="8.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
+                      <span>8.0</span>
+                    </li>
+                    <li title="指定镜腿（leg）拐点相对耳上点的前后方向位移 ">
+                      <div>耳上点前后位移:
+                        <span id="svalEarPointOffset">loading</span>
+                      </div>
+                      <span>-5.0</span>
+                      <input name="EarPointOffset" class="sliderbarParam" id="sliderbarParam7" data-slider-id='Param7Slider' type="text" data-slider-min="-5.0"
+                        data-slider-max="20.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
+                      <span>20.0</span>
+                    </li>
+                    <li title="指定镜腿（leg）拐点相对耳上点的上下方向位移 ">
+                      <div>耳上点上下位移:
+                        <span id="svalEarPointOffsetY">loading</span>
+                      </div>
+                      <span>-5.0</span>
+                      <input name="EarPointOffsetY" class="sliderbarParam" id="sliderbarParam8" data-slider-id='Param8Slider' type="text" data-slider-min="-5.0"
+                        data-slider-max="20.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
+                      <span>20.0</span>
+                    </li>
+                    <li title="指定右镜腿（leg）拐点相对耳上点的左右方向位移 ">
+                      <div>右耳上点左右位移:
+                        <span id="svalEarPointOffsetX0">loading</span>
+                      </div>
+                      <span>-10.0</span>
+                      <input name="EarPointOffsetX0" class="sliderbarParam" id="sliderbarParam9" data-slider-id='Param9Slider' type="text" data-slider-min="-10.0"
+                        data-slider-max="10.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
+                      <span>10.0</span>
+                    </li>
+                    <li title="指定左镜腿（leg）拐点相对耳上点的左右方向位移 ">
+                      <div>左耳上点左右位移:
+                        <span id="svalEarPointOffsetX1">loading</span>
+                      </div>
+                      <span>-10.0</span>
+                      <input name="EarPointOffsetX1" class="sliderbarParam" id="sliderbarParam10" data-slider-id='Param10Slider' type="text" data-slider-min="-10.0"
+                        data-slider-max="10.0" data-slider-step="1.0" data-slider-value="0.0" data-slider-tooltip="hide" />
+                      <span>10.0</span>
+                    </li>
+                    <!-- <li>
+                      <div>测试:
+                        <span id="svalFrontRot1">loading</span>
+                      </div>
+                      <span>-9.0</span>
+                      <input name="FrontRot1" class="sliderbarParam" id="sliderbarParam11" data-slider-id='Param4Slider' type="text" data-slider-min="-10.0"
+                        data-slider-max="10.0" data-slider-step="1.0" data-slider-value="-4.0" data-slider-tooltip="hide" />
+                      <span>9.0</span>
+                    </li> -->
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="tabParam-msge">
+                  <div class="tab-title">
+                    刻字参数
+                  </div>
+                  <ul id="param-list-msge" class="param-list">
+                    <li>
+                      <span>鼻中刻字开关: </span>
+                      <select name="CarveBridge" id="selectParam0">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                      <button type="button" id="button-obvious">高亮显示</button>
+
+                    </li>
+                    <li>
+                      <div>铰链位刻字: </div>
+                      <input name="SlotMessage" id="textParam4" type="text" placeholder="单个字母或数字" maxlength="1" onkeyup="value=value.replace(/[^A-Za-z0-9]/g,'')"
+                        name="SlotMessage">
+                    </li>
+                    <li>
+                      <div>镜腿刻字: </div>
+                      <input name="LegMessage" id="textParam5" type="text" placeholder="四个字母或数字" maxlength="4" onkeyup="value=value.replace(/[^A-Za-z0-9]/g,'')"
+                        name="LegMessage" />
+                    </li>
+                    <li>
+                      <div>鼻中刻字: </div>
+                      <input name="BridgeMessage" id="textParam6" type="text" placeholder="四个字母或数字" maxlength="4" onkeyup="value=value.replace(/[^A-Za-z0-9]/g,'')"
+                        name="BridgeMessage" />
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="tabParam-bevel">
+                  <div class="tab-title">
+                    导角参数
+                  </div>
+                  <ul id="param-list-bevel" class="param-list">
+                    <li>
+                      <span>V&nbsp&nbsp型槽:&nbsp &nbsp </span>
+                      <select name="BevelTri" id="selectParam1">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </li>
+                    <li title="指定三角形bevel顶端的角度。角度制。默认110。 ">
+                      <div>镜片导角:
+                        <span id="svalBevelAngle">loading</span>
+                      </div>
+                      <span>90.0</span>
+                      <input name="BevelAngle" class="sliderbarParam" id="sliderbarParam11" data-slider-id='Param11Slider' type="text" data-slider-min="90.0"
+                        data-slider-max="140.0" data-slider-step="1.0" data-slider-value="110.0" data-slider-tooltip="hide"
+                      />
+                      <span>140.0</span>
+                    </li>
+                    <li title="指定bevel（三角形或四边形）的底端宽度.">
+                      <div>镜片导角宽:
+                        <span id="svalBevelWidth">loading</span>
+                      </div>
+                      <span>0.5</span>
+                      <input name="BevelWidth" class="sliderbarParam" id="sliderbarParam12" data-slider-id='Param12Slider' type="text" data-slider-min="0.5"
+                        data-slider-max="3.0" data-slider-step="0.1" data-slider-value="2.0" data-slider-tooltip="hide" />
+                      <span>3.0</span>
+                    </li>
+                    <li title="指定四边形bevel的深度。">
+                      <div>镜片导角深:
+                        <span id="svalBevelDepth">loading</span>
+                      </div>
+                      <span>0.0</span>
+                      <input name="BevelDepth" class="sliderbarParam" id="sliderbarParam13" data-slider-id='Param13Slider' type="text" data-slider-min="0.0"
+                        data-slider-max="2.0" data-slider-step="0.1" data-slider-value="0.8" data-slider-tooltip="hide" />
+                      <span>2.0</span>
+                    </li>
+                  </ul>
+                </div>
+                <button type="button" id="button-markp-disp" class="button-param">特征点</button>
+                <button type="button" id="button-marki-disp" class="button-param">标记号</button>
+                <button type="button" id="button-param-reset" class="button-param">重&nbsp&nbsp&nbsp置</button>
+                <button type="button" id="button-param-update" class="button-param">刷&nbsp&nbsp&nbsp新</button>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default" id="panelDeal">
+            <div id="remind-sub">
+              修改完了点击这里
+              <img src="images/finger.png" alt="">
+            </div>
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseDeal">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_deal.png' />
+              <div class="accordion-text">订单操作</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseDeal">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabParam" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="PARAMETER" src='images/glassclient/icon_deal.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabDeal">
+                  <div class="tab-title">
+                    订单操作
+                  </div>
+                  <ul id="slider-list-Deal">
+                    <li>
+                      <button type="button" id="button-deal-refresh">提交修改</button>
+                      <button type="button" id="button-deal-download">数&nbsp&nbsp&nbsp&nbsp据</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 个人信息 -->
+          <div class='panel panel-default'style='margin-top:0'>
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseUser">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/tubiao.png' style='margin-right:20px'/>
+              <div class="accordion-text">个人信息</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseUser">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="">
+                    <span>
+                      <a href="#tabParam" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="PARAMETER" src='images/tubiao.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabDeal">
+                  <div class="tab-title">
+                    个人信息
+                  </div>
+                  <ul id="user_list" class='user_pramas'>
+                    <li>
+                      <label>脸部宽度：</label>
+                      <input id='user_EPWidth' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>脸部长度：</label>
+                      <input id='user_FaceHeight' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>左侧脸宽：</label>
+                      <input id='user_LeftFaceWidth' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>右侧脸宽：</label>
+                      <input id='user_RightFaceWidth' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>鼻梁宽度：</label>
+                      <input id='user_NoseWidth' type="text" readonly>
+                    </li>
+                    
+                    <li>
+                      <label>鼻梁高度：</label>
+                      <input id='user_NoseHeight' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>瞳&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;距：</label>
+                      <input id='user_PupilDistance' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>镜框宽度：</label>
+                      <input id='user_FrameWidth' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>左鼻托高：</label>
+                      <input id='user_LeftNosePadHeight' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>右鼻托高：</label>
+                      <input id='user_RightNosePadHeight' type="text" readonly>
+                    </li>
+
+                    <li>
+                      <label>镜片宽度：</label>
+                      <input id='user_LensWidth' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>镜片高度：</label>
+                      <input id='user_LensHeight' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>中梁宽度：</label>
+                      <input id='user_BridgeWidth' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>镜框高度：</label>
+                      <input id='user_FrameHeight' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>左镜腿长：</label>
+                      <input id='user_LeftLegLength' type="text" readonly>
+                    </li>
+                    <li>
+                      <label>右镜腿长：</label>
+                      <input id='user_RightLegLength' type="text" readonly>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="hint">
+    <img src="images/finger1.png" alt="" width="40%">
+  </div>
+  <div id="hint-right">
+    <ul id="finger">
+      <li>
+        <img src="images/finger.png" alt="">
+      </li>
+      <li>
+        <img src="images/finger.png" alt="">
+      </li>
+      <li>
+        <img src="images/finger.png" alt="">
+      </li>
+    </ul>
+  </div>
+  <div id="box">
+  </div>
+  <div id="box-hint">
+    <div id="hint-content">点击这里能将头像模型向右转</div>
+  </div>
+  <div id="box_explain">
+    <div id="explain">
+      解释
+    </div>
+    <p>(提示：鼠标滚轮能缩放，按住右键能拖拽模型，如果不满意可以再修改刷新或重置)</p>
+  </div>
+  <script src="3rd/require/require.min.js" defer async="true" data-main="js/glassadmin/main"></script>
+  <script>
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>输入参数</title>
+    <link rel="stylesheet" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+    <script src="3rd/jquery-3.1.0.min.js"></script>
+    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="3rd/bootstrap-slider/bootstrap-slider.min.css">
+    <script src="3rd/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <script src="3rd/jcanvas/jcanvas.min.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        #content {
+            margin: 5% auto;
+        }
+
+        .two {
+            margin: 45px 0;
+        }
+
+        label {
+            margin: 15px 0;
+            text-align: right;
+        }
+
+        .row {
+            margin-top: 30px;
+            border: 1px solid #000;
+            padding: 5px;
+        }
+
+        .one {
+            margin-top: 100px;
+        }
+
+        .three {
+            margin: 25px 0;
+        }
+
+        p {
+            margin: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content" class="container">
+        <h1>输入教学参数</h1>
+        <div class="row">
+            <div class="col-md-5">
+                <div>
+                    <label for="step_one">第一步的操作提示：</label>
+                    <textarea id="step_one" class="form-control" rows="3"></textarea>
+                    <label for="explain_one">第一步的操作解释：</label>
+                    <textarea id="explain_one" class="form-control" rows="3"></textarea>
+                </div>
+
+            </div>
+
+            <label for="GenerateNosePad_val" class="col-sm-2 control-label two">是否开启鼻托：</label>
+            <div class=" col-sm-5 two">
+                <select id="GenerateNosePad_val" class="form-control">
+                    <option>true</option>
+                    <option>false</option>
+                </select>
+            </div>
+            <label for="CarveBridge_val" class="col-sm-2 control-label two">是否开启刻字：</label>
+            <div class=" col-sm-5 two">
+                <select id="CarveBridge_val" class="form-control">
+                    <option>true</option>
+                    <option>false</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div>
+                    <label for="step_two">第二步的操作提示：</label>
+                    <textarea id="step_two" class="form-control" rows="3"></textarea>
+                    <label for="explain_two">第二步的操作解释：</label>
+                    <textarea id="explain_two" class="form-control" rows="3"></textarea>
+                </div>
+
+            </div>
+            <label for="MarksOffsetX_val" class="col-sm-2 control-label one">特征点横向位移:</label>
+            <div class=" col-sm-5 one">
+                <input id="MarksOffsetX_val" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div>
+                    <label for="step_three">第三步的操作提示：</label>
+                    <textarea id="step_three" class="form-control" rows="3"></textarea>
+                    <label for="explain_three">第三步的操作解释：</label>
+                    <textarea id="explain_three" class="form-control" rows="3"></textarea>
+                </div>
+
+            </div>
+            <label for="MarksOffsetY_val" class="col-sm-2 control-label one">特征点纵向位移:</label>
+            <div class=" col-sm-5 one">
+                <input id="MarksOffsetY_val" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div>
+                        <label for="step_four">第四步的操作提示：</label>
+                        <textarea id="step_four" class="form-control" rows="3"></textarea>
+                        <label for="explain_four">第四步的操作解释：</label>
+                        <textarea id="explain_four" class="form-control" rows="3"></textarea>
+                </div>
+                
+            </div>
+            <label for="EarPointOffset_val" class="col-sm-2 control-label one">耳上点前后位移:</label>
+            <div class=" col-sm-5 one">
+                <input id="EarPointOffset_val" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div>
+                        <label for="step_five">第五步的操作提示：</label>
+                        <textarea id="step_five" class="form-control" rows="3"></textarea>
+                        <label for="explain_five">第五步的操作解释：</label>
+                        <textarea id="explain_five" class="form-control" rows="3"></textarea>
+                </div>
+               
+            </div>
+            <label for="EarPointOffsetY_val" class="col-sm-2 control-label three">耳上点上下位移:</label>
+            <div class=" col-sm-5 three">
+                <input id="EarPointOffsetY_val" class="form-control" type="text">
+            </div>
+            <label for="EarPointOffsetX0_val" class="col-sm-2 control-label three">右耳上点左右位移:</label>
+            <div class=" col-sm-5 three">
+                <input id="EarPointOffsetX0_val" class="form-control" type="text">
+            </div>
+            <label for="EarPointOffsetX1_val" class="col-sm-2 control-label three">左耳上点左右位移:</label>
+            <div class=" col-sm-5 three">
+                <input id="EarPointOffsetX1_val" class="form-control" type="text">
+            </div>
+        </div>
+        <p>
+            <button type="button" id="sub" class="btn btn-info">提交</button>
+            <a href="./glassadmin.html?deal=2d785a351e44f2b9bd8cf26bf0f84926" id="jump" class="btn btn-info">教学页面</a>
+        </p>
+    </div>
+    <script>
+        var uuid;
+        var tmp_data = {};
+        $("#sub").click(function () {
+            if (window.confirm('您确定修改提交吗？')) {
+                var step_one = $("#step_one").val(),//第一步提示
+                    step_two = $("#step_two").val(),//第二步提示
+                    step_three = $("#step_three").val(),//第三步提示
+                    step_four = $("#step_four").val(),//第四步提示
+                    step_five = $("#step_five").val(),//第五步提示
+                    explain_one=$("#explain_one").val(),//第一步提示解释
+                    explain_two=$("#explain_two").val(),//第二步提示解释
+                    explain_three=$("#explain_three").val(),//第三步提示解释
+                    explain_four=$("#explain_four").val(),//第四步提示解释
+                    explain_five=$("#explain_five").val(),//第五步提示解释
+                    GenerateNosePad_val = $("#GenerateNosePad_val").val(),//开启鼻托
+                    CarveBridge_val = $("#CarveBridge_val").val(),//开启刻字
+                    MarksOffsetX_val = $("#MarksOffsetX_val").val(),//特征点横向位移
+                    MarksOffsetY_val = $("#MarksOffsetY_val").val(),//特征点纵向位移
+                    EarPointOffset_val = $("#EarPointOffset_val").val(),//耳上点前后位移
+                    EarPointOffsetY_val = $("#EarPointOffsetY_val").val(),//耳上点上下位移
+                    EarPointOffsetX0_val = $("#EarPointOffsetX0_val").val(),//右耳上点左右位移
+                    EarPointOffsetX1_val = $("#EarPointOffsetX1_val").val();//左耳上点左右位移
+                // console.log(step_one)
+                tmp_data = {
+                    "step_one": step_one,
+                    "step_two": step_two,
+                    "step_three": step_three,
+                    "step_four": step_four,
+                    "step_five": step_five,
+                    "explain_one":explain_one,
+                    "explain_two":explain_two,
+                    "explain_three":explain_three,
+                    "explain_four":explain_four,
+                    "explain_five":explain_five,
+                    "GenerateNosePad_val": GenerateNosePad_val,
+                    "CarveBridge_val": CarveBridge_val,
+                    "MarksOffsetX_val": MarksOffsetX_val,
+                    "MarksOffsetY_val": MarksOffsetY_val,
+                    "EarPointOffset_val": EarPointOffset_val,
+                    "EarPointOffsetY_val": EarPointOffsetY_val,
+                    "EarPointOffsetX0_val": EarPointOffsetX0_val,
+                    "EarPointOffsetX1_val": EarPointOffsetX1_val
+                }
+                $.ajax({
+                    url: "/common",
+                    type: 'POST',
+                    data: {
+                        "action": "list",
+                        "type": "text",
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        uuid = data.list[0]
+                        console.log(uuid)
+                        $.ajax({
+                            url: "/common",
+                            type: "post",
+                            data: {
+                                "action": "update",
+                                "type": "text",
+                                "uuid": uuid,
+                                "content": JSON.stringify(tmp_data)
+                            },
+                            success: function (data) {
+                                if (JSON.parse(data).result == "true")
+                                    console.log(data)
+                                alert("保存成功")
+                            },
+                            error: function () {
+                                alert("更新失败")
+                            }
+                        })
+                    },
+                    error: function () {
+                        alert("false")
+                    }
+                })
+            }
+        })
+        $.ajax({
+            url: "/common",
+            type: 'POST',
+            data: {
+                "action": "list",
+                "type": "text",
+            },
+            success: function (data) {
+                var data = JSON.parse(data)
+                uuid = data.list[0]
+                console.log(uuid)
+                $.ajax({
+                    url: "/common",
+                    type: "post",
+                    data: {
+                        "action": "query",
+                        "type": "text",
+                        "uuid": uuid,
+                        "content": ""
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        if (data.result == "true") {
+                            let content = JSON.parse(data.content);
+                            console.log(content.step_one)
+                            $("#step_one").val(content.step_one);
+                            $("#step_two").val(content.step_two);
+                            $("#step_three").val(content.step_three);
+                            $("#step_four").val(content.step_four);
+                            $("#step_five").val(content.step_five);
+                            $("#explain_one").val(content.explain_one);
+                            $("#explain_two").val(content.explain_two);
+                            $("#explain_three").val(content.explain_three);
+                            $("#explain_four").val(content.explain_four);
+                            $("#explain_five").val(content.explain_five);
+                            $("#GenerateNosePad_val").val(content.GenerateNosePad_val);
+                            $("#CarveBridge_val").val(content.CarveBridge_val);
+                            $("#MarksOffsetX_val").val(content.MarksOffsetX_val);
+                            $("#MarksOffsetY_val").val(content.MarksOffsetY_val);
+                            $("#EarPointOffset_val").val(content.EarPointOffset_val);
+                            $("#EarPointOffsetY_val").val(content.EarPointOffsetY_val);
+                            $("#EarPointOffsetX0_val").val(content.EarPointOffsetX0_val);
+                            $("#EarPointOffsetX1_val").val(content.EarPointOffsetX1_val);
+                        }
+                    },
+                    error: function () {
+                        alert("更新失败")
+                    }
+                })
+            },
+            error: function () {
+                alert("false")
+            }
+        })
+    </script>
+</body>
+
+</html>

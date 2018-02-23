@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="description" content="MEIDAI">
+	<meta name="author" content="MEIDAI">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<link rel="Bookmark" href="img/favicon.ico">
+	<link rel="stylesheet" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<!-- <link rel="stylesheet" href="css/app.css">-->
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script src="3rd/jquery-3.1.0.min.js"></script>
+	<!-- <script src="js/jquery/jquery.validate.js"></script>-->
+	<!-- <script src="js/jquery/jquery.i18n.properties.js"></script>-->
+
+	<script src="js/fswear.js"></script>
+	<script src="js/scanner.js"></script>
+	<script type="text/javascript">
+
+
+/*    $(document).ready(function(){
+      function loadProperties(userLang){
+        jQuery.i18n.properties({
+          name:'strings',
+          path:'resources/i18n/',
+          mode:'map',
+          language:userLang,
+          callback: function() {
+            document.title=$.i18n.prop('string_logintitle');
+            $('#mainnav').html($.i18n.prop('string_loginnav'));
+            $('#label_pwd').html($.i18n.prop('string_pwd'));
+            $('#btn_login').val($.i18n.prop('string_login'));
+            $('#btn_forget').html($.i18n.prop('string_forget'));
+            $('#newuser').val($.i18n.prop('string_newuser'));
+            $('#before_app').html($.i18n.prop('string_beforeapp'));
+            $('#middle_app').html($.i18n.prop('string_middleapp'));
+            $('#after_app').html($.i18n.prop('string_afterapp'));
+            $('#btn_android').html($.i18n.prop('string_btnandroid'));
+            $('#btn_ios').html($.i18n.prop('string_btnios'));
+            $('#uid').attr('placeholder',$.i18n.prop('string_uidplace'));
+            $('#pwd').attr('placeholder',$.i18n.prop('string_pwdplace'));
+            $('#label_forgetuid').html($.i18n.prop('string_labelforget'));
+            $('#forgetuid').attr('placeholder',$.i18n.prop('string_uidplace'));
+            $('#btn_resetpwd').val($.i18n.prop('string_resetpwd'));
+            $('#label_resetpwd').html($.i18n.prop('string_labelresetpwd'));
+          }
+        });
+      }
+//    loadProperties(userLang);
+//    loadProperties_global(userLang);
+
+      $("#uid").change(function(){
+        $('#outtipuid').html('<div id="tipuid" class="tip_zq"></div>');
+      }).on("blur",function(){
+        var onmessage='';
+        if($(this).val()!==""&&!/.+@.+\.[a-zA-Z]{2,4}$/.test($(this).val()) ){
+          onmessage="邮箱输入不正确";
+          $("#tipuid").html(onmessage);
+        }
+
+      }).on("focus",function(){
+          onmessage="";
+          $("#tipuid").html(onmessage);
+      });
+      $("#pwd").change(function(){
+        $('#outtippwd').html('<div id="tippwd" class="tip_zq"></div>');
+        var pwd=$('#pwd').val();
+        var beg=pwd.indexOf('[');
+        var end=pwd.indexOf(']');
+        if(beg>-1 && end>beg){
+          pwd = pwd.substring(beg+2,end-1);
+        }
+        $(this).val(pwd);
+      });
+
+      $("#newuser").on('click',function(event){
+        window.location = "registration.html";
+      });
+*/
+//    $('.popup-with-form').magnificPopup({
+//      type: 'inline',
+//      preloader: false,
+//      focus: '#forgetuid',
+//
+//      // When elemened is focused, some mobile browsers in some cases zoom in
+//      // It looks not nice, so we disable it:
+//      callbacks: {
+//        beforeOpen: function() {
+//          if($(window).width() < 700) {
+//            this.st.focus = false;
+//          } else {
+//            this.st.focus = '#forgetuid';
+//          }
+//        }
+//      }
+//    });
+
+//    $("#btn_resetpwd").on('click',function(event){
+//      event.preventDefault();
+//      var uid=$('#forgetuid').val();
+//      var data={};
+//      data.action="resetpassword";
+//      var patt = /@/;
+//      if(patt.test(uid)){
+//        data.email=uid;
+//      }else{
+//        data.phone=uid;
+//      }
+//      $.ajax({
+//        url: "/user",
+//        type: 'POST',
+//        data: data,
+//        success: function(re){
+//          var re = JSON.parse(re);
+//          console.log(re);
+//          if(re.result=="true"){
+//            $('#outtipforget').html('<div id="pwdreset_ok"></div>');
+//            $('#forget_form').hide();
+//            loadProperties_okdynamic(userLang);
+//            return;
+//          }
+//          // clear all tips
+//          $('#outtipforget').html('<div id="tipforgetuid" class=""></div>');
+//          switcherror(re,"tipforget","");
+//          loadProperties_errordynamic(userLang);
+//        },
+//        error: function(error) {
+//          console.log("resetpassword: error");
+//          console.log(error);
+//        }
+//      });
+//    });
+//
+//  });//end ready
+
+//  $(function(){
+//    // user login
+//    $('#loginform').on('submit', function(event){
+//      // validation code here
+//      event.preventDefault();
+//      var uid=$('#uid').val();
+//      var pwd=$('#pwd').val();
+//      // detect mobile browser, use RegExp as a trick
+//      //if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+//      //}
+//      var data={};
+//      data.action="login";
+//      var patt = /@/;
+//      if(patt.test(uid)){
+//        data.email=uid;
+//      }else{
+//        data.phone=uid;
+//      }
+//      data.password=pwd;
+//      $.ajax({
+//        url: "/user",
+//        type: 'POST',
+//        data: data,
+//        success: function(re){
+//          var re = JSON.parse(re);
+//          console.log(re);
+//          if(re.result=="true"){
+//            setCookie_exDay("useruuid",re.uuid,1);
+//            var now=new Date();
+//            setCookie_exDay("logintime",now,1);
+//            window.location = "index.html";
+//            return;
+//          }
+//          // clear all tips
+//          $('#outtipuid').html('<div id="tipuid" class="tip_zq"></div>');
+//          $('#outtippwd').html('<div id="tippwd" class="tip_zq"></div>');
+//          $('#outtiptip').html('<div id="tiptip" class="tip_zq"></div>');
+//          switcherror(re);
+//          loadProperties_errordynamic(userLang);
+//        },
+//        error: function() {
+//          console.log("error");
+//        }
+//      });
+//      });
+//  });
+
+
+	</script>
+
+	<!-- Other JavaScript at the bottom -->
+</head>
+
+<body>
+	<div id="fsw_table">
+		<div class="fsw_td">
+			<div class="fsw_center">
+				<div id="tittle">
+					<img src="images/logo.png">
+					<p>美你所美 戴你所想</p>
+				</div>
+				<ul id="selector">
+					<li id="login" class='select_active'>扫描</li>
+					<li id="registration">注册</li>
+					<div id="move"></div>
+					<div class="clearbox"></div>
+				</ul>
+				<div id="content">
+					<form id='login_form' class='active_selected'>
+						<div class="fsw_maxbox">
+							<div class='selected'>
+								<label>
+									<div style='position:relative;overflow: hidden;'>
+										<input type="text" placeholder="手机／邮箱" class='email_or_phone panduan  form-control' />
+									</div>
+								</label>
+								<div class="fsw_juerr">
+									<span class='email_or_phone_error'></span>
+								</div>
+								<label class="login_form_userName" style='display:none;'>
+									<input type="text" value='' placeholder="用户名" class="form-control">
+								</label>
+								<div class="fsw_juerr">
+									<span class='login_form_userName_error'></span>
+								</div>
+								<label>
+									<div style='position:relative;overflow: hidden;'>
+										<input type="password" placeholder="请输入密码" class='login_password form-control' min="8" />
+									</div>
+								</label>
+								<div class="fsw_juerr">
+									<span class="login_password_error"></span>
+								</div>
+								<input class='do_login .btn' type="submit" name="确定">
+								<div class='remember' style="text-align:left;">
+									<input type="checkbox" name="">
+									<span style=''>记住我</span>
+									<span style=''>无法登陆？</span>
+								</div>
+								<div class='shejiao' style="text-align:left;">
+									<a>社交账户登陆</a>
+								</div>
+								<div class="fsw_querr">
+									<span class="glyphicon glyphicon-remove"></span>
+									<div class="fsw_querr_infor"></div>
+								</div>
+								<div class="fsw_success login_success">
+									<span class="glyphicon glyphicon-ok"></span>
+									<div class="fsw_success_infor login_success_infor"></div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<form id='registration_form'>
+						<div class="fsw_maxbox">
+							<div class='selected'>
+								<label>
+									<div style='position:relative;overflow: hidden;'>
+										<input type="text" placeholder="手机／邮箱" class='email_by_phone panduan form-control' />
+									</div>
+								</label>
+								<div class="fsw_juerr">
+									<span class='registration_error'></span>
+								</div>
+								<label style='display: none;' class="input_username ">
+									<div style='position:relative;overflow: hidden;'>
+										<input type="text" placeholder="用户名" class="registration_input_username form-control" />
+									</div>
+								</label>
+								<label>
+									<div style='position:relative;overflow: hidden;'>
+										<input type="password" class='password registration_password  form-control' placeholder="请输入密码" />
+									</div>
+								</label>
+								<div class="fsw_juerr">
+									<span class="registration_password_error"></span>
+								</div>
+								<input class='do_registration' type="submit" name="确定">
+								<div class='remember'>
+									<!--   <input type="checkbox"   name="">-->
+									<span></span>
+									<span></span>
+								</div>
+								<div class='shejiao'>
+									<a style="color: white;">社交账户登陆</a>
+								</div>
+								<div class="fsw_querr">
+									<span class="glyphicon glyphicon-remove"></span>
+									<div class="fsw_querr_infor"></div>
+								</div>
+								<div class="fsw_success registration_success">
+									<span class="glyphicon glyphicon-ok"></span>
+									<div class="fsw_success_infor registration_success_infor"></div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div id="user_login">
+						<div class="login_box1">
+							<div class="user_qiehua">
+								<i class="user_qiehua-left">
+									<img src="images/prev.png" />
+								</i>
+							</div>
+							<div class="login_userlist">
+								<p class="select_user">请选择一个用户</p>
+								<div class="fsw_box1">
+									<!--<div class="login_userlist_info">
+							<div class="login_danuser_info">
+								<div class="login_danuser_info_img">
+									<img src="img/1.jpg" />
+								</div>
+								<div class="login_danuser_info_name">
+									<p>用户1</p>
+								</div>
+							</div>
+							<div class="login_danuser_info">
+								<div class="login_danuser_info_img">
+									<img src="img/2.jpg" />
+								</div>
+								<div class="login_danuser_info_name">
+									<p>用户2</p>
+								</div>
+							</div>
+							<div class="login_danuser_info">
+								<div class="login_danuser_info_img">
+									<img src="img/3.jpg" />
+								</div>
+								<div class="login_danuser_info_name">
+									<p>用户3</p>
+								</div>
+							</div>
+						</div>-->
+									<!--<div class="login_userlist_info">
+							<div class="login_danuser_info">
+								<div class="login_danuser_info_img">
+									<img src="img/1.jpg" />
+								</div>
+								<div class="login_danuser_info_name">
+									<p>用户4</p>
+								</div>
+							</div>
+							<div class="login_danuser_info">
+								<div class="login_danuser_info_img">
+									<img src="img/1.jpg" />
+								</div>
+								<div class="login_danuser_info_name">
+									<p>用户4</p>
+								</div>
+							</div>
+						</div>-->
+								</div>
+							</div>
+							<div class="user_qiehua">
+								<i class="user_qiehua_right">
+									<img src="images/next.png" />
+								</i>
+							</div>
+						</div>
+					</div>
+					<div id="user_registration">
+						<div class="registration_box1">
+							<div class="registration_qiehua">
+								<i class="registration_qiehua-left">
+									<img src="images/prev.png" />
+								</i>
+							</div>
+							<div class="registration_userlist">
+								<div class="fsw_registration_box1">
+									<!--<div class="registration_userlist_info">
+							<div class="registration_danuser_info">
+								<div class="registration_danuser_info_img">
+									<img src="img/1.jpg" />
+								</div>
+								<div class="registration_danuser_info_name">
+									<p>用户1</p>
+								</div>
+							</div>
+							<div class="registration_danuser_info">
+								<div class="registration_danuser_info_img">
+									<img src="img/2.jpg" />
+								</div>
+								<div class="registration_danuser_info_name">
+									<p>用户2</p>
+								</div>
+							</div>
+							<div class="registration_danuser_info">
+								<div class="registration_danuser_info_img">
+									<img src="img/3.jpg" />
+								</div>
+								<div class="registration_danuser_info_name">
+									<p>用户3</p>
+								</div>
+							</div>
+						</div>
+						<div class="registration_userlist_info">
+							<div class="registration_danuser_info">
+								<div class="registration_danuser_info_img">
+									<img src="img/1.jpg" />
+								</div>
+								<div class="registration_danuser_info_name">
+									<p>用户4</p>
+								</div>
+							</div>
+							
+						</div>-->
+								</div>
+								<p class="registration_user">请确认你的用户名是否存在</p>
+								<input type="button" value="继续注册" class="registration_btn" />
+							</div>
+							<div class="registration_qiehua">
+								<i class="registration_qiehua_right ">
+									<img src="images/next.png" />
+								</i>
+							</div>
+						</div>
+					</div>
+					<div id="fsw_bj"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

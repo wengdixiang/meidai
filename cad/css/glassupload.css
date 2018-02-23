@@ -1,0 +1,264 @@
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+  padding: 0px;
+}
+
+#row-header{
+  background-color: #000;
+  height: 60px;
+}
+#logo{
+  position: absolute;
+  top: 5px;
+  left: 80px;
+}
+#login{
+  position: absolute;
+  top: 15px;
+}
+#login a{
+  font-size: 1.6em;
+  color: #fff;
+}
+
+#row-content{
+  background-color: #bbb;
+}
+#canvasDisp{
+  background-color: #bbb;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#canvas-interface{
+  list-style-type: none;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+img.canvas-interface-button{
+  position:absolute;
+}
+img.canvas-interface-button:hover{
+  cursor: pointer;
+}
+#camera-up-button{
+  top:0px;
+  left: 50px;
+}
+#camera-front-button{
+  top:80px;
+  left: 50px;
+}
+#camera-left-button{
+  top:40px;
+  left: 0px;
+}
+#camera-right-button{
+  top:40px;
+  left: 100px;
+}
+#head-hide-button{
+  top:40px;
+  left:50px;
+}
+#loadprogress{
+  position: absolute;
+  top: 240px;
+  left: 550px;
+  display: none;
+}
+#loadprogressPercent {
+  font-size: 1.5em;
+  font-weight: bold;
+  position: absolute;
+  left: 110px;
+  top: 110px;
+  color: #000;
+}
+#loadprogressMessage {
+  font-size: 2.5em;
+  font-weight: bold;
+  position: absolute;
+  left: 60px;
+  top: 200px;
+  color: #eee;
+}
+#updateprogress{
+  position: absolute;
+  top: 340px;
+  left: 600px;
+  display: none;
+}
+#updateprogressPercent {
+  font-size: 2.5em;
+  color: #eee;
+}
+#updateprogressMessage {
+  font-size: 2.5em;
+  color: #eee;
+}
+
+#interface{
+  position: absolute;
+  top: 87px;
+  right: 15px;
+}
+#accordionArea{
+  background-color: #eeeeee;
+  border-radius: 5px;
+  height:840px;
+}
+div.accordion-heading{
+  background-image: url(../images/glassclient/panel_hdbkg_normal.png);
+}
+div.accordion-heading:hover{
+  cursor: pointer;
+  background-image: url(../images/glassclient/panel_hdbkg_hover.png);
+  color: #ffffff;
+}
+#toggled{
+  background-image: url(../images/glassclient/panel_hdbkg_toggled.png);
+  pointer-events: none;
+}
+img.accordion-arrow{
+  float: left;
+  margin-right:10px;
+}
+img.accordion-icon{
+  float: right;
+}
+div.accordion-text{
+  font-size: 21px;
+  font-weight: bold;
+  padding: 7px;
+}
+div.accordion-body{
+  border-bottom: 1px solid white;
+  background-color: #eeeeee;
+}
+ul.nav li{
+  margin: 5px 5px 5px 0px;
+}
+li.nav-selected{
+  background-color: #ffffff;
+  pointer-events: none;
+}
+div.pills-left{
+  position: absolute;
+}
+div.tab-title{
+  padding-top: 20px;
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: bold;
+}
+div.tab-content{
+  margin-left: 52px;
+  padding-bottom: 20px;
+  text-align: center;
+  border-left: 1px solid white;
+}
+ul.scroll-list{
+  height: 360px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+div.scroll-up{
+  border-bottom: 1px solid white;
+  display: none;
+}
+#scroll-up-Fdesign{
+  pointer-events: none;
+}
+#scroll-up-Fdesign:hover{
+  cursor: pointer;
+}
+div.scroll-down{
+  border-top: 1px solid white;
+  display: none;
+}
+#scroll-down-Fdesign:hover{
+  cursor: pointer;
+}
+ul.design-list{
+  list-style-type: none;
+  overflow: hidden;
+  padding-left: 50px;
+  margin-bottom: 0px;
+}
+ul.design-list li{
+  float: left;
+  margin: 10px;
+}
+ul.design-list li:hover{
+  cursor: pointer;
+}
+#Fdesign-selected, #Ldesign-selected{
+  background-color: #cccccc;
+}
+ul.color-list{
+  list-style-type: none;
+  overflow: hidden;
+  padding-left: 20px;
+  margin-bottom: 0px;
+}
+ul.color-list li{
+  float: left;
+  margin: 8px 6px 8px 6px;
+}
+ul.color-list li:hover{
+  cursor: pointer;
+}
+img.Fcolor-png, img.Lcolor-png{
+  visibility: hidden;
+}
+#Fcolor-selected, #Lcolor-selected{
+  visibility: visible;
+}
+#canvasPreview{
+  border: 1px solid black;
+  background-image: url(../images/glassclient/face_female.png);
+}
+#slider-list-Param{
+  list-style-type: none;
+  margin-bottom: 0px;
+}
+#slider-list-Param li{
+  margin-top: 20px;
+  margin-right: 40px;
+}
+#Param0Slider .slider-selection,
+#Param1Slider .slider-selection{
+  background: #BABABA;
+}
+#button-param-reset,#button-param-update{
+  width: 100px;
+  height: 36px;
+  color: #000;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px;
+}
+#slider-list-Deal{
+  list-style-type: none;
+  margin-bottom: 0px;
+}
+#slider-list-Deal li{
+  margin-top: 20px;
+  margin-right: 40px;
+}
+#button-deal-submit{
+  width: 100px;
+  height: 36px;
+  color: #000;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px;
+}
+
+
+

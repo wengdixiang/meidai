@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Glass Client</title>
+  <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+  <link rel="stylesheet" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+  <script src="3rd/jquery-3.1.0.min.js"></script>
+  <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="3rd/bootstrap-slider/bootstrap-slider.min.css">
+  <script src="3rd/bootstrap-slider/bootstrap-slider.min.js"></script>
+  <script src="3rd/jcanvas/jcanvas.min.js"></script>
+  <link rel="stylesheet" href="css/glassclient.css">
+  <script src="3rd/three/three.min.js"></script>
+  <script src="3rd/three/OrbitControls.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row" id="row-header">
+      <div class="col-xs-9">
+        <img id="logo" src='images/glassclient/logo.png' />
+      </div>
+      <div class="col-xs-3">
+        <div id="login">
+
+        </div>
+      </div>
+    </div>
+    <div class="row" id="row-content">
+      <div class="col-xs-9" id="display">
+        <canvas id="canvasDisp" width="800" height="800"></canvas>
+        <div id="canvas-interface">
+          <img class="canvas-interface-button" id="camera-up-button" src='images/glassclient/button_camera_up.png' />
+          <img class="canvas-interface-button" id="camera-front-button" src='images/glassclient/button_camera_front.png' />
+          <img class="canvas-interface-button" id="camera-left-button" src='images/glassclient/button_camera_left.png' />
+          <img class="canvas-interface-button" id="camera-right-button" src='images/glassclient/button_camera_right.png' />
+
+          <img class="canvas-interface-button" id="head-hide-button" src='images/glassclient/head_effect_hide.png' />
+        </div>
+        <div id="loadprogress">
+          <img id="loadprogressImage" src='images/glassclient/loadprogress.gif' />
+          <div id="loadprogressPercent">
+            0%
+          </div>
+          <div id="loadprogressMessage">
+            Loading
+          </div>
+        </div>
+        <div id="updateprogress">
+          <div id="updateprogressPercent">
+            &nbsp&nbsp&nbsp&nbsp&nbsp0%
+          </div>
+          <div id="updateprogressMessage">
+            读取数据...
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3" id="interface">
+        <div class="panel-group" id="accordionArea">
+          <div class="panel panel-default" id="panelFrame">
+            <div class="accordion-heading" id="toggled" data-toggle="collapse" data-parent="#accordionArea" href="#collapseFrame">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_selected.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_frame.png' />
+              <div class="accordion-text">镜框设置</div>
+            </div>
+            <div class="accordion-body collapse in" id="collapseFrame">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabFrameDesign" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="DESIGN" src='images/glassclient/icon_frame.png' />
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#tabFrameColor" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="COLOR" src='images/glassclient/icon_color.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabFrameDesign">
+                  <div class="tab-title">
+                    镜框设计
+                  </div>
+                  <div class="scroll-up">
+                    <img class="scroll-up-png" id="scroll-up-Fdesign" src='images/glassclient/scrollup_disabled.png' />
+                  </div>
+                  <ul class="design-list scroll-list" id="Fdesign-list">
+
+                  </ul>
+                  <div class="scroll-down">
+                    <img class="scroll-down-png" id="scroll-down-Fdesign" src='images/glassclient/scrolldown_normal.png' />
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="tabFrameColor">
+                  <div class="tab-title">
+                    镜框色彩
+                  </div>
+                  <ul class="color-list" id="Fcolor-list">
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default" id="panelLeg">
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseLeg">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_leg.png' />
+              <div class="accordion-text">镜腿设置</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseLeg">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabLegDeisign" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="DESIGN" src='images/glassclient/icon_leg.png' />
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#tabLegColor" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="COLOR" src='images/glassclient/icon_color.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabLegDeisign">
+                  <div class="tab-title">
+                    镜腿设计
+                  </div>
+                  <div class="scroll-up">
+                    <img class="scroll-up-png" id="scroll-up-Ldesign" src='images/glassclient/scrollup_disabled.png' />
+                  </div>
+                  <ul class="design-list" id="Ldesign-list">
+
+                  </ul>
+                  <div class="scroll-down">
+                    <img class="scroll-down-png" id="scroll-down-Ldesign" src='images/glassclient/scrolldown_normal.png' />
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="tabLegColor">
+                  <div class="tab-title">
+                    镜腿色彩
+                  </div>
+                  <ul class="color-list" id="Lcolor-list">
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default" id="panelParam">
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseParam">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_param.png' />
+              <div class="accordion-text">参数设置</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseParam">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabParam" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="PARAMETER" src='images/glassclient/icon_param.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabParam">
+                  <div class="tab-title">
+                    参数调整
+                  </div>
+                  <ul id="slider-list-Param">
+                    <li>
+                      <canvas id="canvasPreview" width="320" height="160"></canvas>
+                    </li>
+                    <li>
+                      <span>镜宽比: </span>
+                      <input class="sliderbarParam" id="sliderbarParam0" data="0.8" data-slider-id='Param0Slider' data-slider-tooltip="hide" type="text"
+                        data-slider-min="0.7" data-slider-max="1.0" data-slider-step="0.02" data-slider-value="0.8" />
+                    </li>
+                    <li>
+                      <span>鼻中宽: </span>
+                      <input class="sliderbarParam" id="sliderbarParam1" data="0.4" data-slider-id='Param1Slider' data-slider-tooltip="hide" type="text"
+                        data-slider-min="0.1" data-slider-max="0.8" data-slider-step="0.05" data-slider-value="0.4" />
+                    </li>
+                    <li>
+                      <button type="button" id="button-param-reset">重&nbsp&nbsp&nbsp&nbsp置</button>
+                      <button type="button" id="button-param-update">更&nbsp&nbsp&nbsp&nbsp新</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default" id="panelDeal">
+            <div class="accordion-heading" data-toggle="collapse" data-parent="#accordionArea" href="#collapseDeal">
+              <img class="accordion-arrow" src='images/glassclient/panel_arrow_hidden.png' />
+              <img class="accordion-icon" src='images/glassclient/panel_heading_deal.png' />
+              <div class="accordion-text">订单操作</div>
+            </div>
+            <div class="accordion-body collapse" id="collapseDeal">
+              <div class="pills-left">
+                <ul class="nav">
+                  <li class="nav-selected">
+                    <span>
+                      <a href="#tabParam" data-toggle="pill">
+                        <img data-toggle="tooltip" data-placement="left" title="PARAMETER" src='images/glassclient/icon_deal.png' />
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="tabDeal">
+                  <div class="tab-title">
+                    订单操作
+                  </div>
+                  <ul id="slider-list-Deal">
+                    <li>
+                      <button type="button" id="button-deal-submit">下&nbsp&nbsp&nbsp&nbsp单</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="3rd/require/require.min.js" defer async="true" data-main="js/glassclient/main"></script>
+</body>
+
+</html>
