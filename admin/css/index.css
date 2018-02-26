@@ -234,7 +234,10 @@ label{
 }
 .user_photo>img{
 	border-radius: 35px;
-	position: absolute;
+    position: absolute;
+    right:-25%;
+    /* top:20px; */
+    width:150%;
 }
 
 
@@ -793,12 +796,15 @@ label{
                 width:100%;
             }
             .user_photo{
-                width:100%;
+                width:60%;
                 height:100%;
+                left:20%;
             }
             .user_photo>img{
-                width:70%;
+                width:150%;
                 position:relative;
+              top:0;
+              right:30%;
             }
             .glass{
                 float:left;
@@ -822,4 +828,11 @@ label{
             .glass_userprice>label{
                 width:50%;
             }
+            .particular_schedule b{
+                font-size:12px;
+            }
+            #log_list>div{
+                font-size:12px;
+            }
+
         }

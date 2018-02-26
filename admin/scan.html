@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
     <script src="3rd/jquery-3.1.0.min.js"></script>
     <!-- <script src="3rd/jquery.min.js"></script> -->
-    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>  
+    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>
     <!-- <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.js"></script> -->
     <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.min.js"></script>
     <script src="js/fswear.js"></script>
@@ -28,15 +29,16 @@
     <script src="js/top.js"></script>
     <script src="js/nav_left.js"></script>
     <style>
-        #adjust{
-            width:80px;
-            height:20px;
-            font-size:12px;
-            line-height:20px;
+        #adjust {
+            width: 80px;
+            height: 20px;
+            font-size: 12px;
+            line-height: 20px;
             display: inline-block;
         }
-    </style>    
+    </style>
 </head>
+
 <body>
     <!-- 顶部 -->
     <div class='top'></div>
@@ -54,10 +56,10 @@
         </div>
         <div class='timezone'>
             <select id="dropdown_list_year">
-                <option value ="">-- 选择年 --</option>
+                <option value="">-- 选择年 --</option>
             </select>
             <select id="dropdown_list_month">
-                <option value ="">-- 选择月 --</option>
+                <option value="">-- 选择月 --</option>
             </select>
             <button id='determine_the_time' class='btn_info btn-sm'>确定</button>
         </div>
@@ -67,7 +69,7 @@
                 <table id="table_id_example">
                     <thead>
                         <tr>
-                            <th>序号</th>             
+                            <th>序号</th>
                             <th>姓名</th>
                             <th>手机</th>
                             <th>邮箱</th>
@@ -75,11 +77,11 @@
                             <th>订单详情</th>
                             <th>调整及下单</th>
                             <th>order_list</th>
-                        </tr>      
+                        </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
-               
+
             </div>
             <!-- 当没有证书时的显示 -->
             <div id='prompt_messagea'>
@@ -88,27 +90,28 @@
                 <p>2. 您没有有效的证书。</p>
             </div>
             <!-- 当没有证书时的显示 END-->
-            <div class='versions'>meidai &copy; 2016</div>            
+            <div class='versions'>meidai &copy; 2016</div>
         </div>
     </div>
     <script>  
         /* 年的下拉列表 */
         var year = new Date().getFullYear();
-        for(var i=0;i<=year-2015; i++){
-            var tmp_year = 2015+i; 
-            $('#dropdown_list_year').append('<option value="'+tmp_year+'">'+tmp_year+'年</option>');
+        for (var i = 0; i <= year - 2015; i++) {
+            var tmp_year = 2015 + i;
+            $('#dropdown_list_year').append('<option value="' + tmp_year + '">' + tmp_year + '年</option>');
         }
         /* 月的下拉列表 */
-        for( var i=1;i<=12;i++){
-            $('#dropdown_list_month').append('<option value="'+i+'">'+i+'月</option>');
+        for (var i = 1; i <= 12; i++) {
+            $('#dropdown_list_month').append('<option value="' + i + '">' + i + '月</option>');
         }
 
-        $('#recently_hebdomad').css('background','#1FB3F0')
-                            .attr('index','active');
-        $('.order_data button').click(function(){
-            $(this).css("background","#1FB3F0").siblings().css("background","");
-             $(this).attr('index','active').siblings().attr('index','');
+        $('#recently_hebdomad').css('background', '#1FB3F0')
+            .attr('index', 'active');
+        $('.order_data button').click(function () {
+            $(this).css("background", "#1FB3F0").siblings().css("background", "");
+            $(this).attr('index', 'active').siblings().attr('index', '');
         })
     </script>
 </body>
+
 </html>
