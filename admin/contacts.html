@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>订单管理-美戴</title>
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fswear.css">
+    <link rel="stylesheet" type="text/css" href="css/contacts.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <script src="3rd/jquery-3.1.0.min.js"></script>
+    <!-- <script src="3rd/jquery.min.js"></script> -->
+    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>
+    <script src="3rd/pako/pako_inflate.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.min.js"></script>
+    <script src="js/fswear.js"></script>
+
+    <script src="js/pinyin.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/top.js"></script>
+    <script src="js/nav_left.js"></script>
+    <!-- <script src="js/download.js"></script> -->
+
+    <style>
+        /* 新建 */
+        #new_contacts {
+            margin: 20px;
+            text-align: center;
+        }
+
+        #new_box {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            display: none;
+        }
+
+        #new_center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            width: 300px;
+            height: 250px;
+            padding: 20px;
+            border-radius: 10px;
+
+        }
+
+        #new_center h3 {
+            margin: 20px 0;
+        }
+        .add_contacts{
+            margin-bottom:20px;
+        }
+        /* 更新 */
+
+        #update_box {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            display: none;
+        }
+
+        #update_center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            width: 300px;
+            height: 250px;
+            padding: 20px;
+            border-radius: 10px;
+
+        }
+
+        #update_center h3 {
+            margin: 20px 0;
+        }
+        #apply_close {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            z-index: 5;
+            cursor: pointer;
+        }
+        #apply_close1 {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            z-index: 5;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶部 -->
+    <div class='top'></div>
+    <!-- 顶部 END -->
+    <div class='content'>
+        <!-- 左侧导航栏 -->
+        <div class='nav-left'></div>
+        <!-- 左侧导航栏 END -->
+        <!-- 内容的右侧 -->
+        <div class='message'>
+            <!-- 用户商家证书的界面 -->
+            <div id="new_contacts">
+                <button class="btn_info add_contacts btn">添加联系人</button>
+                <!-- 添加联系人 -->
+                <div id="new_box">
+                    <div id="new_center">
+                        <span id="apply_close" class='glyphicon glyphicon-remove'></span>
+                        <h3>添加申请</h3>
+                        <p class="form-group">
+                            <input id="new_name" type="text" class="form-control" placeholder="联系人">
+                        </p>
+                        <!-- <p class="form-group">
+                            <input id="new_phone" type="text" class="form-control" placeholder="手机号">
+                        </p> -->
+                        <p class="form-group">
+                            <input id="new_email" type="text" class="form-control" placeholder="邮箱">
+                        </p>
+                        <p class="form-group">
+                            <button class="btn btn_info add_btn">确认提交</button>
+                        </p>
+                    </div>
+                </div>
+                <!-- 更新联系人 -->
+                <div id="update_box">
+                    <div id="update_center">
+                        <span id="apply_close1" class='glyphicon glyphicon-remove'></span>
+                        <h3>更新联系人</h3>
+                        <p class="form-group">
+                            <input id="update_name" type="text" class="form-control" placeholder="联系人">
+                        </p>
+                        <!-- <p class="form-group">
+            <input id="new_phone" type="text" class="form-control" placeholder="手机号">
+        </p> -->
+                        <p class="form-group">
+                            <input id="update_email" type="text" class="form-control" placeholder="邮箱">
+                        </p>
+                        <p class="form-group">
+                            <button class="btn btn_info update_btn">确认提交</button>
+                        </p>
+                    </div>
+                </div>
+                <div class='data-table'>
+                    <table id="table_id_example">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>联系人</th>
+                                <th>邮箱</th>
+                                <th>修改</th>
+                                <th>删除</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <!-- 管理其它商家的界面 -->
+
+                <!-- 当没有证书时的显示 -->
+                <div id='prompt_messagea'>
+                    <h1>您无法操作。可能的原因：</h1>
+                    <p>1. 您没有使用 HTTPS 访问。</p>
+                    <p>2. 您没有有效的证书。</p>
+                </div>
+                <!-- 当没有证书时的显示 END-->
+                <div class='versions'>meidai &copy; 2016</div>
+            </div>
+        </div>
+        <script>  
+
+
+        </script>
+</body>
+
+</html>

@@ -143,7 +143,7 @@ $(function () {
     var tmp_list = {
       "action": "query",
       "uuid": JSON.stringify(cert_list),
-      "email": "",
+      // "email": "",
       "phone": "",
       "qq": "",
       "fullname": "",
@@ -156,6 +156,7 @@ $(function () {
       "officehour": "",
       "contactname": "",
       "status": "",
+      "notifieremail":""
     }
     $.ajax({
       type: "post",
@@ -178,6 +179,7 @@ $(function () {
               data[i].fullname,
               format_time(data[i].validdate),
               data[i].phone,
+              data[i].notifieremail,
               "<button class='btn-sm del btn_info' data=" + i + ">吊销证书</button>",
               "<button class='btn-sm update btn_info' data=" + i + ">修改资料</button>"
 
@@ -233,16 +235,16 @@ $(function () {
   });
 
   //修改资料
-  var certUuid="";
+  var certUuid = "";
   $("#table_id_example").on("click", "button.update", function () {
     console.log($(this).attr("data"));
     $("#update_user").fadeIn();
     // let tmp_uuid = $(this).attr("data")
-    certUuid= $(this).attr("data")
+    certUuid = $(this).attr("data")
     let tmp_list = {
       "action": "query",
       "uuid": certUuid,
-      "email": "",
+      // "email": "",
       "phone": "",
       "qq": "",
       "fullname": "",
@@ -254,6 +256,7 @@ $(function () {
       "signdate": "",
       "officehour": "",
       "contactname": "",
+      "notifieremail":"",
       // "status": "",
     }
     $.ajax({
@@ -266,7 +269,7 @@ $(function () {
         if (data.result == 'true') {
           $("#update_name").val(data.contactname),
             $("#update_phone").val(data.phone),
-            $("#update_email").val(data.email),
+            $("#update_email").val(data.notifieremail),
             $("#update_qq").val(data.qq),
             $("#update_fullname").val(data.fullname),
             $("#update_shortname").val(data.shortname),
@@ -281,7 +284,7 @@ $(function () {
     })
   })
   // 点击修改
-  $("#update_submint").click(function(){
+  $("#update_submint").click(function () {
     var update_name = $("#update_name").val(),
       update_phone = $("#update_phone").val(),
       update_email = $("#update_email").val(),
@@ -291,32 +294,33 @@ $(function () {
       update_address = $("#update_address").val(),
       update_zipcode = $("#update_zipcode").val(),
       update_open = $("#update_open").val();
-      let tmp_data = {
-        "action": "update",
-        "uuid": certUuid,
-        "phone": update_phone,
-        "qq": update_qq,
-        "fullname": update_fullname,
-        "shortname": update_shortname,
-        "address": update_address,
-        "zipcode": update_zipcode,
-        "officehour": update_open,
-        "contactname": update_name
-      };
-      console.log(tmp_data)
-      $.ajax({
-        type: "post",
-        url: "/cert",
-        data: tmp_data,
-        success: function (data){
-          if(JSON.parse(data).result=="true"){
-            alert("修改成功")
-          }else{
-            alert("修改失败")
-          }
-        },
-        error:function(){}
-      })
+    let tmp_data = {
+      "action": "update",
+      "uuid": certUuid,
+      "phone": update_phone,
+      "qq": update_qq,
+      "notifieremail":update_email,
+      "fullname": update_fullname,
+      "shortname": update_shortname,
+      "address": update_address,
+      "zipcode": update_zipcode,
+      "officehour": update_open,
+      "contactname": update_name
+    };
+    console.log(tmp_data)
+    $.ajax({
+      type: "post",
+      url: "/cert",
+      data: tmp_data,
+      success: function (data) {
+        if (JSON.parse(data).result == "true") {
+          alert("修改成功")
+        } else {
+          alert("修改失败")
+        }
+      },
+      error: function () { }
+    })
   })
   $("#update_close").click(function () {
     $("#update_user").fadeOut();
@@ -357,18 +361,18 @@ $(function () {
       xhr.responseType = "arraybuffer";
       xhr.onload = function () {
         if (xhr.status === 200) {
-          var downloadFile = function(mobileCode) {
-               
-            var file = new File([mobileCode], "cert.tar.gz", { type: "text/plain;charset=utf-8" });
+          var downloadFile = function (mobileCode) {
+
+            var file = new File([mobileCode], "cert.tar.gz", { type: "application/octet-binary" });
             saveAs(file);
-            console.log(file)
-        }
-        console.log(xhr.response)
-        downloadFile(xhr.response)
+            // console.log(file)
+          }
           var arraybuffer = xhr.response,
             bytes = new Uint8Array(arraybuffer);
           dataUint8 = pako.inflate(bytes);
-          //console.log(dataUint8)
+          console.log(arraybuffer)
+          console.log(bytes)
+          downloadFile(bytes)
           for (var offset = 0, len = dataUint8.length; offset < len; offset += 512) {
             var tempfilename = "";
             for (var i = 0; i < 31; ++i) {
@@ -443,39 +447,26 @@ $(function () {
         var formdata = new FormData();
         formdata.append('file', $("input#uploadify")[0].files[0]);
         formdata.append('certtype', "p12");
-        formdata.append('passphrase', password)
-        $.ajax({
-          url: "/cert?action=renew",
-          type: "POST",
-          processData: false,
-          contentType: false,
-          enctype: "multipart/form-data",
-          data: formdata,
-          cache: false,
-          success: function (response) {
-            // var res=JSON.parse(response)
-            console.log(response)
-            var downloadFile = function(mobileCode) {
-               
-              var file = new File([mobileCode], "cert.tar.gz", { type: "application/vnd.ms-excel" });
-              saveAs(file);
-              console.log(file)
+        formdata.append('passphrase', password);
+        let url = "/cert?action=renew",
+        xhr = new XMLHttpRequest();
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.addEventListener("error", uploadFailed, false);
+        xhr.open("POST", url);
+        xhr.responseType = "arraybuffer";
+        xhr.send(formdata);
+        function uploadComplete(evt) {
+          console.log(xhr.response)
+          var downloadFile = function (mobileCode) {
+            var file = new File([mobileCode], "cert.tar.gz", { type: "application/octet-binary" });
+            saveAs(file);
           }
-            downloadFile(response)
-            // doSave(response,"application/octet-stream", "cert.tar.gz")
-             doSave(response,"application/vnd.ms-excel", "cert.tar.gz")
-            // if(res.result=="true"){
-            //   alert("续期成功");
-            // }else{
-            //   alert("续期失败！可能原因:密码错误,证书格式不正确!");
-            // }
-            $("#uploadify").val("");
-            $("#credential_password").val("")
-          },
-          error: function () {
-            console.log("flase")
-          }
-        })
+          let bytes = new Uint8Array(xhr.response);
+          downloadFile(bytes)
+        }
+        function uploadFailed(evt) {
+          alert("上传失败");
+        }
       } else {
         alert("密码不能为空");
       }

@@ -9,6 +9,7 @@ function certificate_none() {
     $('#credential_info').css('display', 'none');
     $('#credential_all').css('display', 'none');
     $('#credential_list').css('display', 'none');
+    // $('#new_contacts').css('display', 'none');
 
 }
 
