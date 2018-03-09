@@ -42,6 +42,7 @@
     <script src="js/index.js"></script>
     <!-- <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.js"></script> -->
     <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="3rd/paging.js"></script>
     <script src="js/index-data.js"></script>
     <script src="js/top.js"></script>
     <script src="js/nav_left.js"></script>
@@ -116,13 +117,85 @@
         /* #determine_the_time{
              margin-left:130px;
        }*/
-       #teach{
-           /* padding:3px 10px; */
-           width: 100px;
-       }
-       #teach a{
-           color:#f2f2f2;
-       }
+
+        #teach {
+            /* padding:3px 10px; */
+            width: 100px;
+        }
+
+        #teach a {
+            color: #f2f2f2;
+        }
+
+        #table_id_example_paginate {
+            display: none;
+        }
+
+        #foot {
+            width: 100%;
+            /* height: 50px; */
+            background-color: #fff;
+
+        }
+
+        /* .pagination {
+            margin: 0;
+        }
+
+        nav {
+            text-align: center;
+            background-color: #31ADEB;
+            height: 36px; */
+
+        /* } */
+
+        /* 分页 */
+
+        #page {
+            text-align:center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 15px;
+            font-family: "microsoft yahei";
+            color: #666666;
+            margin-right: 10px;
+            padding-left: 20px;
+            box-sizing: border-box;
+        }
+
+        .page_div a {
+            min-width: 30px;
+            height: 28px;
+            border: 1px solid #dce0e0;
+            text-align: center;
+            margin: 0 4px;
+            cursor: pointer;
+            line-height: 28px;
+            color: #666666;
+            font-size: 13px;
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        #firstPage,
+        #lastPage {
+            width: 50px;
+            color: #0073A9;
+            border: 1px solid #0073A9!important;
+        }
+
+        #prePage,
+        #nextPage {
+            width: 70px;
+            color: #0073A9;
+            border: 1px solid #0073A9!important;
+        }
+
+        .page_div .current {
+            background-color: #0073A9;
+            border-color: #0073A9;
+            color: #FFFFFF;
+        }
     </style>
 </head>
 
@@ -180,9 +253,9 @@
             </select>
             <button id='determine_the_time' class='btn_info btn-sm'>确定</button>
             <button class="btn_info btn-sm" id="teach">
-                <a href="../cad/glassadmin.html?deal=2d785a351e44f2b9bd8cf26bf0f84926" >模型调整教学</a>
+                <a href="">模型调整教学</a>
             </button>
-            
+
 
         </div>
         <!-- 内容的右侧 -->
@@ -210,7 +283,39 @@
                     </thead>
                     <tbody></tbody>
                 </table>
+                <div id="foot">
+                    <div id="page" class="page_div"></div>
+                    <!-- <nav>
+                        <ul class="pagination" id="page_list">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
 
+                        </ul>
+                    </nav> -->
+                </div>
             </div>
 
             <!-- 当没有证书时的显示 -->
@@ -584,18 +689,22 @@
             return new Date($.ajax({ async: false }).getResponseHeader("Date"));
         }
         console.log(getDate())
-        // /*商家下拉表*/
-        // $("#certificate").focus(function(){
-        //     $(this).attr("size",5);
-        // }).blur(function(){
-        //     $(this).removeAttr("size")
-        // })
-        // $("#certificate").on("click","option",function(e){
-        //     e.stopPropagation();
-        //     $(this).parent().removeAttr("size").blur();
+        //跳转教学页面
+        goteach()
+        function goteach() {
 
-        // });
+            let src = window.location.host
+            if (src == "leixing.fswear.local") {
+                $("#teach a").attr("href", "../cad/glassadmin.html?deal=2d785a351e44f2b9bd8cf26bf0f84926")
+            } else {
+                $("#teach a").attr("href", "../cad/glassadmin.html?deal=5cae6d62e944c9bf576bb416ac04ab86")
+            }
+            let teach = $("#teach a").attr("href");
+            console.log(teach)
+            console.log(src)
+        }
 
+      
 
         //查看详情进度
 

@@ -375,9 +375,10 @@ table.dataTable{
 	
 	}
 	.nav-left li{
-		width: 33%;
+		width: 25%;
 		float: left;
 		line-height:45px;
+		text-align:center;
 		height:45px;
 		border-bottom:none;
 	}
@@ -388,6 +389,7 @@ table.dataTable{
 		font-size:14px;
 		top:0;
 		left:44px;
+		display: none;
 	}
 	.top-left{
 		min-width:0;

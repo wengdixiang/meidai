@@ -18,7 +18,10 @@ $.fn.extend({
             + "<li id='contacts'>"
             + "<img src='images/contacts.png'>"
             + "<a href='contacts.html'>联系列表</a>"
-            // +"<a href='javascript:window.open('','_parent','');window.close();'>退 &nbsp;&nbsp;&nbsp;&nbsp; 出</a>"
+            + "</li>"
+            + "<li id='order-page'>"
+            + "<img src='images/contacts.png'>"
+            + "<a href='order.html'>预约列表</a>"
             + "</li>"
             + "</ul>"
         );

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>订单管理-美戴</title>
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fswear.css">
+    <link rel="stylesheet" type="text/css" href="css/credential.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <script src="3rd/jquery-3.1.0.min.js"></script>
+    <!-- <script src="3rd/jquery.min.js"></script> -->
+    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>
+    <script src="3rd/pako/pako_inflate.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.min.js"></script>
+    <script src="js/fswear.js"></script>
+
+    <script src="js/pinyin.js"></script>
+    <!-- <script src="js/credential.js"></script> -->
+    <script src="js/top.js"></script>
+    <script src="js/nav_left.js"></script>
+    <script src="js/download.js"></script>
+    <style>
+        #center {
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        #update_user {
+            width: 400px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        #update_close {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+        }
+
+        #user_uuid {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 10px;
+        }
+
+        button {}
+    </style>
+</head>
+
+<body>
+    <div id="center">
+        <!-- <p>国家
+            <input id="country" type="text">
+        </p>
+        <p>省份
+            <input id="province" type="text">
+        </p>
+        <p>城市
+            <input id="city" type="text">
+        </p>
+        <p>邮箱
+            <input id="email" type="text">
+        </p>
+        <p>密码
+            <input id="password" type="text">
+        </p>
+        <p>旧证书名字</p>
+        <input id="identifier" type="text">
+        </p>
+        <p>
+            <button class="btn btn_info">提交</button>
+        </p> -->
+        <div id="user_uuid">
+            <p class="form-group">
+                <input id="update_uuid" type="text" class="form-control" placeholder="旧证书ID">
+            </p>
+            <p>
+                <button id="update_btn" class="btn_info btn">下载商家证书</button>
+            </p>
+        </div>
+        <div id="update_user">
+            <span id="update_close" class='glyphicon glyphicon-remove'></span>
+            <div id="update_input">
+                <h3>修改</h3>
+                <p class="form-group">
+                    <input id="update_name" type="text" class="form-control" placeholder="联系人">
+                </p>
+                <p class="form-group">
+                    <input id="update_phone" type="text" class="form-control" placeholder="手机号">
+                </p>
+                <p class="form-group">
+                    <input id="update_email" type="text" class="form-control" placeholder="邮箱">
+                </p>
+                <p class="form-group">
+                    <input id="update_qq" type="text" class="form-control" placeholder="QQ号">
+                </p>
+                <p class="form-group">
+                    <input id="update_fullname" type="text" class="form-control" placeholder="商家全称">
+                </p>
+                <p class="form-group">
+                    <input id="update_shortname" type="text" class="form-control" placeholder="商家简称">
+                </p>
+                <!-- <p class="form-group">
+                        <select name="" id="update_country">
+                             <option value="">选择国家</option>
+                            <option value="CN">中国</option>
+                             <option value="JP">日本</option>
+                                <option value="US">美国</option> 
+                        </select>
+                        <select name="" id="update_province">
+                            <option value="">选择省份</option>
+                        </select>
+                        <select name="" id="update_city">
+                            <option value="">选择城市</option>
+                        </select>
+                    </p> -->
+
+
+                <p class="form-group">
+                    <input id="update_country" type="text" class="form-control" placeholder="国家">
+                </p>
+                <p class="form-group">
+                    <input id="update_province" type="text" class="form-control" placeholder="省份">
+                </p>
+                <p class="form-group">
+                    <input id="update_city" type="text" class="form-control" placeholder="城市">
+                </p>
+                <p class="form-group">
+                    <input id="update_address" type="text" class="form-control" placeholder="所在街道地址">
+                </p>
+                <p class="form-group">
+                    <input id="update_zipcode" type="text" class="form-control" placeholder="邮政编码">
+                </p>
+                <p class="form-group">
+                    <input id="update_open" type="text" class="form-control" placeholder="营业时间">
+                </p>
+                <p class="form-group">
+                    <input id="update_identifier" type="text" class="form-control" placeholder="旧证书id">
+                </p>
+                <p class="form-group">
+                    <input id="update_password" type="text" class="form-control" placeholder="旧证书密码">
+                </p>
+                <p>
+                    <button id="update_submint" class="btn_info btn">修改资料</button>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        // 查询旧证书信息
+        var url = document.location.href;
+        var url1 = url.split("=")[1];
+        if(url1!=undefined){
+            $("#update_uuid").val(url1);
+        }else{
+            $("#update_uuid").val("");
+        }
+        $("#update_btn").click(function () {
+            let user_uuid = $("#update_uuid").val();
+            console.log(user_uuid)
+            let tmp_list = {
+                "action": "query",
+                "uuid": user_uuid,
+                // "email": "",
+                "phone": "",
+                "qq": "",
+                "fullname": "",
+                "shortname": "",
+                "address": "",
+                "zipcode": "",
+                "certsubject": "",
+                "validdate": "",
+                "signdate": "",
+                "officehour": "",
+                "contactname": "",
+                "notifieremail": "",
+                "status": "",
+            }
+            $.ajax({
+                type: 'post',
+                url: '/cert',
+                dataType: "json",
+                data: tmp_list,
+                success: function (data) {
+                    if (data.result === "true") {
+                        console.log(data);
+                       $("#update_country").val(data.certsubject.C);
+                       $("#update_qq").val(data.qq);
+                       $("#update_province").val(data.certsubject.ST);
+                        $("#update_city").val(data.certsubject.L);
+                        $("#update_identifier").val(user_uuid);
+                        $("#update_phone").val(data.phone);
+                        $("#update_name").val(data.contactname);
+                        $("#update_fullname").val(data.fullname);
+                        $("#update_shortname").val(data.shortname);
+                        $("#update_address").val(data.address);
+                      $("#update_zipcode").val(data.zipcode);
+                       $("#update_open").val(data.officehour);
+                       $("#update_user").show();
+                       $("#user_uuid").hide();
+                       $("#update_uuid").val("");
+                    } else {
+                        alert(data.result)
+                    }
+
+                }
+            })
+        })
+        //更新下载商家证书
+        $("#update_close").click(function(){
+            $("#update_user").hide();
+            $("#user_uuid").show();
+        })
+        var dataUint8 = [];
+        var certUuid = "";
+        $("#update_submint").click(function () {
+            let country = $("#update_country").val();
+            let qq = $("#update_qq").val();
+            let province = $("#update_province").val();
+            let city = $("#update_city").val();
+            let email = $("#update_email").val();
+            let password = $("#update_password").val();
+            let identifier = $("#update_identifier").val();
+            let phone = $("#update_phone").val();
+            let name = $("#update_name").val();
+            let fullname = $("#update_fullname").val();
+            let shortname = $("#update_shortname").val();
+            let address = $("#update_address").val();
+            let zipcode = $("#update_zipcode").val();
+            let open = $("#update_open").val();
+
+            console.log(country, province, city, email, identifier, qq, phone, name, fullname, shortname, address, zipcode, open)
+            let cert_url = "/cert?action=create&email=" + email + "&country=" + country + "&province=" + province + "&city=" + city + "&identifier=" + identifier + "&passphrase=" + password;
+            console.log(cert_url);
+            _downloadTarFile(cert_url)
+            function _downloadTarFile(url) {
+                console.log(123)
+                var xhr = new XMLHttpRequest();
+                xhr.open("post", url, true);
+                xhr.responseType = "arraybuffer";
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var downloadFile = function (mobileCode) {
+                            var file = new File([mobileCode], "cert.tar.gz", { type: "application/octet-binary" });
+                            saveAs(file);
+                            // console.log(file)
+                        }
+                        var arraybuffer = xhr.response,
+                            bytes = new Uint8Array(arraybuffer);
+                        dataUint8 = pako.inflate(bytes);
+                        console.log(arraybuffer)
+                        //   console.log(bytes)
+                        downloadFile(bytes);
+                        for (var offset = 0, len = dataUint8.length; offset < len; offset += 512) {
+                            var tempfilename = "";
+                            for (var i = 0; i < 31; ++i) {
+                                var j = i + offset,
+                                    tempchar = String.fromCharCode(dataUint8[j]);
+                                tempfilename = tempfilename + tempchar;
+                            }
+                            if (tempfilename.indexOf("com.meidai") != -1) {
+                                console.log(tempfilename);
+                                certUuid = tempfilename
+                            }
+
+                        }
+                        let tmp_data = {
+                            "action": "update",
+                            "uuid": certUuid,
+                            "phone": phone,
+                            "qq": qq,
+                            "notifieremail": email,
+                            "fullname": fullname,
+                            "shortname": shortname,
+                            "address": address,
+                            "zipcode": zipcode,
+                            "officehour": open,
+                            "contactname": name
+                        };
+                        console.log(tmp_data)
+                        $.ajax({
+                            type: 'post',
+                            url: '/cert',
+                            data: tmp_data,
+                            success: function (data) {
+                                if (JSON.parse(data).result == "true") {
+                                    alert("证书申请成功！");
+
+                                }
+                            }
+                        })
+
+                    }
+                }
+                xhr.send(null);
+            }
+        })
+    </script>
+</body>
+
+</html>

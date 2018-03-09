@@ -198,7 +198,8 @@ $("#registration_form .registration_confirm_password").on("blur",function(){
       registration_fsw_querr_infor(false,"");
       event.preventDefault();
       var data={};
-      $emailByphoneValue=$emailByphone.val();
+	  $emailByphoneValue=$emailByphone.val();
+	  console.log($emailByphone.val())
       $registrationFormPasswordValue=$($registrationFormPassword[0]).val();
       $confirm_registrationFormPasswordValue=$($registrationFormPassword[1]).val();
       var _registrationUserNameValue=$("#registration_form .input_username .registration_input_username").val();

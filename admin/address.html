@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<style type="text/css">
+		body,
+		html,
+			{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+		}
+
+		#box {
+			width:50%;
+			position: fixed;
+			top:50%;
+			left:50%;
+			transform:translate(-50%,-50%);
+		}
+
+		#allmap {
+			width: 300px;
+			height: 300px;
+			margin-left:100px;
+			margin-top:20px;
+		}
+
+		#l-map {
+			height: 100%;
+			width: 78%;
+			float: left;
+			border-right: 2px solid #bcbcbc;
+		}
+
+		#r-result {
+			height: 100%;
+			width: 20%;
+			float: left;
+		}
+
+		p {
+			margin: 10px 0;
+		}
+		span{
+			border-bottom:1px solid #000;
+		}
+	
+	</style>
+	<script src="3rd/jquery-3.1.0.min.js"></script>
+	<!-- 百度地图v1.4可不用密钥 src="http://api.map.baidu.com/api?v=1.4"-->
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=kptR09WGgU2VO6Gof14fqbDjy2SWwrrA"></script>
+	<title>美戴</title>
+</head>
+
+<body>
+		<div id="allmap"></div>
+	<div id="box">
+		
+		<div>
+			<p>
+				<label for="">地址转换坐标：</label>
+				<input class="" type="text" id="coord">
+				<button class="btn btn-sm" id="coord_btn">转换</button>
+			</p>
+			<p>
+				lng:
+				<span id="lng"></span>
+			</p>
+			<p>
+				lat:
+				<span id="lat"></span>
+			</p>
+		</div>
+	</div>
+
+</body>
+
+</html>
+<script type="text/javascript">
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(120.100615, 30.311706);
+	map.centerAndZoom(point, 12);
+	// 创建地址解析器实例
+	$("#coord_btn").click(function () {
+		let coord_val = $("#coord").val();
+		var myGeo = new BMap.Geocoder();
+		// 将地址解析结果显示在地图上,并调整地图视野
+		myGeo.getPoint(coord_val, function (point) {
+			if (point) {
+				map.centerAndZoom(point, 16);
+				map.addOverlay(new BMap.Marker(point));
+				console.log(point)
+				$("#lng").html(point.lng)
+				$("#lat").html(point.lat)
+			} else {
+				alert("您选择地址没有解析到结果!");
+			}
+		}, "杭州市西湖区");
+	})
+
+
+</script>

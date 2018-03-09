@@ -156,7 +156,9 @@ $(function () {
       "officehour": "",
       "contactname": "",
       "status": "",
-      "notifieremail":""
+      "notifieremail": "",
+      "longitude": "",
+      "latitude": ""
     }
     $.ajax({
       type: "post",
@@ -181,7 +183,8 @@ $(function () {
               data[i].phone,
               data[i].notifieremail,
               "<button class='btn-sm del btn_info' data=" + i + ">吊销证书</button>",
-              "<button class='btn-sm update btn_info' data=" + i + ">修改资料</button>"
+              "<button class='btn-sm update btn_info' data=" + i + ">修改资料</button>",
+              "<a  href='./downloadcert.html?uuid=" + i + "' class='btn-sm  download_cert btn_info'>下载证书</a>"
 
             ]);
             table.draw(false);
@@ -256,8 +259,10 @@ $(function () {
       "signdate": "",
       "officehour": "",
       "contactname": "",
-      "notifieremail":"",
-      // "status": "",
+      "notifieremail": "",
+      "longitude": "",
+      "latitude": "",
+      "status": "",
     }
     $.ajax({
       type: "post",
@@ -278,9 +283,15 @@ $(function () {
             $("#update_address").val(data.address),
             $("#update_zipcode").val(data.zipcode),
             $("#update_open").val(data.officehour);
+          $("#update_longitude").val(data.longitude);
+          $("#update_latitude").val(data.latitude);
+        }else{
+          alert("证书请求错误")
         }
       },
-      error: function () { }
+      error: function () {
+        alert("请检查网络连接")
+       }
     })
   })
   // 点击修改
@@ -293,19 +304,24 @@ $(function () {
       update_shortname = $("#update_shortname").val(),
       update_address = $("#update_address").val(),
       update_zipcode = $("#update_zipcode").val(),
-      update_open = $("#update_open").val();
+      update_open = $("#update_open").val(),
+      update_lng = $("#update_longitude").val(),
+      update_lat = $("#update_latitude").val();
+
     let tmp_data = {
       "action": "update",
       "uuid": certUuid,
       "phone": update_phone,
       "qq": update_qq,
-      "notifieremail":update_email,
+      "notifieremail": update_email,
       "fullname": update_fullname,
       "shortname": update_shortname,
       "address": update_address,
       "zipcode": update_zipcode,
       "officehour": update_open,
-      "contactname": update_name
+      "contactname": update_name,
+      "longitude": update_lng,
+      "latitude": update_lat
     };
     console.log(tmp_data)
     $.ajax({
@@ -324,6 +340,12 @@ $(function () {
   })
   $("#update_close").click(function () {
     $("#update_user").fadeOut();
+  })
+
+  //下载商家证书
+  $("#table_id_example").on("click", "button.download_cert", function () {
+    let cert_Uuid = $(this).attr("data");
+    console.log(cert_Uuid)
   })
   //申请证书
   ////点击申请按钮显示申请表单
@@ -348,6 +370,8 @@ $(function () {
       cert_address = $("#cert_address").val(),
       cert_zipcode = $("#cert_zipcode").val(),
       cert_open = $("#cert_open").val();
+     cert_lng = $("#cert_longitude").val(),
+     cert_lat = $("#cert_latitude").val();
     console.log(cert_name, cert_phone, cert_email, cert_qq, cert_fullname, cert_shortname, cert_country, cert_province, cert_city, cert_address, cert_zipcode, cert_open);
     var dataUint8 = [],
       cert_uuid = "";
@@ -397,7 +421,10 @@ $(function () {
             "address": cert_address,
             "zipcode": cert_zipcode,
             "officehour": cert_open,
-            "contactname": cert_name
+            "contactname": cert_name,
+            "notifieremail": update_email,
+            "longitude": cert_lng,
+            "latitude": cert_lat
           };
           console.log(tmp_data)
           $.ajax({
@@ -449,7 +476,7 @@ $(function () {
         formdata.append('certtype', "p12");
         formdata.append('passphrase', password);
         let url = "/cert?action=renew",
-        xhr = new XMLHttpRequest();
+          xhr = new XMLHttpRequest();
         xhr.addEventListener("load", uploadComplete, false);
         xhr.addEventListener("error", uploadFailed, false);
         xhr.open("POST", url);
