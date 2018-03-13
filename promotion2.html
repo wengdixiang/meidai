@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>美戴</title>
+
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    
+    <link href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/fswear.css">
+    <link rel="stylesheet" type="text/css" href="css/promotion.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="3rd/jquery.min.js"></script>
+    <!-- <script src="3rd/jquery-3.1.0.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>    
+    <!-- 图片懒加载 -->
+    <script src="3rd/jquery.lazyload.js"></script>       
+    <!-- 生成二维码 -->
+    <script type="text/javascript" src="3rd/qrcode.min.js"></script>
+    <!-- 百度地图 -->
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=H9QbaP3ezjCGaPW0GuF4oB6S6ZCHosX6">
+    // <!-- <script type="text/javascript" src="//api.map.baidu.com/api?v=1.2&key=H9QbaP3ezjCGaPW0GuF4oB6S6ZCHosX6&callback=initialize"> -->
+        //v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+        //v1.4版本及以前版本的引用方式：src="http://api.map.baidu.com/api?v=1.4&key=您的密钥&callback=initialize"
+    </script>
+    <script type="text/javascript" src="3rd/SearchInfoWindow/SearchInfoWindow.js"></script>
+    <link rel="stylesheet" href="3rd/SearchInfoWindow/SearchInfoWindow.css" />
+    <script type="text/javascript" src='js/fswear.js'></script>
+    <script type="text/javascript" src='js/booking.js'></script>
+    <script type="text/javascript" src='js/promotion.js'></script>
+    <style>
+
+
+    </style>
+</head>
+<body>
+    <!-- 导航开始 -->           
+    <div id='nav_content' class='nav_content'></div>
+    <!-- 导航结束 END-->
+    <div class='login'>
+        <div class='container'>
+            <div class='wechat_img hidden-xs '>
+                <!-- <img src="images/weixin2.jpg"> -->
+                <img id='coupon' src="images/promotion/youhui.png">
+            </div>
+            <a id='back_to_top' class="hidden-xs" title="返回顶部"><span class='glyphicon glyphicon-chevron-up'></span></a>
+            <div id='news'>
+                <img class='img_lazyload' data-original="images/promotion/ertong.png" src='images/white.gif'>
+                <!-- <p class='tmp_p'><b>“<span style='color:#FF0000'>你的眼镜存在</span>这些弊端么？”</b></p> -->
+                <h3>一副不合适的眼镜，</h3>
+                <h3>会给你带来这些痛苦</h3>
+                <div class='drawback'>
+                    <div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+                        <img class='img_lazyload' data-original="images/promotion/ertong1.png" src='images/white.gif'>
+                        <p>镜架易滑落</p>
+                        <span>不能低头，因为眼镜会掉，永远都在重复性地扶眼镜</span>
+                    </div>
+                    <div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+                        <img class='img_lazyload' data-original="images/promotion/ertong2.png" src='images/white.gif'>
+                        <p>戴起来太紧</p>
+                        <span>眼镜太夹头，像是紧箍咒，拿下来头上还有深深的夹痕</span>
+                    </div>
+                </div>
+                <div class='drawback'>
+                    <div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+                        <img class='img_lazyload' data-original="images/promotion/ertong3.png" src='images/white.gif'>
+                        <p>镜腿长短不一</p>
+                        <span>镜腿总是很长，只是架在耳朵上，还需要耳钩辅助</span>
+                    </div>
+                    <div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+                        <img class='img_lazyload' data-original="images/promotion/ertong4.png" src='images/white.gif'>
+                        <p>视力逐渐加深</p>
+                        <span>眼镜的不适合，导致佩戴眼镜不适，视力只增不减</span>
+                    </div>
+                </div>
+                <div id='customized'>
+                    <img class='img_lazyload' data-original="images/promotion/banner3-1.jpg" src='images/white.gif'>
+                    <div id='customized_div'>
+                        <h3 class='hidden-xs customized_h3'>让人工智能为你量身定制一副独一无二的眼镜</h3>
+                        <h4 class='visible-xs'>让人工智能为你量身定制一副独一无二的眼镜</h4>
+                        <div>
+                            <button>
+                                <img class='img_lazyload' data-original="images/promotion/buyi.png" src='images/white.gif'>
+                                <b>不易滑落</b>
+                            </button>
+                            <button>
+                                <img class='img_lazyload' data-original="images/promotion/buhui.png" src='images/white.gif'>
+                                <b>不会夹头</b>
+                            </button>
+                            <button>
+                                <img class='img_lazyload' data-original="images/promotion/huangjin.png" src='images/white.gif'>
+                                <b>黄金比例</b>
+                            </button>
+                            <button>
+                                <img class='img_lazyload' data-original="images/promotion/jingtui.png" src='images/white.gif'>
+                                <b>镜腿适宜</b>
+                            </button>
+                            <button>
+                                <img class='img_lazyload' data-original="images/promotion/sanwei.png" src='images/white.gif'>
+                                <b>三维扫描</b>
+                            </button>
+                            <button>
+                                <img class='img_lazyload' data-original="images/promotion/dayin.png" src='images/white.gif'>
+                                <b>3D&nbsp;打印</b>
+                            </button>
+                        </div>  
+                    </div>
+                </div>
+                <div class='glasses_merit'>
+                    <div class='font_design font_design_xs'>
+                        <span><b>贴合</b></span>
+                        <div class='font_design_sign'></div>
+                        <div>
+                            <p>一体式非对称设计鼻托，</p>
+                            <p>完全贴合鼻型、减小梁受力。</p>
+                        </div>
+                    </div>
+                    <img class='img_lazyload' data-original="images/promotion/yanjing1.png" src='images/white.gif'>
+                    <div class='font_design font_design_md'>
+                        <span><b>精确</b></span>
+                        <div class='font_design_sign'></div>
+                        <div>
+                            <p>全球第一个眼镜设计人工智能程序</p>
+                            <p>让每一位顾客获得独一无二的眼镜镜架</p>
+                        </div>
+                    </div>
+                    <div class='font_design font_design_lg'>
+                        <span><b>完美</b></span>
+                        <div class='font_design_sign'></div>
+                        <div>
+                            <p>款式、颜色自定义。根据脸型推荐款式,</p>
+                            <p>更多颜色搭配，眼镜也能秀出彩。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class='feature'>
+                    <h3>每张脸都是与众不同的，为什么眼镜却是批量生产的？</h3>
+                    <div>
+                        <div>
+                            <img class='img_lazyload' data-original="images/promotion/lian1.jpg" src='images/white.gif'>
+                            <p>长方脸型</p>
+                        </div>
+                        <div>
+                            <img class='img_lazyload' data-original="images/promotion/lian2.jpg" src='images/white.gif'>
+                            <p>锥形脸型</p>
+                        </div>
+                        <div>
+                            <img class='img_lazyload' data-original="images/promotion/lian3.jpg" src='images/white.gif'>
+                            <p>方形脸型</p>
+                        </div>
+                        <div>
+                            <img class='img_lazyload' data-original="images/promotion/lian4.jpg" src='images/white.gif'>
+                            <p>心形脸型</p>
+                        </div>
+                        <div>
+                            <img class='img_lazyload' data-original="images/promotion/lian5.jpg" src='images/white.gif'>
+                            <p>椭圆脸型</p>
+                        </div>
+                        <div>
+                            <img class='img_lazyload' data-original="images/promotion/lian6.jpg" src='images/white.gif'>
+                            <p>圆形脸型</p>
+                        </div>
+                    </div>
+                    <p>别人做不到，我们做得到。我们生产的每一副眼镜，都是不同的</p>
+                </div>
+                <img class='img_lazyload' data-original="images/promotion/banner4.png" src='images/white.gif'>
+                <img class='img_lazyload' data-original="images/promotion/banner5.png" src='images/white.gif'>
+                <img class='img_lazyload' data-original="images/promotion/banner6.png" src='images/white.gif'>
+                <img class='img_lazyload' data-original="images/promotion/banner7.png" src='images/white.gif'>
+            </div>
+            <div class='wechat visible-xs'>
+                <!-- <img src="images/weixin2.jpg"> -->
+                <img src="images/promotion/youhui.png">
+            </div>
+            <div class="map_content">
+                <div id='map'></div>
+                <p>*鼠标移动到红色标记查看店铺地址</p>
+            </div>
+            <form id='qrcode_text'>
+                <div id='user'>
+                    <div>
+                        <div class='user_name pull-left'>
+                            <label>姓氏</label>
+                            <input id='username' type="text" name="">
+                            <span class="error">姓名不能为空</span>
+                        </div>
+                        <div class="sex pull-right">
+                            <div class="man">
+                                <label for="man">先生</label>
+                                <input type="radio" name="sex" id="man" value="先生">
+                                <div class="user-defined">
+                                    <span class="circle"></span>
+                                </div>
+                            </div>
+                            <div class="madam">
+                                <label for="madam">女士</label>
+                                <input type="radio" name="sex" id="madam" value="女士">
+                                <div class="user-defined">
+                                    <span class="circle"></span>
+                                </div>
+                            </div>
+                            <span class="error">请选择性别</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label>手机</label>
+                        <input id='phone' type="text" name="">
+                        <span class="error">电话不能为空</span>
+                    </div>
+                </div>   
+                <button id='but_qrcode' class='btn-default' type="button">预约得优惠</button>
+                <div class='data_success'>
+                    <span class='glyphicon glyphicon-ok'></span>
+                    <p>预约成功到门店提供手机号码即可得到优惠</p>                            
+                </div>
+                <div class='data_error'>
+                    <span class='glyphicon glyphicon-remove'></span>
+                    <p>当前网络错误请重新连接</p>                            
+                </div>
+            </form>
+            <!-- <div class='qrcode_ves'><div id="qrcode"></div></div> -->
+            
+        </div>
+    </div>
+          
+    <script>
+        $(document).ready(function(){
+            // 引入顶部导航
+            $('.nav_content').load("navbar.html .navbar", function(){
+                $('.activity a').eq(0).attr('href','promotion2.html');
+                $('.activity a').eq(1).attr('href','promotion2.html');
+                setCookie("activityurl",'promotion2.html',0.00035); 
+            })
+        })
+    </script>
+</body>
+</html>

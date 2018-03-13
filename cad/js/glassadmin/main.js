@@ -339,10 +339,12 @@
             if (dealdata.result === "true") {
               console.log("deal query result: true");
               console.log("deal data:");
+              
               console.log(dealdata);
               orderUuid = dealdata.owneruuid;
               dealConfigUuid = dealdata.config;
               PupilDistance=dealdata.config_literal.PupilDistance;
+              $('#user_PupilDistance').val(PupilDistance);
               var tempdate = new Date(dealdata.createdate);
               dealCreateDate = tempdate.toLocaleString();
               if (orderUuid.length === 0) {
@@ -351,7 +353,7 @@
               }
               else {
                 console.log("orderuuid: " + orderUuid);
-                load_params_data()
+                // fileurlgenerator.load_params_data(orderUuid,14)
               }
               if (dealConfigUuid.length === 0) {
                 alert("订单无效，请重新从商家管理系统链接。。。");
@@ -478,7 +480,7 @@
         }
         $('div.tab-content').css('pointerEvents', '');
         if (on_off == 1) {
-          if (dealUuid == "2d785a351e44f2b9bd8cf26bf0f84926") {
+          if (dealUuid == "5cae6d62e944c9bf576bb416ac04ab86") {
             $("title").html("模型调整教学")
             console.log(on_off)
             teaching()
@@ -504,6 +506,7 @@
     $('#button-param-update').click(function () {
       console.log("Params update event");
       updateGlass();
+     
     });
 
     $('#button-markp-disp').click(function () {
@@ -736,7 +739,7 @@
 
     function setupDefaultConfig(configdata, literaldata) {
       //update config data
-      console.log(configdata)
+      // console.log(configdata)
       var linelist = configdata.split("\n");
       for (var i = 0, len = linelist.length; i < len; ++i) {
         var lineinfo = linelist[i].split(" ");
@@ -875,110 +878,7 @@
 
     });
     // 个人信息
-    userInfo();
-    function load_params_data() {
-      var order_data = {
-        "action": "query",
-        "uuid": orderUuid,
-        "params": '',
-      }
-      $.ajax({
-        type: "post",
-        data: order_data,
-        dataType: "json",
-        url: "/order",
-        success: function (data) {
-          console.log(data)
-          
-          var params_uuid = '';
-          if (data.params[0] != undefined) {
-            params_uuid = data.params[0]
-            var post_data = {
-              'action': 'download',
-              'type': 'params',
-              'uuid': params_uuid
-            };
-            $.ajax({
-              type: 'post',
-              data: post_data,
-              async: false,
-              dataType: 'json',
-              url: "/data",
-              success: function (data) {
-                  for(var  i in data){
-                    glass_params_data[i] = data[i];
-                }
-                userInfo();
-                console.log(glass_params_data)
-              },
-              error: function () {
-
-              }
-            })
-          }
-
-        },
-        error: function () {
-          console.log("获取失败")
-        }
-      })
-    };
-    function userInfo() {
-      function inspect_data(obj, key) {
-        var tmp_key = obj.hasOwnProperty(key) ? obj[key] : '';
-        return tmp_key;
-      }
-      // 脸部宽度 EPWidth
-      $('#user_EPWidth').val(inspect_data(glass_params_data, "EPWidth"));
-      // 脸部长度 FaceHeight
-      $('#user_FaceHeight').val(inspect_data(glass_params_data, "FaceHeight"));
-      // 鼻梁宽度 NoseWidth
-      $('#user_NoseWidth').val(inspect_data(glass_params_data, "NoseWidth"));
-      // 鼻梁高度 NoseHeight
-      $('#user_NoseHeight').val(inspect_data(glass_params_data, "NoseHeight"));
-      // 左侧脸宽 LeftFaceWidth
-      $('#user_LeftFaceWidth').val(inspect_data(glass_params_data, "LeftFaceWidth"));
-      // 右侧脸宽 RightFaceWidth
-      $('#user_RightFaceWidth').val(inspect_data(glass_params_data, "RightFaceWidth"));
-      // // 左眼视力  left_degrees
-      // $('#user_left_degrees').val(inspect_data(glass_collecteddata_data,"left_degrees"));
-      // // 右眼视力 right_degrees
-      // $('#user_right_degrees').val(inspect_data(glass_collecteddata_data,"right_degrees"));
-      // // 左眼散光 left_cyl
-      // $('#user_left_cyl').val(inspect_data(glass_collecteddata_data,"left_cyl"));
-      // // 右眼散光 right_cyl
-      // $('#user_right_cyl').val(inspect_data(glass_collecteddata_data,"right_cyl"));
-
-
-      // // 左眼轴向 left_axis
-      // $('#user_left_axis').val(inspect_data(glass_collecteddata_data,"left_axis"));
-      // // 右眼轴向 right_axis
-      // $('#user_right_axis').val(inspect_data(glass_collecteddata_data,"right_axis"));
-
-      // 瞳距 PupilDistance
-      $('#user_PupilDistance').val(PupilDistance);
-
-      // left_axis
-
-      // 镜框宽度 FrameWidth
-      $('#user_FrameWidth').val(inspect_data(glass_params_data, "FrameWidth"));
-      // 镜框高度 FrameHeight
-      $('#user_FrameHeight').val(inspect_data(glass_params_data, "FrameHeight"));
-      // 左鼻托高 LeftNosePadHeight
-      $('#user_LeftNosePadHeight').val(inspect_data(glass_params_data, "LeftNosePadHeight"));
-      // 右鼻托高 RightNosePadHeight
-      $('#user_RightNosePadHeight').val(inspect_data(glass_params_data, "RightNosePadHeight"));
-      // 左腿长度 LeftLegLength
-      $('#user_LeftLegLength').val(inspect_data(glass_params_data, "LeftLegLength"));
-      // 右腿长度 RightLegLength
-      $('#user_RightLegLength').val(inspect_data(glass_params_data, "RightLegLength"));
-      // 镜片宽度 LensWidth
-      $('#user_LensWidth').val(inspect_data(glass_params_data, "LensWidth"));
-      // 镜片高度 LensHeight
-      $('#user_LensHeight').val(inspect_data(glass_params_data, "LensHeight"));
-      // 中梁宽 BridgeWidth
-      $('#user_BridgeWidth').val(inspect_data(glass_params_data, "BridgeWidth"));
-    }
+  //  fileurlgenerator.load_params_data()
   })
   // 教学程序
   var on_off = 1, test;

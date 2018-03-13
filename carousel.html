@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>美戴</title>
+
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+
+    <link href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="3rd/jquery.min.js"></script>
+    <!-- <script src="3rd/jquery-3.1.0.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <!-- 图片懒加载 -->
+    <script src="3rd/jquery.lazyload.js"></script>
+    <!-- 实现轮播的图片的颜色抓取 -->
+    <script type="text/javascript" src='3rd/rgbaster.js'></script>
+    <!-- 启用jquery的toggle属性 -->
+    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>
+    <style>
+        #left,#right{
+            background:none;
+            top:50%;
+            height:2%;
+            width:5%;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="carousel" class="carousel slide" data-ride="carousel"  data-interval="4000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+        <li data-target="#carousel" data-slide-to="3"></li>
+        <li data-target="#carousel" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <a href=""><img src="images/index/3D/dingzhi.jpg" alt="..."></a>
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
+            <a href="https://baidu.com" target="_blank">
+                <img src="images/index/3D/kuanshi.jpg" alt="...">
+            </a>
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+            <a href="" target="_blank">
+                <img src="images/index/3D/liucheng.jpg" alt="...">
+            </a>
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+            <a href="https://www.meidaitech.com/index.html" target="_blank">
+                <img src="images/index/3D/yuyue.jpg" alt="...">
+            </a>
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+            <a href="https://www.meidaitech.com/index.html" target="_blank">
+                <img src="images/index/3D/zhineng1.jpg" alt="...">
+            </a>
+            <div class="carousel-caption">
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" id="left" href="#carousel"  data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" id="right" href="#carousel"  data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+</body>
+</html>

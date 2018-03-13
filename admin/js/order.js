@@ -132,10 +132,9 @@ $(function () {
                     order_list = data.data;
                     console.log(order_list)
                     var id = 0;
-
                     let state = "";
                     for (var i in order_list) {
-                        if (order_list[i].status != "2"||order_list[i].status!="3") {
+                        if (order_list[i].status != "2" && order_list[i].status != "3") {
                             console.log(order_list[i])
                             switch (order_list[i].status) {
                                 case "0":
@@ -145,7 +144,6 @@ $(function () {
                                     state = "已经到店"
                                     break;
                             }
-
                             table.row.add([
                                 ++id,
                                 order_list[i].user,
@@ -163,13 +161,8 @@ $(function () {
                             ]);
                             table.draw(false);
                         }
-                        console.log(order_list[i])
-
                     }
                 }
-
-
-
             },
             error: function () {
                 alert("请检查网络")
@@ -178,22 +171,60 @@ $(function () {
     }
 
     // 查询
-   
+
     // 商家修改时间
     $("#apply_close").click(function () {
         $("#submit_box").hide();
     })
     $("#table_id_example tbody").on("click", '.affirm', function () {
         $("#submit_box").show();
+        let uuid = $(this).attr("data");
+        $("#sub").unbind('click').click(function () {
+            let year = $("#year").val() + "年";
+            let month = $("#month").val() + "月";
+            let day = $("#day").val() + "号";
+            let hour = $("#hour").val() + "点";
+            let minute = $("#minute").val() + "分";
+            let date = "";
+            if ($("#minute").val() != "") {
+                date = year + month + day + hour + minute
+            } else {
+                date = year + month + day + hour
+            }
+            let tmp_data = {
+                "action": "update",
+                "user_id": uuid,
+                "update_date": date
+            }
+            console.log(tmp_data)
+            $.ajax({
+                type: "post",
+                url: "/meet",
+                dataType: "json",
+                data: tmp_data,
+                success: function (data) {
+                    console.log(data)
+                    window.location.reload();
+                },
+                error: function () {
+                    
+                    console.log("false")
+                }
+            })
+        })
     })
     //点击提交修改
-    $("#sub").click(function () {
-        let year = $("#year").val() + "年";
-        let month = $("#month").val() + "月";
-        let day = $("#day").val() + "号";
-        let hour = $("#hour").val() + "点";
-        let minute = $("#minute").val() + "分";
-        console.log(year, month, day, hour, minute)
+
+    //确认到店
+    $("#table_id_example tbody").on("click", '.arrive', function () {
+        console.log("确认到店")
+    })
+    //预约完成
+    $("#table_id_example tbody").on("click", '.complete', function () {
+        console.log("预约完成")
+    })
+    $("#table_id_example tbody").on("click", '.cel', function () {
+        console.log("取消预约")
     })
 })
 

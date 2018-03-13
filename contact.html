@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>联系我们-美戴</title>
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    <link href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/fswear.css">
+    <link rel="stylesheet" type="text/css" href="css/contact.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="3rd/jquery-3.1.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src='js/fswear.js'></script>
+    <!-- 启用jquery的toggle属性 -->    
+    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>
+    <!-- 百度地图 -->
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=H9QbaP3ezjCGaPW0GuF4oB6S6ZCHosX6">
+        //v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+        //v1.4版本及以前版本的引用方式：src="http://api.map.baidu.com/api?v=1.4&key=您的密钥&callback=initialize"
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <!-- 导航开始 -->   
+    <div id='nav_content' class='nav_content'></div>
+    <!-- 导航结束 END-->
+    <!-- 联系我们页面 -->
+    <div class='contact'>
+        <div class='col-lg-2 col-md-2 col-sm-1'></div>
+        <div id='left' class='hidden-xs col-lg-1 col-md-1 col-sm-1'>
+            <h3 id='left-h3'>公司信息</h3>
+            <p id='left-p'></p>
+            <ul id='left-ul'>
+                <li><a href="about.html">核心团队</a></li>
+                <li><a href="introduce.html">顾&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 问</a></li>
+                <!-- <li><a href='news.html'>新闻动态</a></li> -->
+                <li><a href='##'>新闻动态</a></li>
+                <li><a href='contact.html' target="_parent">联系我们</a></li>
+            </ul>
+        </div>
+        <div class='contact-right col-lg-8 col-md-8 col-sm-8 col-lg-12'>
+            <div id='vertical' class='hidden-xs'></div>
+            <div id='contact-map'>
+                
+            </div>              
+            <ul class='contact-bottom'>
+                <li>
+                    <img src="images/contact/contact_03.png">
+                    &nbsp;&nbsp;&nbsp;浙江省杭州市西湖区申花路789号剑桥公社F座907
+                </li>
+                <li>
+                    <img src="images/contact/contact_02.png">
+                    &nbsp;&nbsp;&nbsp;service@meidaitech.com
+                </li>
+                <li>
+                    <img src="images/contact/contact_01.png">
+                    &nbsp;&nbsp;&nbsp;杭州地区：&nbsp;&nbsp;&nbsp;18969014358
+                </li>
+                <li>
+                    <img src="images/contact/contact_01.png">
+                    &nbsp;&nbsp;&nbsp;温州地区：&nbsp;&nbsp;&nbsp;13957778558
+                </li>
+            </ul>               
+        </div>
+    </div>
+    <!-- 联系我们页面 END --> 
+    <!-- footer -->
+    <div id='footer_content' class='footer_content'></div>
+    <!-- footer END -->
+    <script>
+
+        /***** 地图 ******/
+        var map = new BMap.Map("contact-map"); // 创建地图实例
+        var point = new BMap.Point(120.102444, 30.312274); // 创建点坐标
+        map.centerAndZoom(point, 15); // 初始化地图，设置中心点坐标和地图级别
+
+        // window.setTimeout(function(){
+        // map.panTo(new BMap.Point(120.19, 30.27));
+        // }, 2000);
+
+        var marker = new BMap.Marker(point);        // 创建标注    
+        map.addOverlay(marker);                     // 将标注添加到地图中
+
+        map.addControl(new BMap.NavigationControl());
+        map.addControl(new BMap.ScaleControl());
+        map.addControl(new BMap.OverviewMapControl());
+        map.addControl(new BMap.MapTypeControl());
+        map.setCurrentCity("杭州"); // 仅当设置城市信息时，MapTypeControl 的切换功能才能可用
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    </script> 
+</body>
+</html>

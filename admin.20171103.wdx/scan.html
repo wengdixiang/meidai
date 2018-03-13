@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>订单管理-美戴</title>
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fswear.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <script src="3rd/jquery-3.1.0.min.js"></script>
+    <!-- <script src="3rd/jquery.min.js"></script> -->
+    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>  
+    <!-- <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.js"></script> -->
+    <script type="text/javascript" charset="utf8" src="3rd/jquery.dataTables.min.js"></script>
+    <script src="js/fswear.js"></script>
+    <script src="js/scan-data.js"></script>
+    <script src="js/top.js"></script>
+    <script src="js/nav_left.js"></script>
+    <style>
+
+    </style>    
+</head>
+<body>
+    <!-- 顶部 -->
+    <div class='top'></div>
+    <!-- 顶部 END -->
+    <div class='content'>
+        <!-- 左侧导航栏 -->
+        <div class='nav-left'></div>
+        <!-- 左侧导航栏 END -->
+        <div class='order_data'>
+            <button id='recently_one_day' class='btn_info btn-sm'>今天</button>
+            <button id='recently_hebdomad' class='btn_info btn-sm'>最近7天</button>
+            <button id='recently_month' class='btn_info btn-sm'>最近30天</button>
+            <button id='recently_one_year' class='btn_info btn-sm'>最近300天</button>
+            <button id='all_data' class='btn_info btn-sm'>全部</button>
+        </div>
+        <div class='timezone'>
+            <select id="dropdown_list_year">
+                <option value ="">-- 选择年 --</option>
+            </select>
+            <select id="dropdown_list_month">
+                <option value ="">-- 选择月 --</option>
+            </select>
+            <button id='determine_the_time' class='btn_info btn-sm'>确定</button>
+        </div>
+        <!-- 内容的右侧 -->
+        <div class='message'>
+            <div class='data-table'>
+                <table id="table_id_example">
+                    <thead>
+                        <tr>
+                            <th>序号</th>             
+                            <th>姓名</th>
+                            <th>手机</th>
+                            <th>邮箱</th>
+                            <th>扫描日期</th>
+                            <th>订单详情</th>
+                            <th>order_list</th>
+                        </tr>      
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <!-- 当没有证书时的显示 -->
+            <div id='prompt_messagea'>
+                <h1>您无法操作。可能的原因：</h1>
+                <p>1. 您没有使用 HTTPS 访问。</p>
+                <p>2. 您没有有效的证书。</p>
+            </div>
+            <!-- 当没有证书时的显示 END-->
+            <div class='versions'>meidai &copy; 2016</div>            
+        </div>
+    </div>
+    <script>  
+        /* 年的下拉列表 */
+        var year = new Date().getFullYear();
+        for(var i=0;i<=year-2015; i++){
+            var tmp_year = 2015+i; 
+            $('#dropdown_list_year').append('<option value="'+tmp_year+'">'+tmp_year+'年</option>');
+        }
+        /* 月的下拉列表 */
+        for( var i=1;i<=12;i++){
+            $('#dropdown_list_month').append('<option value="'+i+'">'+i+'月</option>');
+        }
+
+        $('#recently_hebdomad').css('background','#1FB3F0')
+                            .attr('index','active');
+        $('.order_data button').click(function(){
+            $(this).css("background","#1FB3F0").siblings().css("background","");
+             $(this).attr('index','active').siblings().attr('index','');
+        })
+    </script>
+</body>
+</html>

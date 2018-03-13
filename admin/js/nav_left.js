@@ -20,7 +20,7 @@ $.fn.extend({
             + "<a href='contacts.html'>联系列表</a>"
             + "</li>"
             + "<li id='order-page'>"
-            + "<img src='images/contacts.png'>"
+            + "<img src='images/yuyue.png'>"
             + "<a href='order.html'>预约列表</a>"
             + "</li>"
             + "</ul>"

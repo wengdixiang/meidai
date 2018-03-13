@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>美戴</title>
+
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    
+    <link href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/fswear.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="3rd/jquery.min.js"></script>
+    <!-- <script src="3rd/jquery-3.1.0.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>    
+    <script type="text/javascript" src='js/fswear.js'></script>
+    <!-- 图片懒加载 -->
+    <script src="3rd/jquery.lazyload.js"></script>
+    <!-- 实现轮播的图片的颜色抓取 -->
+    <script type="text/javascript" src='3rd/rgbaster.js'></script>
+    <!-- 启用jquery的toggle属性 -->    
+    <script src="3rd/jquery-migrate-1.1.0.min.js"></script>
+    <script type="text/javascript" src='js/index.js'></script>       
+    <style>
+    </style>
+</head>
+<body>
+    <!-- 导航开始 -->           
+    <div id='nav_content' class='nav_content'></div>
+    <!-- 导航结束 END-->
+    <!-- 轮播 -->
+    <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <!-- <li data-target="#myCarousel" data-slide-to="4"></li> -->
+        </ol>
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div id='img_first' class="active item">
+                <img  src="images/index/3D/zhineng.jpg" alt="">
+            </div>
+            <div class="item">
+                <a href="idea.html"><img  src="images/index/3D/dingzhi.jpg" alt=""></a>
+            </div>
+            <div class="item">
+                <a href="experience.html"><img src="images/index/3D/liucheng.jpg" alt=""></a>              
+            </div>
+            <div class="item" id='img_last'>
+                <a href="product.html"><img src="images/index/3D/kuanshi.jpg" alt=""></a>              
+            </div>
+            <!-- <div id='img_last' class="item">
+                <a href="booking.html"><img src="images/index/3D/yuyue.jpg" alt=""></a>
+            </div> -->
+            <!-- <button id='carousel_inner_button' type='button' class='btn-default'>立即预约</button> -->
+        </div>
+        <!-- Carousel nav -->
+        <img class='carousel-prev' data-slide="prev" href="#myCarousel" src="images/index/prev.png">
+        <img class='carousel-next' data-slide="next" href="#myCarousel" src="images/index/next.png">
+    </div>
+    <!-- 轮播 END -->
+    <div class='glasses_pictures'>
+        <p class='hidden-xs'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你的眼镜就像你一样独一无二 &nbsp;&nbsp;&nbsp;&nbsp; 量身定制，让眼睛更舒适、更健康</p>
+        <div class='visible-xs'>
+            <p>你的眼镜就像你一样独一无二</p>
+            <p>量身定制，让眼睛更舒适、更健康</p>
+        </div>  
+    </div>
+    <div class='product_img'>
+        <div class='col-xs-12 col-sm-6 col-md-6 col-lg-6 taste-bottom-contant'>
+            <div class='mouseenter-show'>
+                <img class='index-img mouseenter-show' data-original="images/index/ertong.jpg" src='images/white.gif'>
+                <div class='overlay-block'>
+                    <a href="product.html">
+                        <ul>
+                            <li>
+                                <button>查看详情</button>
+                            </li>
+                        </ul>
+                    </a>
+                </div>
+            </div>
+            <h3><b>关爱眼睛 如同关爱孩子</b></h3>
+            <p>守护者系列</p>
+        </div>
+        <div class='col-xs-12 col-sm-6 col-md-6 col-lg-6 taste-bottom-contant'>
+            <div class='mouseenter-show'>
+                <img class='index-img mouseenter-show' data-original="images/index/yundong.jpg" src='images/white.gif'>
+                <div class='overlay-block'>
+                    <ul>
+                        <li>
+                            <button>即将上线</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <h3><b>坚持如你 不曾滑落掉队</b></h3>
+            <p>奔跑者系列</p>
+        </div>
+    </div>   
+    <!-- footer -->
+    <div id='footer_content' class='footer_content'></div>
+    <!-- footer END -->
+    <script>
+        
+    </script>
+</body>
+</html>

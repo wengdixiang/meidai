@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>美戴</title>
+
+    <link rel="shortcut icon" href="images/logoico.ico" type="image/x-icon" />
+    
+    <link href="3rd/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/fswear.css">
+    <link rel="stylesheet" type="text/css" href="css/booking.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="3rd/jquery.min.js"></script>
+    <!-- <script src="3rd/jquery-3.1.0.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="3rd/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>    
+    <!-- 图片懒加载 -->
+    <script src="3rd/jquery.lazyload.js"></script>       
+    <script type="text/javascript" src='js/fswear.js'></script>
+    <script type="text/javascript" src='js/booking.js'></script>
+
+    <style>
+
+
+    </style>
+</head>
+<body>
+    <!-- 导航开始 -->           
+    <!-- <div id='nav_content' class='nav_content'></div> -->
+    <!-- 导航结束 END-->
+    <!-- <div class='login' style='border:1px solid red;background: url(images/booking1.jpg)'> -->
+    <div class='login'>
+        <div class='container'>
+            <div class="logo_img"><img src="images/booking/logo.png" alt=""></div>
+            <p>请填写下面的信息</p>
+            <form id='qrcode_text'>
+                <div id='user'>
+                    <div>
+                        <div class='user_name pull-left'>
+                            <label>姓氏</label>
+                            <input id='username' type="text" name="">
+                            <span class="error">姓名不能为空</span>
+                        </div>
+                        <div class="sex pull-right">
+                            <div class="man">
+                                <label for="man">先生</label>
+                                <input type="radio" name="sex" id="man" value="先生">
+                                <div class="user-defined">
+                                    <span class="circle"></span>
+                                </div>
+                            </div>
+                            <div class="madam">
+                                <label for="madam">女士</label>
+                                <input type="radio" name="sex" id="madam" value="女士">
+                                <div class="user-defined">
+                                    <span class="circle"></span>
+                                </div>
+                            </div>
+                            <span class="error">请选择性别</span>
+                        </div>    
+                    </div>
+                    <div>
+                        <label>手机</label>
+                        <input id='phone' type="text" name="">
+                        <span class="error">电话不能为空</span>
+                    </div>
+                </div>   
+                <button id='but_qrcode' class='btn-default' type="button">马上预约</button>
+                <div class='data_success'>
+                    <span class='glyphicon glyphicon-ok'></span>
+                    <p>已收到您的信息，客服人员会稍后跟您联系</p>                            
+                </div>
+                <!-- <div class='data_repetition'>
+                    <span class='glyphicon glyphicon-remove'></span>
+                    <p>您已预约成功，请无重复预约</p>                            
+                </div> -->
+                <div class='data_error'>
+                    <span class='glyphicon glyphicon-remove'></span>
+                    <p>当前网络错误请重新连接</p>                            
+                </div>
+            </form>
+
+            <!-- <div class='qrcode_ves'><div id="qrcode"></div></div> -->
+            
+        </div>
+    </div>   
+    <script>
+        
+    </script>
+</body>
+</html>
